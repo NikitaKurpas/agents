@@ -1,0 +1,48 @@
+model = "gpt-5.2-codex"
+model_reasoning_effort = "medium"
+
+[projects."/Users/nikitakurpas/Developer/aiTomo"]
+trust_level = "trusted"
+
+[projects."/Users/nikitakurpas/Developer/chadgpt"]
+trust_level = "trusted"
+
+[projects."/Users/nikitakurpas/Developer/mlx-bigram/mlx-bigram"]
+trust_level = "trusted"
+
+[projects."/Users/nikitakurpas/Developer/markrawl"]
+trust_level = "trusted"
+
+[projects."/Users/nikitakurpas/Developer/simnetctl"]
+trust_level = "trusted"
+
+[projects."/Users/nikitakurpas/Developer/agents"]
+trust_level = "trusted"
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = [
+  "/Users/nikitakurpas/Library/Caches",
+  "/Users/nikitakurpas/Library/Developer/Xcode/DerivedData",
+  "/Users/nikitakurpas/Library/Developer/CoreSimulator",
+  "/Users/nikitakurpas/Library/Logs/CoreSimulator"
+]
+
+[notice]
+hide_gpt5_1_migration_prompt = true
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[notice.model_migrations]
+"gpt-5.2" = "gpt-5.2-codex"
+
+# [mcp_servers.XcodeBuildMCP]
+# command = "npx"
+# args = ["-y", "xcodebuildmcp@latest"]
+# env = { "XCODEBUILDMCP_ENABLED_WORKFLOWS" = "simulator,simulator-management,ui-testing,session-management" }
+
+[features]
+web_search_request = true
+apply_patch_freeform = true
+shell_snapshot = true
+skills = true
+unified_exec = true

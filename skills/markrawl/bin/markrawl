@@ -1,0 +1,37 @@
+#!/usr/bin/env -S deno run -q --allow-env --allow-run --allow-sys --allow-read --allow-write --allow-net
+
+// ideas:
+// - https://github.com/jaywcjlove/html-to-markdown-cli/blob/main/packages/html-to-markdown/src/index.ts
+// - https://github.com/mmdclx/url-to-markdown-cli-tool/tree/main/src
+
+import puppeteer from "npm:puppeteer";
+import turndown from "npm:turndown";
+
+async function fetchUrlToMarkdown(url) {
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox"],
+  });
+  const page = await browser.newPage();
+  await page.goto(url, { waitUntil: "networkidle2" });
+  const html = await page.content();
+  await browser.close();
+
+  const td = new turndown();
+  const md = td.turndown(html);
+  return md;
+}
+
+(async () => {
+  const url = process.argv[2];
+  const output = process.argv[3] ?? (await Deno.makeTempFile({dir: '/tmp', suffix: '.md'}));
+
+  if (!url) {
+    console.error("Usage: node main.js <url> [output-file]");
+    process.exit(1);
+  }
+
+  const md = await fetchUrlToMarkdown(url);
+  Deno.writeTextFileSync(output, md);
+  console.log(`Page saved to ${output}`);
+})();

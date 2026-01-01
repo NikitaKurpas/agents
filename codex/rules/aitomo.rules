@@ -1,0 +1,1 @@
+prefix_rule(pattern=["gmake", ["test-ios", "build-ios", "build-ios-release"]], decision="allow")
