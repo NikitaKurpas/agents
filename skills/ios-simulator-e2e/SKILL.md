@@ -1,6 +1,6 @@
 ---
 name: ios-simulator-e2e
-description: End-to-end iOS app development workflow on the iOS Simulator using CLI tools (xcodebuild, xcrun simctl, log stream, xctrace). Use when Codex needs to build, install, run, log, inspect UI, interact, capture screenshots/recordings, or iterate on iOS apps in the Simulator. Prefer the axe skill for UI inspection/interaction when present.
+description: End-to-end iOS app development workflow on the iOS Simulator using CLI tools (xcodebuild, xcrun simctl, log stream, xctrace). Use to build, install, run, log, inspect UI, interact, capture screenshots/recordings, or iterate on iOS apps in the Simulator. Prefer the axe skill for UI inspection/interaction when present.
 ---
 
 # iOS Simulator End-to-End Workflow
@@ -18,7 +18,7 @@ description: End-to-end iOS app development workflow on the iOS Simulator using 
 - Wait for boot: `xcrun simctl bootstatus <device-udid> -b`
 - Prefer a picked destination string when device discovery is flaky: `./scripts/simctl-destination.sh`
 - Build: prefer UDID + arch to avoid ambiguous name matching:
-  - `xcodebuild -scheme <Scheme> -destination 'platform=iOS Simulator,id=<UDID>,arch=arm64' build`
+  - `xcodebuild -scheme <Scheme> -destination 'platform=iOS Simulator,id=<UDID>,arch=arm64' -quiet -hideShellScriptEnvironment build`
 - Install: `xcrun simctl install <device-udid> <path-to-app>`
 - Launch: `xcrun simctl launch <device-udid> <bundle-id>`
 
@@ -43,14 +43,9 @@ description: End-to-end iOS app development workflow on the iOS Simulator using 
   - `scripts/xcodebuild-app-info.sh -scheme <Scheme> -sdk iphonesimulator -configuration Debug | while IFS= read -r line; do export "$line"; done`
   - Optional: `xcrun simctl install "$UDID" "$APP_PATH"` and `xcrun simctl launch "$UDID" "$BUNDLE_ID"`
 
-## Xcode output handling (preferred)
+## Xcode output handling
 
-- Write xcodebuild output to a temp file, check exit status, then inspect only what you need:
-  - `LOG=/tmp/xcodebuild.log`
-  - `xcodebuild ... build >"$LOG" 2>&1; status=$?`
-  - If `status=0`, check the last lines: `tail -n 50 "$LOG"`
-  - If `status!=0`, search for errors first: `rg -n -i "error:|fatal error:|warning:" "$LOG"`
-- Avoid loading the full log into the model; use `rg` or `tail` to keep output concise.
+Use `-quiet -hideShellScriptEnvironment` flags to omit diagnostic output.
 
 ## Find the built .app and identifiers
 

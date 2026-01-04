@@ -5,7 +5,7 @@ set -euo pipefail
 
 if [[ $# -lt 1 ]]; then
   echo "Usage: $0 <xcodebuild-args>"
-  echo "Example: $0 -scheme MyApp -destination 'platform=iOS Simulator,name=iPhone 15'"
+  echo "Example: $0 -scheme MyApp -destination 'generic/platform=iOS'"
   exit 2
 fi
 
