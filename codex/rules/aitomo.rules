@@ -1,1 +1,12 @@
-prefix_rule(pattern=["gmake", ["test-ios", "build-ios", "build-ios-release"]], decision="allow")
+
+prefix_rule(pattern=["gmake", ["test-ios", "test-backend", "build-ios", "build-ios-and-run", "build-ios-release"]], decision="allow")
+prefix_rule(
+    pattern = [["/bin/bash", "/bin/zsh"], "-lc", "gmake", [
+        "test-ios",
+        "test-backend",
+        "build-ios",
+        "build-ios-and-run",
+        "build-ios-release"
+    ]],
+    decision = "allow"
+)

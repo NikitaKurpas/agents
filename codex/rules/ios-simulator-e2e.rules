@@ -3,6 +3,7 @@ prefix_rule(
         "xcodebuild",
         "xcrun",
         "log",
+        "/usr/bin/log",
         "simctl",
         "xctrace"
     ]],
@@ -22,13 +23,6 @@ prefix_rule(
 )
 prefix_rule(
     pattern = ["xctrace"], decision = "allow"
-)
-prefix_rule(
-    pattern = [[
-        "./xcbuild-trim-log.sh",
-        "./scripts/xcbuild-trim-log.sh",
-        "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/xcbuild-trim-log.sh"
-    ]], decision = "allow"
 )
 prefix_rule(
     pattern = [[
@@ -56,13 +50,6 @@ prefix_rule(
         "./xcresult-strip-frontend.sh",
         "./scripts/xcresult-strip-frontend.sh",
         "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/xcresult-strip-frontend.sh"
-    ]], decision = "allow"
-)
-prefix_rule(
-    pattern = [[
-        "./xcresult-trim-log.sh",
-        "./scripts/xcresult-trim-log.sh",
-        "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/xcresult-trim-log.sh"
     ]], decision = "allow"
 )
 prefix_rule(
