@@ -1,12 +1,11 @@
 - Do not use python or other trickery to edit files, use the built-in "apply patch" tool.
-- General rule: if you expect a command to produce long/large output (like `xcodebuild` or other Xcode tools), then pipe it to a temp file, then search/head/tail it, but try to avoid reading it whole.
 - Never read lock files such as `deno.lock`, `package.lock`, etc. You may only search lockfiles for very specific lines with `rg`.
-- Only download content with `curl` if you know it's text-only, e.g. Markdown files or other source code. Otherwise, if you need to download/inspect a web page, use the locally installed `markrawl` tool: `markrawl <url> [output-file]`; if output is not specified, it creates a temporary file and prints the name; if you specify the output, save it to `/tmp/` or `./.tmp/` and inspect it with `rg` or read the output in chunks with `sed` with a max chunk size of 250 lines.
+- Only download content with `curl` if you know it's text-only, e.g. Markdown files or other source code.
 - When given a task, if while exploring the codebase you find a better way to implement it by changing/refactoring existing code, propose your approach(es), and wait for user's confirmation.
 - If, while implementing a task, you notice possible improvements to the code you wrote/modified/explored - mention them to the user at the end of your task.
 - Inspecting Deno package cache: `find $HOME/Library/Caches/deno -maxdepth 8 -name <package/file name>`; TypeScript definitions for packages are stored here.
   - Don't read TS definitions in whole - they can be huge and will not be loaded completely; instead try to use `rg` starting with the most specific query to find the information you need; use `-C/-A/-B` for additional context.
-- Try to avoid using `deno info`, it outputs too much information.
+- If using `deno info`, always trim or search the output with head/tail/rg.
 - You have `npx`, `uvx`, and `dx` (from Deno) available.
 
 **Subagents**
