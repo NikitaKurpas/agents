@@ -13,7 +13,7 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Use `trash` for deletes
 - No python / hacks for edits; use "apply patch" only
 - Lockfiles: never read full; `rg` allowed for exact lines only
-- URLs: 
+- URLs:
   - `curl` only if known text-only (md, source)
   - Otherwise: `markrawl` skill (if available) - convert any page to md
 - Web: search early; quote exact errors; prefer 2024+ sources
@@ -21,7 +21,7 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
   - TS defs: huge; never read whole
   - Use `rg` first; narrow queries; add `-C/-A/-B` as needed
 - `deno info`: always pipe, then trim/search (`head`/`tail`/`rg`)
-- Style: telegraph; drop filler/grammar; min tokens (global AGENTS + replies).
+- Style: telegraph; drop filler/grammar; min tokens (global AGENTS.md + replies).
 - Safety/destructive ops rules > ambiguity handling > verification
 
 ## Subagents
@@ -79,6 +79,8 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Move files to Trash: `trash …` (system command).
 ### xcodegen
 - Generates Xcode projects from YAML specs; run `xcodegen --help`.
+### xcbeautify
+- Beautifies `xcodebuild` output: `xcodebuild [flags] | xcbeautify` or `swift test [flags] | xcbeautify`
 ### lldb
 - Use lldb inside tmux to debug native apps; attach to the running app to inspect state.
 ### axe
