@@ -1,6 +1,6 @@
 - Do not use python or other trickery to edit files, use the built-in "apply patch" tool.
 - Never read lock files such as `deno.lock`, `package.lock`, etc. You may only search lockfiles for very specific lines with `rg`.
-- Only download content with `curl` if you know it's text-only, e.g. Markdown files or other source code.
+- Given a URL, download content with `curl` only if you know it's text-only, e.g. Markdown files or other source code.
 - When given a task, if while exploring the codebase you find a better way to implement it by changing/refactoring existing code, propose your approach(es), and wait for user's confirmation.
 - If, while implementing a task, you notice possible improvements to the code you wrote/modified/explored - mention them to the user at the end of your task.
 - Inspecting Deno package cache: `find $HOME/Library/Caches/deno -maxdepth 8 -name <package/file name>`; TypeScript definitions for packages are stored here.
