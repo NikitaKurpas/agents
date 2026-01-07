@@ -79,6 +79,8 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Move files to Trash: `trash …` (system command).
 ### xcodegen
 - Generates Xcode projects from YAML specs; run `xcodegen --help`.
+### xcdiff
+- Find diff between two .xcodeproj files: `xcdiff -p1 Original.xcodeproj -p2 Generated.xcodeproj -v -f markdown`; run `xcdiff --help` for more options.
 ### xcbeautify
 - Beautifies `xcodebuild` output: `xcodebuild [flags] | xcbeautify` or `swift test [flags] | xcbeautify`
 ### lldb
