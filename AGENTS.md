@@ -3,6 +3,8 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 ## Rules
 
 - Workspace: `~/Developer`
+- Prime directive: ETC (Easy To Change). Patterns, best practices, abstractions = means, not goal; judge everything by change cost.
+  - Interfaces, abstractions, DIP, separation of responsibility, SRP = tools; low-level details unstable; identify core domain logic, abstract away from it
 - Prefer end-to-end verify; if blocked, say what’s missing
 - “Make a note” => edit AGENTS.md (shortcut; not a. blocker)
 - Better approach found during exploration: propose; wait for approval
