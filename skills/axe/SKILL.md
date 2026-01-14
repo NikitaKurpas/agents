@@ -1,34 +1,28 @@
 ---
 name: axe
-description: Use AXe CLI to inspect and control iOS Simulator UIs with token-efficient filtering of accessibility JSON. Trigger when a task needs simulator UI discovery or interaction.
+description: Use AXe CLI to inspect and control iOS Simulator UIs with token-efficient filtering of accessibility JSON. Use when a task needs simulator UI discovery or interaction.
 ---
 
 # AXe
 
 ## Quick start
 
-Set the simulator UDID once per session:
+Always execute the bundled scripts from this skill’s `scripts/` folder (the one next to this `SKILL.md`).
+
+Prefer the helper script (token-efficient and recommended). With no extra args it returns every node that has an `AXLabel` or `AXValue` (including `StaticText`), so you usually do not need raw `axe describe-ui` + `jq`. It prints help if no `AXE_UDID` env var or `--udid` is provided:
 
 ```bash
-export AXE_UDID="8657E64C-781C-46A7-901E-2F5E84ECA2CF"
-```
-
-Scripts live under this skill folder’s `scripts/` directory. Always execute the bundled scripts from this skill’s `scripts/` folder (the one next to this `SKILL.md`), not any `scripts/` folder in the project repo. Use `scripts/<script-name>` from the skill folder.
-
-Prefer the helper script (token-efficient and recommended). With no extra args it returns every node that has an `AXLabel` or `AXValue` (including `StaticText`), so you usually do not need raw `axe describe-ui` + `jq`. It prints help if no `AXE_UDID` or `--udid` is provided:
-
-```bash
-scripts/axe_interactables.sh --udid "$AXE_UDID"
-scripts/axe_interactables.sh --udid "$AXE_UDID" --label 'Send|OK'
-scripts/axe_interactables.sh --udid "$AXE_UDID" --type Button
-scripts/axe_interactables.sh --udid "$AXE_UDID" --bounds 0 400 390 800 --label 'Send'
-scripts/axe_interactables.sh --udid "$AXE_UDID" --value-regex 'error|failed'
+scripts/axe_interactables.sh --udid <udid>
+scripts/axe_interactables.sh --udid <udid> --label 'Send|OK'
+scripts/axe_interactables.sh --udid <udid> --type Button
+scripts/axe_interactables.sh --udid <udid> --bounds 0 400 390 800 --label 'Send'
+scripts/axe_interactables.sh --udid <udid> --value-regex 'error|failed'
 ```
 
 Describe UI with token-efficient output:
 
 ```bash
-axe describe-ui --udid "$AXE_UDID" | jq -c '
+axe describe-ui --udid <udid> | jq -c '
 def nodes: .. | objects | select(has("type") and has("frame"));
 nodes
 | select((.AXLabel // "") != "" or (.AXValue // "") != "")
@@ -50,8 +44,8 @@ nodes
 Tap by label or id (preferred over coordinates when available):
 
 ```bash
-axe tap --label "Send" --udid "$AXE_UDID"
-axe tap --id "<AXUniqueId>" --udid "$AXE_UDID"
+axe tap --label "Send" --udid <udid>
+axe tap --id "<AXUniqueId>" --udid <udid>
 ```
 
 ## Describe UI (token-efficient patterns)
@@ -61,7 +55,7 @@ Use focused filters and avoid dumping full JSON to the model.
 Find elements by label regex:
 
 ```bash
-axe describe-ui --udid "$AXE_UDID" | jq -c --arg re 'Send|OK' '
+axe describe-ui --udid <udid> | jq -c --arg re 'Send|OK' '
 def nodes: .. | objects | select(has("type") and has("frame"));
 nodes
 | select((.AXLabel // "") | test($re; "i"))
@@ -71,7 +65,7 @@ nodes
 Find elements by value regex:
 
 ```bash
-axe describe-ui --udid "$AXE_UDID" | jq -c --arg re 'error|failed' '
+axe describe-ui --udid <udid> | jq -c --arg re 'error|failed' '
 def nodes: .. | objects | select(has("type") and has("frame"));
 nodes
 | select((.AXValue // "") | test($re; "i"))
@@ -81,7 +75,7 @@ nodes
 List only likely interactables (label or value present):
 
 ```bash
-axe describe-ui --udid "$AXE_UDID" | jq -c '
+axe describe-ui --udid <udid> | jq -c '
 def nodes: .. | objects | select(has("type") and has("frame"));
 nodes
 | select((.AXLabel // "") != "" or (.AXValue // "") != "")
@@ -95,7 +89,7 @@ When AXUniqueId is null, fall back to AXLabel or coordinates.
 Buttons only:
 
 ```bash
-axe describe-ui --udid "$AXE_UDID" | jq -c '
+axe describe-ui --udid <udid> | jq -c '
 def nodes: .. | objects | select(has("type") and has("frame"));
 nodes
 | select(.type == "Button")
@@ -105,7 +99,7 @@ nodes
 Text fields only:
 
 ```bash
-axe describe-ui --udid "$AXE_UDID" | jq -c '
+axe describe-ui --udid <udid> | jq -c '
 def nodes: .. | objects | select(has("type") and has("frame"));
 nodes
 | select(.type == "TextField")
@@ -117,7 +111,7 @@ nodes
 If labels are duplicated, scope by frame bounds (x/y/width/height) and keep only hits in a region:
 
 ```bash
-axe describe-ui --udid "$AXE_UDID" | jq -c --arg re "Send" '
+axe describe-ui --udid <udid> | jq -c --arg re "Send" '
 def nodes: .. | objects | select(has("type") and has("frame"));
 nodes
 | select((.AXLabel // "") | test($re; "i"))
@@ -130,7 +124,7 @@ nodes
 Type text (US keyboard only):
 
 ```bash
-axe type "Hello" --udid "$AXE_UDID"
+axe type "Hello" --udid <udid>
 ```
 
 Non-US text input is not supported by `axe type` (US HID keyboard only). Workaround: use the simulator pasteboard and paste.
@@ -138,7 +132,7 @@ Non-US text input is not supported by `axe type` (US HID keyboard only). Workaro
 ```bash
 # 1) Focus the target field with axe tap.
 # 2) Copy non-US text to the simulator pasteboard:
-printf '%s' "$TEXT" | xcrun simctl pbcopy "$AXE_UDID"
+printf '%s' "$TEXT" | xcrun simctl pbcopy <udid>
 # 3) Long-press the field to show the edit menu, then tap "Paste".
 ```
 
@@ -146,9 +140,9 @@ Fully automated long-press + paste (requires field coordinates):
 
 ```bash
 # Long-press at the field center (x,y) to open the edit menu.
-axe touch -x 200 -y 500 --down --up --delay 1.0 --udid "$AXE_UDID"
+axe touch -x 200 -y 500 --down --up --delay 1.0 --udid <udid>
 # Tap the "Paste" menu item.
-axe tap --label "Paste" --udid "$AXE_UDID"
+axe tap --label "Paste" --udid <udid>
 ```
 
 Note: The “Paste” label may be localized on non-English simulators.
@@ -156,14 +150,14 @@ Note: The “Paste” label may be localized on non-English simulators.
 Swipe between coordinates:
 
 ```bash
-axe swipe --start-x 200 --start-y 600 --end-x 200 --end-y 200 --udid "$AXE_UDID"
+axe swipe --start-x 200 --start-y 600 --end-x 200 --end-y 200 --udid <udid>
 ```
 
 Press simulator buttons:
 
 ```bash
-axe button home --udid "$AXE_UDID"
-axe button lock --duration 1.5 --udid "$AXE_UDID"
+axe button home --udid <udid>
+axe button lock --duration 1.5 --udid <udid>
 ```
 
 ## Screenshots (token-efficient)
@@ -171,7 +165,7 @@ axe button lock --duration 1.5 --udid "$AXE_UDID"
 If you need a screenshot, downsample it (2x–3x) before reading it to reduce tokens.
 
 ```bash
-axe screenshot --udid "$AXE_UDID" --output /tmp/axe-sim.png
+axe screenshot --udid <udid> --output /tmp/axe-sim.png
 # Downsample ~3x by capping the longest edge.
 sips -Z 900 /tmp/axe-sim.png --out /tmp/axe-sim.down.png
 # Then read/attach the downsampled image.

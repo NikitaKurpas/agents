@@ -1,6 +1,6 @@
 ---
 name: ios-simulator-e2e
-description: End-to-end iOS app development workflow on the iOS Simulator using CLI tools (xcodebuild, xcrun simctl, log stream, xctrace). Use to build, install, run, log, inspect UI, interact, capture screenshots/recordings, or iterate on iOS apps in the Simulator. Prefer the axe skill for UI inspection/interaction when present.
+description: End-to-end iOS app development workflow on the iOS Simulator using CLI tools. Use to build, install, run, log, inspect UI, interact, capture screenshots/recordings, or iterate on iOS apps in the Simulator. Prefer the axe skill for UI inspection/interaction when present.
 ---
 
 # iOS Simulator End-to-End Workflow
@@ -12,36 +12,26 @@ description: End-to-end iOS app development workflow on the iOS Simulator using 
 
 ## Quick start (CLI)
 
+Always prefer to use the project's tasks/recipes if they exist.
+
 - In sandboxed environments, run Xcode/Simulator commands with escalated permissions to avoid CoreSimulatorService and device discovery failures.
 - List Simulators: `xcrun simctl list devices`
 - Boot a device: `xcrun simctl boot <device-udid>` or `xcrun simctl boot "iPhone 15"`
 - Wait for boot: `xcrun simctl bootstatus <device-udid> -b`
 - Prefer a picked destination string when device discovery is flaky: `./scripts/simctl-destination.sh`
 - Build: prefer UDID + arch to avoid ambiguous name matching:
-  - `xcodebuild -scheme <Scheme> -destination 'platform=iOS Simulator,id=<UDID>,arch=arm64' -quiet -hideShellScriptEnvironment build`
+  - `xcodebuild build -scheme <Scheme> -destination 'platform=iOS Simulator,id=<UDID>,arch=arm64' -quiet -hideShellScriptEnvironment`
 - Install: `xcrun simctl install <device-udid> <path-to-app>`
 - Launch: `xcrun simctl launch <device-udid> <bundle-id>`
 
 ## Bundled helper scripts
 
-- Scripts live under this skill folder’s `scripts/` directory. Always execute the **bundled** scripts from this skill’s `scripts/` folder (the one next to this `SKILL.md`), not any `scripts/` folder in the project repo.
-- Use `scripts/<script-name>` from the skill folder:
-- `scripts/xcodebuild-app-info.sh`: print app path, bundle id, and executable name.
+- Always use `scripts/<script-name>` from the skill folder (the one next to this `SKILL.md`):
+- `scripts/xcodebuild-app-info.sh`: print .app path, bundle id, and executable name.
   - Example: `scripts/xcodebuild-app-info.sh -scheme <Scheme> -sdk iphonesimulator -configuration Debug`
-- `scripts/simctl-destination.sh`: pick a simulator destination and print `DESTINATION` (with `arch=arm64`), `UDID`, `NAME`, `STATE`.
-  - Example: `scripts/simctl-destination.sh | while IFS= read -r line; do export "$line"; done` then use `$DESTINATION` or `$UDID`.
-- `scripts/simlog-stream.sh`: duration-capped log stream with optional predicate.
-  - Example: `scripts/simlog-stream.sh "$UDID" aiTomo 5`
-  - Example with predicate: `scripts/simlog-stream.sh --udid "$UDID" --process aiTomo --duration 5 --predicate 'subsystem == "com.apple.network"'`
+- `scripts/simctl-destination.sh`: pick the first available iPhone simulator destination and print `DESTINATION`, `UDID`, `NAME`, `STATE`.
 - `scripts/xcresult-failures.sh`: summarize xcresult test failures (Xcode 16+ summary format).
-  - Example: `scripts/xcresult-failures.sh ./.tmp/LatestTests.xcresult`
-
-## Bootstrap snippet
-
-- One-paste setup for simulator target + build outputs:
-  - `scripts/simctl-destination.sh | while IFS= read -r line; do export "$line"; done`
-  - `scripts/xcodebuild-app-info.sh -scheme <Scheme> -sdk iphonesimulator -configuration Debug | while IFS= read -r line; do export "$line"; done`
-  - Optional: `xcrun simctl install "$UDID" "$APP_PATH"` and `xcrun simctl launch "$UDID" "$BUNDLE_ID"`
+  - Example: `scripts/xcresult-failures.sh /tmp/LatestTests.xcresult`
 
 ## Xcode output handling
 
@@ -54,20 +44,24 @@ Use `-quiet -hideShellScriptEnvironment` flags to omit diagnostic output.
   - `.app` path: `<TARGET_BUILD_DIR>/<FULL_PRODUCT_NAME>`
   - Bundle id: `<PRODUCT_BUNDLE_IDENTIFIER>`
   - Process name: `<EXECUTABLE_NAME>`
-  - One-liner for `.app` path:
-    - `xcodebuild -scheme <Scheme> -destination 'platform=iOS Simulator,name=<Device>' -showBuildSettings | rg 'TARGET_BUILD_DIR|FULL_PRODUCT_NAME' | awk -F' = ' 'NR==1{dir=$2} NR==2{print dir "/" $2}'`
+  - One-liner for `.app` path: `xcodebuild -scheme <Scheme> -destination 'platform=iOS Simulator,name=<Device>' -showBuildSettings | rg 'TARGET_BUILD_DIR|FULL_PRODUCT_NAME' | awk -F' = ' 'NR==1{dir=$2} NR==2{print dir "/" $2}'`
 
 ## Logs
 
-- Stream logs (Simulator): `xcrun simctl spawn <device-udid> log stream --style compact --predicate 'process == "<AppProcessName>"'`
-- Find bundle/process name from the app’s Info.plist or build settings.
-- Prefer a duration-capped wrapper and filter noisy lines (e.g., `getpwuid_r`) to keep output token-efficient.
+If you know in advance you will need logs to debug/verify, stream logs in background terminal: `xcrun simctl spawn booted/<device-udid> log stream --style compact --predicate '...'`
+  - To reduce output size, use `--style ndjson` and pipe to sed and jq: `sed -n '/^{/p' | jq -r --unbuffered '[.messageType,.subsystem,.category,.eventMessage] | @tsv'`
+Otherwise, show past logs: `xcrun simctl spawn booted/<device-udid> log show --style compact --last <timeframe or use 2m> --predicate '...'`
+  - To reduce output size, use `--style json` and pipe to jq: `jq -r '.[] | [.messageType,.subsystem,.category,.eventMessage] | @tsv'`
+
+- Strongly prefer to narrow logs down using subsystem and category, if known: `--predicate 'subsystem == "..." [AND category == "..."]'`.
+- Otherwise, use app process name to filter logs: `--predicate 'process == "<AppProcessName>"'`; this will output a lot of noise, so try filtering.
+- Find bundle/process name using `scripts/xcodebuild-app-info.sh`.
 
 ## UI inspection and interaction
 
-- Use `axe` skill for accessibility tree queries, element discovery, taps, typing, and scrolling.
-- If `axe` is unavailable, drive UI via XCUITest and log `app.debugDescription` for a UI tree snapshot.
-- Other CLI paths are limited: `simctl io` only supports screenshots/recordings and pasteboard, not element-level interaction.
+- Use `axe` skill for element discovery, taps, typing, and scrolling.
+- If skill use unavailable, use the `axe` command and filter output with `jq`.
+- Other CLI paths are limited: `simctl io` only supports screenshots/recordings and pasteboard.
 
 ## Screenshots and recordings
 

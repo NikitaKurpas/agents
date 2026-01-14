@@ -13,12 +13,12 @@ tmp="$(mktemp -t xcodebuild-app-info.XXXXXX)"
 trap 'rm -f "$tmp"' EXIT
 
 set +e
-xcodebuild "$@" -showBuildSettings >"$tmp" 2>&1
+xcodebuild "$@" -quiet -hideShellScriptEnvironment -showBuildSettings >"$tmp" 2>&1
 status=$?
 set -e
 
 app_info="$(
-  rg 'TARGET_BUILD_DIR|FULL_PRODUCT_NAME|PRODUCT_BUNDLE_IDENTIFIER|EXECUTABLE_NAME' "$tmp" \
+  (rg 'TARGET_BUILD_DIR|FULL_PRODUCT_NAME|PRODUCT_BUNDLE_IDENTIFIER|EXECUTABLE_NAME' "$tmp" || true) \
     | awk -F' = ' '
       $1 ~ /TARGET_BUILD_DIR/ {dir=$2}
       $1 ~ /FULL_PRODUCT_NAME/ {name=$2}
@@ -36,5 +36,10 @@ if [[ -n "$app_info" ]]; then
   exit 0
 fi
 
-rg -n -m 12 -i 'error:|error domain|unable to find a device|coresimulatorservice|simulator device support disabled|failed to initialize simulator device set|simdiskimaged' "$tmp" || true
+if [[ $status -ne 0 ]]; then
+  echo "xcodebuild failed (exit $status)"
+  # rg -n -m 24 -i 'error:|error domain|unable to find a device|coresimulatorservice|simulator device support disabled|failed to initialize simulator device set|simdiskimaged' "$tmp" || true
+  # echo "--- tail ---"
+  cat "$tmp" || true
+fi
 exit "$status"
