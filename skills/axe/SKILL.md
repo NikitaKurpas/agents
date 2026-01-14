@@ -9,7 +9,7 @@ description: Use AXe CLI to inspect and control iOS Simulator UIs with token-eff
 
 Always execute the bundled scripts from this skill’s `scripts/` folder (the one next to this `SKILL.md`).
 
-Prefer the helper script (token-efficient and recommended). With no extra args it returns every node that has an `AXLabel` or `AXValue` (including `StaticText`), so you usually do not need raw `axe describe-ui` + `jq`. It prints help if no `AXE_UDID` env var or `--udid` is provided:
+Prefer the helper script (token-efficient). With no extra args it returns every node that has an `AXLabel` or `AXValue` (including `StaticText`). It prints help if no `AXE_UDID` env var or `--udid` is provided:
 
 ```bash
 scripts/axe_interactables.sh --udid <udid>
@@ -19,7 +19,7 @@ scripts/axe_interactables.sh --udid <udid> --bounds 0 400 390 800 --label 'Send'
 scripts/axe_interactables.sh --udid <udid> --value-regex 'error|failed'
 ```
 
-Describe UI with token-efficient output:
+Describe UI with token-efficient output (use when helper script not enough):
 
 ```bash
 axe describe-ui --udid <udid> | jq -c '
@@ -50,29 +50,9 @@ axe tap --id "<AXUniqueId>" --udid <udid>
 
 ## Describe UI (token-efficient patterns)
 
-Use focused filters and avoid dumping full JSON to the model.
+Use focused filters. Avoid dumping full JSON.
 
-Find elements by label regex:
-
-```bash
-axe describe-ui --udid <udid> | jq -c --arg re 'Send|OK' '
-def nodes: .. | objects | select(has("type") and has("frame"));
-nodes
-| select((.AXLabel // "") | test($re; "i"))
-| {type, label:.AXLabel, id:.AXUniqueId, frame}'
-```
-
-Find elements by value regex:
-
-```bash
-axe describe-ui --udid <udid> | jq -c --arg re 'error|failed' '
-def nodes: .. | objects | select(has("type") and has("frame"));
-nodes
-| select((.AXValue // "") | test($re; "i"))
-| {type, label:.AXLabel, value:.AXValue, id:.AXUniqueId, frame}'
-```
-
-List only likely interactables (label or value present):
+Base pattern (edit the `select(...)` clause):
 
 ```bash
 axe describe-ui --udid <udid> | jq -c '
@@ -84,29 +64,13 @@ nodes
 
 When AXUniqueId is null, fall back to AXLabel or coordinates.
 
-### Presets
+Common variants (swap into `select(...)`):
 
-Buttons only:
+- `(.AXLabel // "") | test($re; "i")` with `--arg re 'Send|OK'`
+- `(.AXValue // "") | test($re; "i")`
+- `.type == "Button"` / `.type == "TextField"`
 
-```bash
-axe describe-ui --udid <udid> | jq -c '
-def nodes: .. | objects | select(has("type") and has("frame"));
-nodes
-| select(.type == "Button")
-| {type, label:.AXLabel, id:.AXUniqueId, frame}'
-```
-
-Text fields only:
-
-```bash
-axe describe-ui --udid <udid> | jq -c '
-def nodes: .. | objects | select(has("type") and has("frame"));
-nodes
-| select(.type == "TextField")
-| {type, label:.AXLabel, value:.AXValue, id:.AXUniqueId, frame}'
-```
-
-### Dedupe and scope by bounds
+### Dedupe + bounds
 
 If labels are duplicated, scope by frame bounds (x/y/width/height) and keep only hits in a region:
 
@@ -127,7 +91,7 @@ Type text (US keyboard only):
 axe type "Hello" --udid <udid>
 ```
 
-Non-US text input is not supported by `axe type` (US HID keyboard only). Workaround: use the simulator pasteboard and paste.
+Non-US text input not supported by `axe type` (US HID keyboard only). Workaround: simulator pasteboard + paste.
 
 ```bash
 # 1) Focus the target field with axe tap.
@@ -136,7 +100,7 @@ printf '%s' "$TEXT" | xcrun simctl pbcopy <udid>
 # 3) Long-press the field to show the edit menu, then tap "Paste".
 ```
 
-Fully automated long-press + paste (requires field coordinates):
+Optional automation (requires field coordinates):
 
 ```bash
 # Long-press at the field center (x,y) to open the edit menu.
@@ -145,7 +109,7 @@ axe touch -x 200 -y 500 --down --up --delay 1.0 --udid <udid>
 axe tap --label "Paste" --udid <udid>
 ```
 
-Note: The “Paste” label may be localized on non-English simulators.
+Note: “Paste” label may be localized.
 
 Swipe between coordinates:
 
