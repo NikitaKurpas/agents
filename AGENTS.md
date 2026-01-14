@@ -10,11 +10,11 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Better approach found during exploration: propose; wait for approval
 - Improvements noticed during work: mention at end
 - Keep files <~500 LOC; split/refactor as needed
-- Use `trash` for deletes
 - No python / hacks for edits; use "apply patch" only
 - Lockfiles: never read full; `rg` allowed for exact lines only
 - URLs:
-  - `curl` only if known text-only (md, source)
+  - `curl` only if known text-only (md, sources)
+  - `curl` GitHub file URLs (transform to GH raw link, then dl)
   - Otherwise: `markrawl` skill (if available) - convert any page to md
 - Web: search early; quote exact errors; prefer 2024+ sources
 - Deno cache inspect: `find $HOME/Library/Caches/deno -maxdepth 8 -name <pkg/file>`
@@ -52,7 +52,7 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Leave breadcrumb notes in thread
 
 ## Flow & Runtim
-- Use background terminals for long jobs; tmux only for interactive/persistent (debugger/server).
+- Use background terminals for long jobs (server); tmux only for interactive/persistent (debugger).
 
 ## Build & Test
 - Before handoff: run full gate (lint/build/typecheck/tests/docs)
@@ -73,10 +73,10 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
 ## Available tools
 ### node, deno, npm, uv
+### just
+- Command runner; list tasks w\ `just --list`
 ### xcp
 - Xcode project/workspace helper for managing targets, groups, files, build settings, and assets; run `xcp --help`.
-### trash
-- Move files to Trash: `trash …` (system command).
 ### xcodegen
 - Generates Xcode projects from YAML specs; run `xcodegen --help`.
 ### xcdiff
@@ -86,13 +86,17 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 ### lldb
 - Use lldb inside tmux to debug native apps; attach to the running app to inspect state.
 ### axe
+- Use `axe` skill if available.
 - Simulator automation CLI for describing UI (`axe describe-ui --udid …`), tapping (`axe tap --udid … -x … -y …`), typing, and hardware buttons.
 - Use `axe list-simulators` to enumerate devices.
-- Use `axe` skill if available, or trim `axe describe-ui` with `jq`.
+- Trim `axe describe-ui` with `jq`.
 ### tmux
-- Use only when you need persistence/interaction (debugger/server).
+- Use only when you need persistence/interaction (e.g. debugger).
 - Quick refs: `tmux new -d -s codex-shell`, `tmux attach -t codex-shell`, `tmux list-sessions`, `tmux kill-session -t codex-shell`.
 ### ast-grep
+- Search code using ASTs
+### tofu (OpenTofu)
+- Infra management
 
 ## Frontend Aesthetics
 Avoid “AI slop” UI. Be opinionated + distinctive.
