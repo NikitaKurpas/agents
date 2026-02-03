@@ -6,7 +6,8 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Prime directive: ETC (Easy To Change). Patterns, best practices, abstractions = means, not goal; judge everything by change cost.
   - Interfaces, abstractions, DIP, separation of responsibility, SRP = tools; low-level details unstable; identify core domain logic, abstract away from it
 - Prefer end-to-end verify; if blocked, say what’s missing
-- “Make a note” => edit AGENTS.md (shortcut; not a. blocker)
+- “Make a note” => edit AGENTS.md (shortcut; not a blocker)
+- Branch name: `codex/[issue-]<slug>`
 - Better approach found during exploration: propose; wait for approval
 - Improvements noticed during work: mention at end
 - Keep files <~500 LOC; split/refactor as needed
@@ -75,6 +76,8 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 ### node, deno, npm, uv
 ### just
 - Command runner; list tasks w\ `just --list`
+### gh (GitHub CLI)
+- Use to work with issues and PRs
 ### xcp
 - Xcode project/workspace helper for managing targets, groups, files, build settings, and assets; run `xcp --help`.
 ### xcodegen
