@@ -1,4 +1,7 @@
-.PHONY: sync-skills
+.PHONY: sync-skills update-skills
+
+update-skills:
+	@./scripts/update_skills.ts --file skills/sources.toml --dest skills --overwrite
 
 sync-skills:
 	@set -euo pipefail; \
@@ -13,4 +16,5 @@ sync-skills:
 		fi; \
 		rm -rf "$$dest"; \
 		cp -R "$$src" "$$dest"; \
+		echo "Synced: $$skill"; \
 	done < "$(CURDIR)/codex/enabled-skills"

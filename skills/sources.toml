@@ -1,0 +1,8 @@
+[skills]
+atlas = "https://github.com/openai/skills/tree/main/skills/.curated/atlas"
+gh-address-comments = "https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments"
+imagegen = "https://github.com/openai/skills/tree/main/skills/.curated/imagegen"
+openai-docs = "https://github.com/openai/skills/tree/main/skills/.curated/openai-docs"
+playwright = "https://github.com/openai/skills/tree/main/skills/.curated/playwright"
+security-threat-model = "https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model"
+yeet = "https://github.com/openai/skills/tree/main/skills/.curated/yeet"
