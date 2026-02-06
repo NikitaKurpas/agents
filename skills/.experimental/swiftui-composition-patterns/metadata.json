@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "organization": "Engineering",
+  "date": "January 2026",
+  "abstract": "Composition patterns for building flexible, maintainable SwiftUI views. Avoid flag proliferation by using compound views, lifting state, and composing internals. These patterns make codebases easier for both humans and AI agents to work with as they scale.",
+  "references": [
+    "https://developer.apple.com/documentation/swiftui",
+    "https://developer.apple.com/documentation/swiftui/environmentvalues",
+    "https://developer.apple.com/documentation/swiftui/viewbuilder"
+  ]
+}
