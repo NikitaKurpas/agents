@@ -1,6 +1,7 @@
 [skills]
 atlas = "https://github.com/openai/skills/tree/main/skills/.curated/atlas"
 composition-patterns = "https://github.com/vercel-labs/agent-skills/tree/main/skills/composition-patterns"
+frontend-design = "https://github.com/anthropics/skills/tree/main/skills/frontend-design"
 gh-address-comments = "https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments"
 imagegen = "https://github.com/openai/skills/tree/main/skills/.curated/imagegen"
 openai-docs = "https://github.com/openai/skills/tree/main/skills/.curated/openai-docs"
@@ -8,6 +9,10 @@ playwright = "https://github.com/openai/skills/tree/main/skills/.curated/playwri
 security-threat-model = "https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model"
 swift-concurrency = "https://github.com/AvdLee/Swift-Concurrency-Agent-Skill/tree/main/swift-concurrency"
 swiftui-expert-skill = "https://github.com/AvdLee/SwiftUI-Agent-Skill/tree/main/swiftui-expert-skill"
+swiftui-liquid-glass = "https://github.com/Dimillian/Skills/tree/main/swiftui-liquid-glass"
+swiftui-performance-audit = "https://github.com/Dimillian/Skills/tree/main/swiftui-performance-audit"
+swiftui-ui-patterns = "https://github.com/Dimillian/Skills/tree/main/swiftui-ui-patterns"
+swiftui-view-refactor = "https://github.com/Dimillian/Skills/tree/main/swiftui-view-refactor"
 yeet = "https://github.com/openai/skills/tree/main/skills/.curated/yeet"
 xcodebuildmcp-cli = "https://github.com/cameroncooke/XcodeBuildMCP/tree/main/skills/xcodebuildmcp-cli"
 xcsift = "https://github.com/ldomaradzki/xcsift/tree/master/plugins/codex"
