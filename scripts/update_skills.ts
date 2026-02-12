@@ -15,7 +15,7 @@ function usage(): string {
     "",
     "TOML format:",
     "[skills]",
-    'atlas = "https://github.com/openai/skills/tree/main/skills/.curated/atlas"',
+    'imagegen = "https://github.com/openai/skills/tree/main/skills/.curated/imagegen"',
   ].join("\n");
 }
 
@@ -100,43 +100,86 @@ async function main() {
     return;
   }
 
+  const failures: Array<{ name: string; reason: string }> = [];
+  let successCount = 0;
+
   for (const [name, url] of entries) {
+    let backupDir: string | null = null;
     const skillDir = join(destDir, name);
-    if (await pathExists(skillDir)) {
-      if (!overwrite) {
-        throw new Error(
-          `Skill exists: ${skillDir}. Use --overwrite to replace.`,
-        );
+
+    try {
+      if (await pathExists(skillDir)) {
+        if (!overwrite) {
+          throw new Error(
+            `Skill exists: ${skillDir}. Use --overwrite to replace.`,
+          );
+        }
+        if (!dryRun) {
+          backupDir = join(destDir, `.update-skills-backup-${name}-${crypto.randomUUID()}`);
+          await Deno.rename(skillDir, backupDir);
+        }
       }
-      if (!dryRun) {
-        await Deno.remove(skillDir, { recursive: true });
+
+      const args = [
+        "-u",
+        installer,
+        "--url",
+        url,
+        "--dest",
+        destDir,
+        "--name",
+        name,
+      ];
+
+      if (dryRun) {
+        console.log(["python3", ...args].join(" "));
+        successCount += 1;
+        continue;
+      }
+
+      const cmd = new Deno.Command("python3", {
+        args,
+        stdin: "null",
+        stdout: "inherit",
+        stderr: "inherit",
+      });
+      const { code } = await cmd.output();
+      if (code !== 0) {
+        throw new Error(`Installer exited with code ${code}.`);
+      }
+
+      if (backupDir && await pathExists(backupDir)) {
+        await Deno.remove(backupDir, { recursive: true });
+      }
+      successCount += 1;
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      failures.push({ name, reason });
+      console.error(`Failed '${name}': ${reason}`);
+
+      if (!dryRun && backupDir && await pathExists(backupDir)) {
+        try {
+          if (await pathExists(skillDir)) {
+            await Deno.remove(skillDir, { recursive: true });
+          }
+          await Deno.rename(backupDir, skillDir);
+        } catch (restoreError) {
+          const restoreReason = restoreError instanceof Error
+            ? restoreError.message
+            : String(restoreError);
+          console.error(`Restore failed '${name}': ${restoreReason}`);
+        }
       }
     }
+  }
 
-    const args = [
-      "-u",
-      installer,
-      "--url",
-      url,
-      "--dest",
-      destDir,
-      "--name",
-      name,
-    ];
-
-    if (dryRun) {
-      console.log(["python3", ...args].join(" "));
-      continue;
+  console.log(`Updated skills: ${successCount}/${entries.length}`);
+  if (failures.length > 0) {
+    console.error("Failed skills:");
+    for (const failure of failures) {
+      console.error(`- ${failure.name}: ${failure.reason}`);
     }
-
-    const cmd = new Deno.Command("python3", {
-      args,
-      stdin: "null",
-      stdout: "inherit",
-      stderr: "inherit",
-    });
-    const { code } = await cmd.output();
-    if (code !== 0) Deno.exit(code);
+    Deno.exit(1);
   }
 }
 
