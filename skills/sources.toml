@@ -1,5 +1,4 @@
 [skills]
-atlas = "https://github.com/openai/skills/tree/main/skills/.curated/atlas"
 composition-patterns = "https://github.com/vercel-labs/agent-skills/tree/main/skills/composition-patterns"
 frontend-design = "https://github.com/anthropics/skills/tree/main/skills/frontend-design"
 gh-address-comments = "https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments"
