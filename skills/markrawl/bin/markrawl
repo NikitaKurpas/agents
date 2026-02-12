@@ -7,6 +7,20 @@
 import puppeteer from "npm:puppeteer";
 import turndown from "npm:turndown";
 
+function printHelp() {
+  console.log(`Usage: markrawl [options] <url> [output-file]
+
+Convert a web page to Markdown and write it to a file.
+
+Arguments:
+  <url>          URL to fetch and convert
+  [output-file]  Destination path (default: temp file in /tmp)
+
+Options:
+  -h, --help     Show this help message
+`);
+}
+
 async function fetchUrlToMarkdown(url) {
   const browser = await puppeteer.launch({
     headless: true,
@@ -23,11 +37,18 @@ async function fetchUrlToMarkdown(url) {
 }
 
 (async () => {
-  const url = process.argv[2];
-  const output = process.argv[3] ?? (await Deno.makeTempFile({dir: '/tmp', suffix: '.md'}));
+  const args = [...Deno.args];
+
+  if (args.includes("--help") || args.includes("-h")) {
+    printHelp();
+    process.exit(0);
+  }
+
+  const url = args[0];
+  const output = args[1] ?? (await Deno.makeTempFile({dir: "/tmp", suffix: ".md" }));
 
   if (!url) {
-    console.error("Usage: node main.js <url> [output-file]");
+    printHelp();
     process.exit(1);
   }
 
