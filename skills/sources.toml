@@ -7,6 +7,7 @@ openai-docs = "https://github.com/openai/skills/tree/main/skills/.curated/openai
 playwright = "https://github.com/openai/skills/tree/main/skills/.curated/playwright"
 security-threat-model = "https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model"
 swift-concurrency = "https://github.com/AvdLee/Swift-Concurrency-Agent-Skill/tree/main/swift-concurrency"
+swift-testing-expert = "https://github.com/AvdLee/Swift-Testing-Agent-Skill/tree/main/swift-testing-expert"
 swiftui-expert-skill = "https://github.com/AvdLee/SwiftUI-Agent-Skill/tree/main/swiftui-expert-skill"
 swiftui-liquid-glass = "https://github.com/Dimillian/Skills/tree/main/swiftui-liquid-glass"
 swiftui-performance-audit = "https://github.com/Dimillian/Skills/tree/main/swiftui-performance-audit"
