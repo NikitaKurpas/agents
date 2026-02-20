@@ -16,3 +16,5 @@ swiftui-view-refactor = "https://github.com/Dimillian/Skills/tree/main/swiftui-v
 yeet = "https://github.com/openai/skills/tree/main/skills/.curated/yeet"
 xcodebuildmcp-cli = "https://github.com/cameroncooke/XcodeBuildMCP/tree/main/skills/xcodebuildmcp-cli"
 xcsift = "https://github.com/ldomaradzki/xcsift/tree/master/plugins/codex"
+tuist-migrate = "https://github.com/tuist/agent-skills/tree/main/skills/migrate"
+generated-projects = "https://github.com/tuist/agent-skills/tree/main/skills/generated-projects"
