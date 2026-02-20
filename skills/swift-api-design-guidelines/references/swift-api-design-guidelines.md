@@ -42,6 +42,14 @@ init(count n: Int, repeatedElement x: Element)
 ```
 
 - Use recognized symbol commands when useful (`Parameter`, `Returns`, `Throws`, `Note`, `SeeAlso`, etc.).
+- Recognized symbol command keywords include:
+  - `Attention`, `Author`, `Authors`, `Bug`
+  - `Complexity`, `Copyright`, `Date`, `Experiment`
+  - `Important`, `Invariant`, `Note`, `Parameter`
+  - `Parameters`, `Postcondition`, `Precondition`, `Remark`
+  - `Requires`, `Returns`, `SeeAlso`, `Since`
+  - `Throws`, `ToDo`, `Version`, `Warning`
+- Optionally continue after the summary with paragraphs and bullet items for details; use complete sentences in extended discussion sections.
 
 ## Naming
 
@@ -136,6 +144,8 @@ line1.intersects(line2)
 
 - Avoid obscure terms when common terms are equally precise.
 - If using a term of art, use its established meaning.
+  - Don't surprise an expert: existing domain users should find usage unsurprising.
+  - Don't confuse a beginner: term should be learnable via context.
 - Avoid non-standard abbreviations.
 - Embrace strong precedent (`Array`, `sin(x)`) instead of over-explaining names.
 
@@ -197,6 +207,10 @@ Int64(someUInt32)
 String(veryLargeNumber, radix: 16)
 ```
 
+- The first conversion argument should be the source value.
+- Value-preserving conversion: every distinct source value maps to a distinct result value (injective/monomorphic mapping in the guidelines' wording).
+- Recovering the original value later is not part of the value-preserving criterion.
+
 - In narrowing conversions, use clarifying labels.
 
 ```swift
@@ -208,6 +222,13 @@ init(saturating valueToApproximate: UInt64)
 
 ```swift
 x.removeBoxes(havingLength: 12)
+```
+
+- Exception: when first two arguments are parts of one abstraction, start label after preposition and fold it into base name.
+
+```swift
+a.moveTo(x: b, y: c)
+a.fadeFrom(red: b, green: c, blue: d)
 ```
 
 - If first argument is part of the grammatical phrase, omit first label and merge phrase into base name.
@@ -224,6 +245,8 @@ words.split(maxSplits: 12)
 students.sorted(isOrderedBefore: Student.namePrecedes)
 ```
 
+- Defaulted arguments can be omitted; because omitted/defaultable arguments do not participate in grammatical phrases at use sites, they should keep labels.
+
 - Label all other arguments.
 
 ## Special Instructions
@@ -236,6 +259,8 @@ mutating func ensureUniqueStorage(
   allocate: (_ byteCount: Int) -> UnsafeRawPointer
 ) -> (reallocated: Bool, capacityChanged: Bool)
 ```
+
+- Closure arguments cannot be labeled at call sites; choose closure parameter names with the same care as top-level function parameters.
 
 - Use extra care with unconstrained polymorphism (`Any`, `AnyObject`, unconstrained generics) to avoid overload ambiguity.
 
