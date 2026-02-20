@@ -1,0 +1,4 @@
+interface:
+  display_name: "AXe"
+  short_description: "Inspect and control iOS Simulator UI via AXe CLI"
+  default_prompt: "Use $axe to inspect this simulator UI and perform the requested interactions with token-efficient output."

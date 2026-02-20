@@ -1,0 +1,4 @@
+interface:
+  display_name: "Markrawl"
+  short_description: "Fetch rendered web pages as Markdown"
+  default_prompt: "Use $markrawl to fetch this page and return the resulting Markdown for analysis."

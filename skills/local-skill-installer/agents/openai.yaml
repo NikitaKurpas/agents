@@ -1,0 +1,4 @@
+interface:
+  display_name: "Local Skill Installer"
+  short_description: "Install Codex skills from local directories"
+  default_prompt: "Use $local-skill-installer to install this local skill into the correct Codex skills directory."

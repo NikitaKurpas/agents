@@ -1,0 +1,4 @@
+interface:
+  display_name: "Instruments Profiling"
+  short_description: "Profile macOS/iOS apps with Instruments and xctrace"
+  default_prompt: "Use $instruments-profiling to capture a Time Profiler trace, verify target binary selection, and summarize hotspots."

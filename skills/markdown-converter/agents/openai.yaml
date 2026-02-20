@@ -1,0 +1,4 @@
+interface:
+  display_name: "Markdown Converter"
+  short_description: "Convert files and URLs to Markdown with markitdown"
+  default_prompt: "Use $markdown-converter to convert the provided files or URLs into clean Markdown."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "iOS Simulator E2E"
+  short_description: "Build, run, and validate iOS apps in Simulator via CLI"
+  default_prompt: "Use $ios-simulator-e2e to build, install, launch, and validate this app in the iOS Simulator."
