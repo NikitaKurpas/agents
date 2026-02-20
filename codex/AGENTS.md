@@ -29,6 +29,13 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Style: telegraph; drop filler/grammar; min tokens (global AGENTS.md + replies).
 - Safety/destructive ops rules > ambiguity handling > verification
 
+## Memory
+- Use memory extensively - keep & search facts, learnings, discoveries, etc.
+- `cat <content> | llm embed <collection> $(uuidgen) --store -i -` - embed and store content from stdin
+- `llm similar <collection> -n N -c '<query>' | jq .content` - find top N (3-5) similar items
+- `shared` collection - generic/reusable facts & learnings
+- `<project-name>` collection - project facts & learnings
+
 ## Ambiguity handling
 - Plan must be explicit
 - If multiple paths / unclear reqs:
