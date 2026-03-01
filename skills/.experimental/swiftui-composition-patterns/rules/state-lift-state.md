@@ -34,8 +34,10 @@ struct ComposerSubmit: View {
 **Correct (state in provider, shared via environment):**
 
 ```swift
-final class ComposerStore: ObservableObject, ComposerState, ComposerActions {
-  @Published var text: String = ""
+@Observable
+@MainActor
+final class ComposerStore: ComposerState, ComposerActions {
+  var text: String = ""
   var isSending: Bool = false
 
   func updateText(_ value: String) { text = value }
@@ -43,12 +45,16 @@ final class ComposerStore: ObservableObject, ComposerState, ComposerActions {
 }
 
 struct ComposerProvider<Content: View>: View {
-  @StateObject private var store = ComposerStore()
-  @ViewBuilder let content: () -> Content
+  @State private var store = ComposerStore()
+  @ViewBuilder let content: Content
+
+  init(@ViewBuilder content: () -> Content) {
+    self.content = content()
+  }
 
   var body: some View {
     let context = ComposerContext(state: store, actions: store, meta: .init())
-    content().environment(\.composerContext, context)
+    content.environment(\.composerContext, context)
   }
 }
 ```

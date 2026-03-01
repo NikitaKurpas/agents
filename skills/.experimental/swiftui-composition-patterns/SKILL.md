@@ -55,8 +55,9 @@ Reference these guidelines when:
 
 ### 3. Implementation Patterns (MEDIUM)
 
-- `patterns-explicit-variants` - Create explicit variant views instead of
-  boolean modes
+- `patterns-explicit-variants` - Avoid boolean mode flags; use explicit
+  variants when API clarity matters (enum routing is also valid for finite
+  internal flows)
 - `patterns-children-over-render-props` - Prefer ViewBuilder slots and child
   views over renderX-style closures or AnyView erasure
 

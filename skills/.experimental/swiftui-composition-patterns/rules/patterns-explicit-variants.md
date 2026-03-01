@@ -7,26 +7,21 @@ tags: patterns, swiftui, composition
 
 ## Create Explicit View Variants
 
-Prefer explicit variants over `mode` enums or `isX` flags inside one view. Each
-variant should clearly express its layout and slots.
+Avoid `isX` boolean mode flags. For finite flows, both explicit variants and
+enum-driven routing can be valid. Prefer explicit variant types when you want a
+clearer public API and reusable composition slots.
 
-**Incorrect (mode enum with branching):**
+**Incorrect (boolean mode flags):**
 
 ```swift
-enum ComposerMode { case channel, thread, edit }
-
 struct ComposerView: View {
-  let mode: ComposerMode
+  let isThread: Bool
+  let isEditing: Bool
 
   var body: some View {
-    switch mode {
-    case .channel:
-      ChannelLayout()
-    case .thread:
-      ThreadLayout()
-    case .edit:
-      EditLayout()
-    }
+    if isThread { ThreadLayout() }
+    else if isEditing { EditLayout() }
+    else { ChannelLayout() }
   }
 }
 ```
@@ -40,3 +35,21 @@ struct EditComposerView: View { var body: some View { EditLayout() } }
 ```
 
 Explicit variants improve API clarity and reduce internal branching.
+
+**Also acceptable (finite internal flow):**
+
+```swift
+enum ComposerMode { case channel, thread, edit }
+
+struct ComposerRootView: View {
+  let mode: ComposerMode
+
+  var body: some View {
+    switch mode {
+    case .channel: ChannelLayout()
+    case .thread: ThreadLayout()
+    case .edit: EditLayout()
+    }
+  }
+}
+```

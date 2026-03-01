@@ -7,9 +7,9 @@ tags: patterns, swiftui, composition
 
 ## Prefer ViewBuilder Slots Over Render Closures
 
-Avoid `renderX` closures that return `AnyView` or `some View` with type erasure.
+Avoid `renderX` closures that return `AnyView`.
 Prefer `@ViewBuilder` slots and generic content parameters so composition stays
-type-safe and flexible.
+type-safe, flexible, and easier for SwiftUI to diff.
 
 **Incorrect (render closures with AnyView):**
 
@@ -32,15 +32,25 @@ struct CardView: View {
 
 ```swift
 struct CardView<Header: View, Footer: View, Content: View>: View {
-  @ViewBuilder let header: () -> Header
-  @ViewBuilder let footer: () -> Footer
-  @ViewBuilder let content: () -> Content
+  @ViewBuilder let header: Header
+  @ViewBuilder let footer: Footer
+  @ViewBuilder let content: Content
+
+  init(
+    @ViewBuilder header: () -> Header,
+    @ViewBuilder footer: () -> Footer,
+    @ViewBuilder content: () -> Content
+  ) {
+    self.header = header()
+    self.footer = footer()
+    self.content = content()
+  }
 
   var body: some View {
     VStack {
-      header()
-      content()
-      footer()
+      header
+      content
+      footer
     }
   }
 }

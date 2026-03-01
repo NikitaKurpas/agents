@@ -93,7 +93,8 @@ struct EditComposerView: View {
 **Impact: HIGH (enables flexible composition without prop drilling)**
 
 Structure complex views as compound components with shared environment. Each
-subview reads shared state via `@Environment` or `@EnvironmentObject`.
+subview reads shared state via `@Environment` (or `@EnvironmentObject` for
+legacy code).
 
 **Incorrect: monolithic view with flags and render closures**
 
@@ -115,20 +116,78 @@ struct ComposerView: View {
 **Correct: compound components with context**
 
 ```swift
+protocol ComposerState {
+  var text: String { get }
+}
+
+protocol ComposerActions {
+  func updateText(_ value: String)
+  func send()
+}
+
+struct ComposerContext {
+  var state: any ComposerState
+  var actions: any ComposerActions
+  var meta: ComposerMeta
+
+  static let unimplemented = ComposerContext(
+    state: ComposerStatePlaceholder(),
+    actions: ComposerActionsPlaceholder(),
+    meta: .init()
+  )
+}
+
+private struct ComposerStatePlaceholder: ComposerState {
+  var text: String {
+    assertionFailure("Missing composerContext in environment")
+    return ""
+  }
+}
+
+private struct ComposerActionsPlaceholder: ComposerActions {
+  func updateText(_ value: String) {
+    assertionFailure("Missing composerContext in environment")
+  }
+
+  func send() {
+    assertionFailure("Missing composerContext in environment")
+  }
+}
+
+private struct ComposerContextKey: EnvironmentKey {
+  static let defaultValue = ComposerContext.unimplemented
+}
+
+extension EnvironmentValues {
+  var composerContext: ComposerContext {
+    get { self[ComposerContextKey.self] }
+    set { self[ComposerContextKey.self] = newValue }
+  }
+}
+
 struct ComposerProvider<Content: View>: View {
   let context: ComposerContext
-  @ViewBuilder let content: () -> Content
+  @ViewBuilder let content: Content
+
+  init(context: ComposerContext, @ViewBuilder content: () -> Content) {
+    self.context = context
+    self.content = content()
+  }
 
   var body: some View {
-    content().environment(\.composerContext, context)
+    content.environment(\.composerContext, context)
   }
 }
 
 struct ComposerFrame<Content: View>: View {
-  @ViewBuilder let content: () -> Content
+  @ViewBuilder let content: Content
+
+  init(@ViewBuilder content: () -> Content) {
+    self.content = content()
+  }
 
   var body: some View {
-    VStack { content() }
+    VStack { content }
   }
 }
 ```
@@ -154,7 +213,7 @@ Views should depend on a stable context interface, not a concrete store type.
 
 ```swift
 struct ComposerView: View {
-  @StateObject var store: ComposerStore
+  @State private var store = ComposerStore()
 
   var body: some View {
     TextField("Message", text: $store.text)
@@ -175,8 +234,8 @@ struct ComposerInput: View {
     TextField(
       "Message",
       text: Binding(
-        get: { context?.state.text ?? "" },
-        set: { context?.actions.updateText($0) }
+        get: { context.state.text },
+        set: { context.actions.updateText($0) }
       )
     )
   }
@@ -192,9 +251,32 @@ on a stable contract.
 
 ```swift
 struct ComposerContext {
-  var state: ComposerState
-  var actions: ComposerActions
+  var state: any ComposerState
+  var actions: any ComposerActions
   var meta: ComposerMeta
+
+  static let unimplemented = ComposerContext(
+    state: ComposerStatePlaceholder(),
+    actions: ComposerActionsPlaceholder(),
+    meta: .init()
+  )
+}
+
+private struct ComposerStatePlaceholder: ComposerState {
+  var text: String {
+    assertionFailure("Missing composerContext in environment")
+    return ""
+  }
+}
+
+private struct ComposerActionsPlaceholder: ComposerActions {
+  func updateText(_ value: String) {
+    assertionFailure("Missing composerContext in environment")
+  }
+
+  func send() {
+    assertionFailure("Missing composerContext in environment")
+  }
 }
 ```
 
@@ -205,13 +287,27 @@ struct ComposerContext {
 Lift shared state into a provider view and inject via environment.
 
 ```swift
+@Observable
+@MainActor
+final class ComposerStore: ComposerState, ComposerActions {
+  var text: String = ""
+  var isSending: Bool = false
+
+  func updateText(_ value: String) { text = value }
+  func send() { /* send */ }
+}
+
 struct ComposerProvider<Content: View>: View {
-  @StateObject private var store = ComposerStore()
-  @ViewBuilder let content: () -> Content
+  @State private var store = ComposerStore()
+  @ViewBuilder let content: Content
+
+  init(@ViewBuilder content: () -> Content) {
+    self.content = content()
+  }
 
   var body: some View {
     let context = ComposerContext(state: store, actions: store, meta: .init())
-    content().environment(\.composerContext, context)
+    content.environment(\.composerContext, context)
   }
 }
 ```
@@ -228,12 +324,16 @@ Specific techniques for implementing compound views and ViewBuilder slots.
 
 **Impact: MEDIUM (reduces mode branching)**
 
-Prefer explicit variants over `mode` enums or `isX` flags.
+Avoid `isX` boolean mode flags. For finite flows, both explicit variants and
+enum-driven routing can be valid. Prefer explicit variant types when you want a
+clearer public API.
 
 ```swift
 struct ChannelComposerView: View { var body: some View { ChannelLayout() } }
 struct ThreadComposerView: View { var body: some View { ThreadLayout() } }
 ```
+
+Enum-driven routing is also acceptable for finite internal flows.
 
 ### 3.2 Prefer ViewBuilder Slots Over Render Closures
 
@@ -244,12 +344,22 @@ Use typed `@ViewBuilder` slots instead of `renderX` closures returning
 
 ```swift
 struct CardView<Header: View, Footer: View, Content: View>: View {
-  @ViewBuilder let header: () -> Header
-  @ViewBuilder let footer: () -> Footer
-  @ViewBuilder let content: () -> Content
+  @ViewBuilder let header: Header
+  @ViewBuilder let footer: Footer
+  @ViewBuilder let content: Content
+
+  init(
+    @ViewBuilder header: () -> Header,
+    @ViewBuilder footer: () -> Footer,
+    @ViewBuilder content: () -> Content
+  ) {
+    self.header = header()
+    self.footer = footer()
+    self.content = content()
+  }
 
   var body: some View {
-    VStack { header(); content(); footer() }
+    VStack { header; content; footer }
   }
 }
 ```

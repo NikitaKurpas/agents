@@ -9,13 +9,13 @@ tags: state, swiftui, composition
 
 The provider is the only place that knows how state is managed. Views consume a
 stable context interface (state/actions/meta). This keeps UI stable even if you
-swap `@StateObject`, `@Observable`, or external stores.
+swap `@Observable`, `ObservableObject` (legacy), or external stores.
 
 **Incorrect (views bind to a concrete store type):**
 
 ```swift
 struct ComposerView: View {
-  @StateObject var store: ComposerStore
+  @State private var store = ComposerStore()
 
   var body: some View {
     VStack {
@@ -40,8 +40,8 @@ protocol ComposerActions {
 }
 
 struct ComposerContext {
-  var state: ComposerState
-  var actions: ComposerActions
+  var state: any ComposerState
+  var actions: any ComposerActions
 }
 
 struct ComposerInput: View {
@@ -51,8 +51,8 @@ struct ComposerInput: View {
     TextField(
       "Message",
       text: Binding(
-        get: { context?.state.text ?? "" },
-        set: { context?.actions.updateText($0) }
+        get: { context.state.text },
+        set: { context.actions.updateText($0) }
       )
     )
   }

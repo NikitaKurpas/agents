@@ -8,8 +8,8 @@ tags: composition, swiftui, architecture
 ## Use Compound Components
 
 Structure complex views as compound components with shared environment. Each
-subview reads shared state via `@Environment` or `@EnvironmentObject`, not
-prop chains. Consumers compose the pieces they need.
+subview reads shared state via `@Environment` (or `@EnvironmentObject` for
+legacy code), not prop chains. Consumers compose the pieces they need.
 
 **Incorrect (monolithic view with render closures and flags):**
 
@@ -40,18 +40,50 @@ struct ComposerView: View {
 **Correct (compound components with shared environment):**
 
 ```swift
+protocol ComposerState {
+  var text: String { get }
+}
+
+protocol ComposerActions {
+  func updateText(_ value: String)
+  func send()
+}
+
 struct ComposerContext {
-  var state: ComposerState
-  var actions: ComposerActions
+  var state: any ComposerState
+  var actions: any ComposerActions
   var meta: ComposerMeta
+
+  static let unimplemented = ComposerContext(
+    state: ComposerStatePlaceholder(),
+    actions: ComposerActionsPlaceholder(),
+    meta: .init()
+  )
+}
+
+private struct ComposerStatePlaceholder: ComposerState {
+  var text: String {
+    assertionFailure("Missing composerContext in environment")
+    return ""
+  }
+}
+
+private struct ComposerActionsPlaceholder: ComposerActions {
+  func updateText(_ value: String) {
+    assertionFailure("Missing composerContext in environment")
+  }
+
+  func send() {
+    assertionFailure("Missing composerContext in environment")
+  }
 }
 
 private struct ComposerContextKey: EnvironmentKey {
-  static let defaultValue: ComposerContext? = nil
+  static let defaultValue = ComposerContext.unimplemented
 }
 
 extension EnvironmentValues {
-  var composerContext: ComposerContext? {
+  var composerContext: ComposerContext {
     get { self[ComposerContextKey.self] }
     set { self[ComposerContextKey.self] = newValue }
   }
@@ -59,26 +91,39 @@ extension EnvironmentValues {
 
 struct ComposerProvider<Content: View>: View {
   let context: ComposerContext
-  @ViewBuilder let content: () -> Content
+  @ViewBuilder let content: Content
+
+  init(context: ComposerContext, @ViewBuilder content: () -> Content) {
+    self.context = context
+    self.content = content()
+  }
 
   var body: some View {
-    content().environment(\.composerContext, context)
+    content.environment(\.composerContext, context)
   }
 }
 
 struct ComposerFrame<Content: View>: View {
-  @ViewBuilder let content: () -> Content
+  @ViewBuilder let content: Content
+
+  init(@ViewBuilder content: () -> Content) {
+    self.content = content()
+  }
 
   var body: some View {
-    VStack { content() }
+    VStack { content }
   }
 }
 
 struct ComposerFooter<Content: View>: View {
-  @ViewBuilder let content: () -> Content
+  @ViewBuilder let content: Content
+
+  init(@ViewBuilder content: () -> Content) {
+    self.content = content()
+  }
 
   var body: some View {
-    HStack { content() }
+    HStack { content }
   }
 }
 ```
