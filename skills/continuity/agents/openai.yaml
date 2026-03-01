@@ -1,0 +1,4 @@
+interface:
+  display_name: "Continuity"
+  short_description: "Maintain compaction-safe workspace continuity ledger"
+  default_prompt: "Use $continuity to maintain CONTINUITY.md as the canonical cross-turn ledger while working this workspace."
