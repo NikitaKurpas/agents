@@ -6,7 +6,6 @@ gh-address-comments
 imagegen
 ios-simulator-e2e
 markdown-converter
-markrawl
 swift-api-design-guidelines
 swift-concurrency
 swift-testing-expert
@@ -18,3 +17,4 @@ tuist-migrate
 xcsift
 xcodebuildmcp-cli
 yeet
+continuity

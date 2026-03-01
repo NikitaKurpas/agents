@@ -16,7 +16,7 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - URLs:
   - `curl` only if known text-only (md, sources)
   - `curl` GitHub file URLs (transform to GH raw link, then dl)
-  - Otherwise: `markrawl` skill (if available) - convert any page to md
+  - Otherwise: `https://markdown.new/<any-url-here>` - convert any page to md (GET returns raw md), save to temp file
 - Web: search early; quote exact errors; prefer 2024+ sources
 - Deno cache inspect: `find $HOME/Library/Caches/deno -maxdepth 8 -name <pkg/file>`
   - TS defs: huge; never read whole
@@ -28,6 +28,7 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
   - Write common func only if stdlib func doesn't exist
 - Style: telegraph; drop filler/grammar; min tokens (global AGENTS.md + replies).
 - Safety/destructive ops rules > ambiguity handling > verification
+- Use `-q`/`--quiet` flag for CLIs that support it; especially `xcodebuild -quiet`
 
 ## Memory
 - Use memory extensively - keep & search facts, learnings, discoveries, etc.

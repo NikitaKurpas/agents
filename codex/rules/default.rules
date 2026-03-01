@@ -18,4 +18,3 @@ prefix_rule(pattern=["docker-compose"], decision="allow")
 prefix_rule(pattern=["tofu"], decision="prompt")
 prefix_rule(pattern=["xcodebuildmcp"], decision="allow")
 prefix_rule(pattern=["llm", ["embed", "similar"]], decision="allow")
- 
