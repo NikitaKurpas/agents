@@ -1,6 +1,7 @@
 [skills]
 composition-patterns = "https://github.com/vercel-labs/agent-skills/tree/main/skills/composition-patterns"
 frontend-design = "https://github.com/anthropics/skills/tree/main/skills/frontend-design"
+frontend-skill = "https://github.com/openai/skills/tree/main/skills/.curated/frontend-skill"
 gh-address-comments = "https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments"
 imagegen = "https://github.com/openai/skills/tree/main/skills/.curated/imagegen"
 openai-docs = "https://github.com/openai/skills/tree/main/skills/.curated/openai-docs"
