@@ -8,7 +8,6 @@ description: End-to-end iOS app development workflow on the iOS Simulator using 
 ## Preferred UI tooling
 
 - Prefer using the `axe` skill for UI inspection and interaction when it is available.
-- Fall back to XCUITest-driven UI dumps/interactions or `simctl` only if `axe` is unavailable.
 
 ## Quick start (CLI)
 
