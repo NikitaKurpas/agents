@@ -1,0 +1,3 @@
+interface:
+  display_name: "LLM Council"
+  short_description: "Run a prompt through a council of 5 AI advisors"
