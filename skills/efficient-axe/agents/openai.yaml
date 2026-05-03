@@ -1,0 +1,4 @@
+interface:
+  display_name: "Efficient AXe"
+  short_description: "Token-efficient overlay for AXe CLI simulator UI work"
+  default_prompt: "Use $efficient-axe for token-efficient AXe CLI usage. If the `axe` skill is available, refer to it for full AXe CLI guidance and command coverage."
