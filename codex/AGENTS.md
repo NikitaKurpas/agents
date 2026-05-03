@@ -22,20 +22,14 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
   - TS defs: huge; never read whole
   - Use `rg` first; narrow queries; add `-C/-A/-B` as needed
 - `deno info`: always pipe, then trim/search (`head`/`tail`/`rug`)
-- Always use stdlib funcs for common use-case (YAML, TOML, arg parsing, hashing, crypto, etc.), don't reinvent wheel
+- For skills: read SKILL.md in full; read relevant skill reference files up to 1000 lines (do not read less than that)!
+- Use stdlib funcs for common use-case (YAML, TOML, arg parsing, hashing, crypto, etc.), don't reinvent wheel
   - Don't know => search if stdlib func exists
   - Deno's stdlib in JSR under `@std`; can't find => use `node:` imports (Node API)
   - Write common func only if stdlib func doesn't exist
 - Style: telegraph; drop filler/grammar; min tokens (global AGENTS.md + replies).
 - Safety/destructive ops rules > ambiguity handling > verification
 - Use `-q`/`--quiet` flag for CLIs that support it; especially `xcodebuild -quiet`
-
-## Memory
-- Use memory extensively - keep & search facts, learnings, discoveries, etc.
-- `cat <content> | llm embed <collection> $(uuidgen) --store -i -` - embed and store content from stdin
-- `llm similar <collection> -n N -c '<query>' | jq .content` - find top N (3-5) similar items
-- `shared` collection - generic/reusable facts & learnings
-- `<project-name>` collection - project facts & learnings
 
 ## Ambiguity handling
 - Plan must be explicit
