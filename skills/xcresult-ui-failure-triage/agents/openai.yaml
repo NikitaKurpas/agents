@@ -1,0 +1,4 @@
+interface:
+  display_name: "XCResult UI Triage"
+  short_description: "Extract UI-failure artifacts from xcresult"
+  default_prompt: "Use $xcresult-ui-failure-triage to inspect a failing UI test result bundle and extract the accessibility hierarchy."
