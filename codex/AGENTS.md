@@ -11,14 +11,13 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Better approach found during exploration: propose; wait for approval
 - Improvements noticed during work: mention at end
 - Keep files <~500 LOC; split/refactor as needed
-- No python / hacks for edits; use "apply patch" only
-- Lockfiles: never read full; `rg` allowed for exact lines only
+- Lockfiles: never read full; use `rg` for exact lines only
 - URLs:
   - `curl` only if known text-only (md, sources)
   - `curl` GitHub file URLs (transform to GH raw link, then dl)
   - Otherwise: `https://markdown.new/<any-url-here>` - convert any page to md (GET returns raw md), save to temp file
 - Web: search early; quote exact errors; prefer 2024+ sources
-- Deno cache inspect: `find $HOME/Library/Caches/deno -maxdepth 8 -name <pkg/file>`
+- Deno cache inspect: `fd <pattern/pkg/file> --max-results 25 $HOME/Library/Caches/deno`
   - TS defs: huge; never read whole
   - Use `rg` first; narrow queries; add `-C/-A/-B` as needed
 - `deno info`: always pipe, then trim/search (`head`/`tail`/`rug`)
@@ -28,7 +27,6 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
   - Deno's stdlib in JSR under `@std`; can't find => use `node:` imports (Node API)
   - Write common func only if stdlib func doesn't exist
 - Style: telegraph; drop filler/grammar; min tokens (global AGENTS.md + replies).
-- Safety/destructive ops rules > ambiguity handling > verification
 - Use `-q`/`--quiet` flag for CLIs that support it; especially `xcodebuild -quiet`
 
 ## Ambiguity handling
@@ -55,16 +53,12 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Unrecognized changes: assume other agent/user; keep going; focus your changes. If it causes issues, stop + ask user
 - Leave breadcrumb notes in thread
 
-## Flow & Runtim
-- Use background terminals for long jobs (server); tmux only for interactive/persistent (debugger).
-
 ## Build & Test
 - Before handoff: run full gate (lint/build/typecheck/tests/docs)
-- Keep it observable (logs, panes, tails)
 
 ## Git
 - Safe by default: git status/diff/log. Push only when user asks
-- Destructive ops forbidden unless explicit (`reset --hard`, `clean`, `restore`, `rm`, …)
+- Destructive ops forbidden unless asked for (`reset --hard`, `clean`, `restore`, `rm`, …)
 - Don’t delete/rename unexpected stuff; stop + ask
 - No repo-wide S/R scripts; keep edits small/reviewable
 - If user types a command (“pull and push”), that’s consent for that command
@@ -72,11 +66,13 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Multi-agent: check git status/diff before edits; ship small commits
 
 ## Language/Stack Notes
-- Swift: use Swift 6.2+; validate build + tests; keep concurrency attrs right
-- TypeScript: write for Deno 2.6+; keep files small; follow existing patterns
+- Swift: use Swift 6.3+
+- TypeScript: write for Deno 2.8+
+- Validate build + tests
 
-## Available tools
-### node, deno, npm, uv
+## System tools
+### node, deno
+### uv, uvx
 ### just
 - Command runner; list tasks w\ `just --list`
 ### gh (GitHub CLI)
@@ -85,17 +81,15 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Xcode project/workspace helper for managing targets, groups, files, build settings, and assets; run `xcp --help`.
 ### xcodegen
 - Generates Xcode projects from YAML specs; run `xcodegen --help`.
-### xcdiff
-- Find diff between two .xcodeproj files: `xcdiff -p1 Original.xcodeproj -p2 Generated.xcodeproj -v -f markdown`; run `xcdiff --help` for more options.
-### xcbeautify
-- Beautifies `xcodebuild` output: `xcodebuild [flags] | xcbeautify` or `swift test [flags] | xcbeautify`
+### xcsift
+- Beautifies `xcodebuild` output: `xcodebuild [flags] | xcisft` or `swift test [flags] | xcsift`
 ### lldb
 - Use lldb inside tmux to debug native apps; attach to the running app to inspect state.
-### axe
-- Use `axe` skill if available.
+### axe (CLI)
 - Simulator automation CLI for describing UI (`axe describe-ui --udid …`), tapping (`axe tap --udid … -x … -y …`), typing, and hardware buttons.
+- Use `efficient-axe` skill if available, fall back to `axe` skill if available.
 - Use `axe list-simulators` to enumerate devices.
-- Trim `axe describe-ui` with `jq`.
+- Always trim `axe describe-ui` with `jq`.
 ### tmux
 - Use only when you need persistence/interaction (e.g. debugger).
 - Quick refs: `tmux new -d -s codex-shell`, `tmux attach -t codex-shell`, `tmux list-sessions`, `tmux kill-session -t codex-shell`.
