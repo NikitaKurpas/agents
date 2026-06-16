@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-udid=""
+input_path=""
 label_re=""
 value_re=""
 type_filter=""
@@ -13,10 +13,10 @@ y2=0
 
 print_help() {
   cat <<'EOF'
-Usage: axe_interactables.sh [--udid <udid>] [--label <regex>] [--value-regex <regex>] [--type <type>] [--bounds <x1> <y1> <x2> <y2>] [label_regex]
+Usage: axe_interactables.sh [--input <path>] [--label <regex>] [--value-regex <regex>] [--type <type>] [--bounds <x1> <y1> <x2> <y2>] [label_regex]
 
 Options:
-  --udid <udid>  Simulator UDID (overrides AXE_UDID)
+  --input <path> Read accessibility tree JSON from file instead of stdin
   --label <regex>
                  Filter AXLabel with case-insensitive regex
   --value-regex <regex>
@@ -26,15 +26,15 @@ Options:
                  Keep elements fully inside bounds (top-left to bottom-right)
 
 Notes:
-  - If neither --udid nor AXE_UDID is set, this script exits with help.
+  - Reads an accessibility tree JSON document from stdin by default.
   - label_regex is optional; prefer --label to avoid ambiguity with other args.
 EOF
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --udid)
-      udid="${2:-}"
+    --input)
+      input_path="${2:-}"
       shift 2
       ;;
     --label)
@@ -72,15 +72,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -z "$udid" ]]; then
-  udid="${AXE_UDID:-}"
-fi
-
-if [[ -z "$udid" ]]; then
-  print_help
-  exit 1
-fi
-
 if [[ "$has_bounds" == "true" ]]; then
   if [[ -z "$x1" || -z "$y1" || -z "$x2" || -z "$y2" ]]; then
     print_help
@@ -88,7 +79,16 @@ if [[ "$has_bounds" == "true" ]]; then
   fi
 fi
 
-axe describe-ui --udid "$udid" | jq -c \
+if [[ -n "$input_path" && "$input_path" != "-" ]]; then
+  exec <"$input_path"
+fi
+
+if [[ -z "$input_path" && -t 0 ]]; then
+  print_help
+  exit 1
+fi
+
+jq -c \
   --arg label_re "$label_re" \
   --arg value_re "$value_re" \
   --arg type "$type_filter" \

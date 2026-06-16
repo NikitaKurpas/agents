@@ -26,17 +26,18 @@ This skill only adds token-efficiency rules on top of AXe CLI usage.
 
 ## Helper script
 
-Run bundled helper from this skill’s `scripts/` dir:
+Run bundled helper from this skill’s `scripts/` dir after acquiring the tree:
 
 ```bash
-scripts/axe_interactables.sh --udid <udid>
-scripts/axe_interactables.sh --udid <udid> --label 'Send|OK'
-scripts/axe_interactables.sh --udid <udid> --type Button
-scripts/axe_interactables.sh --udid <udid> --bounds 0 400 390 800 --label 'Send'
-scripts/axe_interactables.sh --udid <udid> --value-regex 'error|failed'
+axe describe-ui --udid <udid> | scripts/axe_interactables.sh
+axe describe-ui --udid <udid> | scripts/axe_interactables.sh --label 'Send|OK'
+axe describe-ui --udid <udid> | scripts/axe_interactables.sh --type Button
+axe describe-ui --udid <udid> | scripts/axe_interactables.sh --bounds 0 400 390 800 --label 'Send'
+axe describe-ui --udid <udid> | scripts/axe_interactables.sh --value-regex 'error|failed'
+scripts/axe_interactables.sh --input tree.json --label 'Send|OK'
 ```
 
-Use helper first. Falls back to filtered `axe describe-ui` only when needed.
+Helper only filters input JSON; it does not call AXe CLI itself.
 
 ## Compact `describe-ui`
 
