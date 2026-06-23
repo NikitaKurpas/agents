@@ -1,61 +1,13 @@
 prefix_rule(
-    pattern = [["/bin/zsh", "/bin/bash"], "-lc", [
-        "xcodebuild",
-        "xcrun",
-        "log",
-        "/usr/bin/log",
-        "simctl",
-        "xctrace"
-    ]],
+    pattern = [
+        [
+            "xcodebuild",
+            "xcrun",
+            "simctl",
+            "xctrace",
+            "log",
+            "/usr/bin/log"
+        ]
+    ],
     decision = "allow"
-)
-prefix_rule(
-    pattern = ["xcodebuild"], decision = "allow"
-)
-prefix_rule(
-    pattern = ["xcrun"], decision = "allow"
-)
-prefix_rule(
-    pattern = [["log", "/usr/bin/log"]], decision = "allow"
-)
-prefix_rule(
-    pattern = ["simctl"], decision = "allow"
-)
-prefix_rule(
-    pattern = ["xctrace"], decision = "allow"
-)
-prefix_rule(
-    pattern = [[
-        "./xcodebuild-app-info.sh",
-        "./scripts/xcodebuild-app-info.sh",
-        "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/xcodebuild-app-info.sh"
-    ]], decision = "allow"
-)
-prefix_rule(
-    pattern = [[
-        "./simctl-destination.sh",
-        "./scripts/simctl-destination.sh",
-        "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/simctl-destination.sh"
-    ]], decision = "allow"
-)
-prefix_rule(
-    pattern = [[
-        "./simlog-stream.sh",
-        "./scripts/simlog-stream.sh",
-        "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/simlog-stream.sh"
-    ]], decision = "allow"
-)
-prefix_rule(
-    pattern = [[
-        "./xcresult-strip-frontend.sh",
-        "./scripts/xcresult-strip-frontend.sh",
-        "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/xcresult-strip-frontend.sh"
-    ]], decision = "allow"
-)
-prefix_rule(
-    pattern = [[
-        "./xcresult-failures.sh",
-        "./scripts/xcresult-failures.sh",
-        "/Users/nikitakurpas/.codex/skills/ios-simulator-e2e/scripts/xcresult-failures.sh"
-    ]], decision = "allow"
 )

@@ -1,12 +1,13 @@
-Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
+Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
 
 ## Rules
 
 - Workspace: `~/Developer`
-- Prime directive: ETC (Easy To Change). Patterns, best practices, abstractions = means, not goal; judge everything by change cost.
-  - Interfaces, abstractions, DIP, separation of responsibility, SRP = tools; low-level details unstable; identify core domain logic, abstract away from it
+- Prime directive: ETC (Easy To Change). Patterns, best practices, abstractions = means, not goal; judge everything by change cost
+  - Interfaces, abstractions, dep inversion, separation of responsibility, single responsibility = tools
+  - Low-level details always unstable; identify core domain logic, extract it, abstract away from infra/platform deps
+- Use gpt-5.4-mini subagents extensively: initing session, exploring code, searching docs, well-defined verification, etc.
 - Prefer end-to-end verify; if blocked, say what’s missing
-- “Make a note” => edit AGENTS.md (shortcut; not a blocker)
 - Branch name: `codex/[issue-]<slug>`
 - Better approach found during exploration: propose; wait for approval
 - Improvements noticed during work: mention at end
@@ -16,17 +17,15 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
   - `curl` only if known text-only (md, sources)
   - `curl` GitHub file URLs (transform to GH raw link, then dl)
   - Otherwise: `https://markdown.new/<any-url-here>` - convert any page to md (GET returns raw md), save to temp file
-- Web: search early; quote exact errors; prefer 2024+ sources
+- Web: search early, prefer 2024+ sources
 - Deno cache inspect: `fd <pattern/pkg/file> --max-results 25 $HOME/Library/Caches/deno`
-  - TS defs: huge; never read whole
-  - Use `rg` first; narrow queries; add `-C/-A/-B` as needed
-- `deno info`: always pipe, then trim/search (`head`/`tail`/`rug`)
+  - TS defs: huge; never read whole; use `rg`
+- `deno info`: always pipe, then trim/search (`head`/`tail`/`rg`)
 - For skills: read SKILL.md in full; read relevant skill reference files up to 1000 lines (do not read less than that)!
-- Use stdlib funcs for common use-case (YAML, TOML, arg parsing, hashing, crypto, etc.), don't reinvent wheel
+- Use stdlib funcs for common use-cases (YAML, TOML, arg parsing, hashing, crypto, etc.), don't reinvent wheel
   - Don't know => search if stdlib func exists
   - Deno's stdlib in JSR under `@std`; can't find => use `node:` imports (Node API)
   - Write common func only if stdlib func doesn't exist
-- Style: telegraph; drop filler/grammar; min tokens (global AGENTS.md + replies).
 - Use `-q`/`--quiet` flag for CLIs that support it; especially `xcodebuild -quiet`
 
 ## Ambiguity handling
@@ -38,7 +37,7 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
   4. Do not proceed until resolved
 
 ## Professional objectivity
-- Truth > user validation
+- Truth > validating user
 - Technical accuracy first
 - Facts, problem-solving; no fluff
 - No praise / superlatives / emotional padding
@@ -66,37 +65,24 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Multi-agent: check git status/diff before edits; ship small commits
 
 ## Language/Stack Notes
-- Swift: use Swift 6.3+
+- Swift: write for Swift 6.3+
 - TypeScript: write for Deno 2.8+
-- Validate build + tests
 
 ## System tools
-### node, deno
-### uv, uvx
-### just
-- Command runner; list tasks w\ `just --list`
-### gh (GitHub CLI)
-- Use to work with issues and PRs
-### xcp
-- Xcode project/workspace helper for managing targets, groups, files, build settings, and assets; run `xcp --help`.
-### xcodegen
-- Generates Xcode projects from YAML specs; run `xcodegen --help`.
-### xcsift
-- Beautifies `xcodebuild` output: `xcodebuild [flags] | xcisft` or `swift test [flags] | xcsift`
-### lldb
-- Use lldb inside tmux to debug native apps; attach to the running app to inspect state.
-### axe (CLI)
-- Simulator automation CLI for describing UI (`axe describe-ui --udid …`), tapping (`axe tap --udid … -x … -y …`), typing, and hardware buttons.
-- Use `efficient-axe` skill if available, fall back to `axe` skill if available.
-- Use `axe list-simulators` to enumerate devices.
-- Always trim `axe describe-ui` with `jq`.
-### tmux
-- Use only when you need persistence/interaction (e.g. debugger).
-- Quick refs: `tmux new -d -s codex-shell`, `tmux attach -t codex-shell`, `tmux list-sessions`, `tmux kill-session -t codex-shell`.
-### ast-grep
-- Search code using ASTs
-### tofu (OpenTofu)
-- Infra management
+- node, deno
+- uv, uvx
+- just
+- gh (GitHub CLI)
+- xcp: Xcode project/workspace helper for managing targets, groups, files, build settings, and assets; run `xcp --help`.
+- xcodegen: Generates Xcode projects from YAML specs; run `xcodegen --help`.
+- xcsift: Beautifies `xcodebuild` output: `xcodebuild [flags] | xcisft` or `swift test [flags] | xcsift`
+- lldb: Use lldb inside tmux to debug native apps; attach to the running app to inspect state.
+- axe: Simulator automation CLI for describing UI (`axe describe-ui --udid …`), tapping (`axe tap --udid … -x … -y …`), typing, and hardware buttons.
+  - Use `efficient-axe` skill if available, fall back to `axe` skill if available.
+  - Use `axe list-simulators` to enumerate devices.
+  - Always trim `axe describe-ui` with `jq`.
+- tmux
+- tofu (OpenTofu): Infra management
 
 ## Frontend Aesthetics
 Avoid “AI slop” UI. Be opinionated + distinctive.

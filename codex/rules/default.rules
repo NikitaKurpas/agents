@@ -1,20 +1,20 @@
 prefix_rule(pattern=["codex", "execpolicy"], decision="allow")
 prefix_rule(pattern=["git", ["diff", "status"]], decision="allow")
-prefix_rule(pattern=["jq"], decision="allow")
-prefix_rule(pattern=["markrawl"], decision="allow")
-prefix_rule(pattern=["axe"], decision="allow")
-prefix_rule(pattern=["xcodegen"], decision="allow")
-prefix_rule(pattern=["xcp"], decision="allow")
-prefix_rule(pattern=["xcdiff"], decision="allow")
-prefix_rule(pattern=["xcbeautify"], decision="allow")
-prefix_rule(pattern=["xcsift"], decision="allow")
-prefix_rule(pattern=["lldb"], decision="allow")
-prefix_rule(pattern=["/Users/nikitakurpas/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py"], decision="allow")
-prefix_rule(pattern=["python3", "/Users/nikitakurpas/.codex/skills/.system/skill-creator/scripts/init_skill.py"], decision="allow")
-prefix_rule(pattern=["python3", "/Users/nikitakurpas/.codex/skills/.system/skill-creator/scripts/package_skill.py"], decision="allow")
-prefix_rule(pattern=["uv", "run", "--with", "pyyaml", "python3", "/Users/nikitakurpas/.codex/skills/.system/skill-creator/scripts/package_skill.py"], decision="allow")
-prefix_rule(pattern=["docker", ["run", "compose", "ps", "images", "inspect", "logs", "version", "info"]], decision="allow")
-prefix_rule(pattern=["docker-compose"], decision="allow")
+prefix_rule(
+    pattern=[
+        [
+            "jq",
+            "axe",
+            "xcodegen",
+            "xcp",
+            "xcdiff",
+            "xcbeautify",
+            "xcsift",
+            "lldb",
+            "xcodebuildmcp"
+        ]
+    ],
+    decision="allow"
+)
+prefix_rule(pattern=["docker", ["run", "ps", "images", "inspect", "logs", "version", "info"]], decision="allow")
 prefix_rule(pattern=["tofu"], decision="prompt")
-prefix_rule(pattern=["xcodebuildmcp"], decision="allow")
-prefix_rule(pattern=["llm", ["embed", "similar"]], decision="allow")
