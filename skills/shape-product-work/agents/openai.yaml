@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shape Product Work"
+  short_description: "Choose and shape the right planning document"
+  default_prompt: "Use $shape-product-work to help me shape this work and create the right planning document."
