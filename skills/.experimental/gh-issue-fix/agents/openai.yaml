@@ -1,0 +1,4 @@
+interface:
+  display_name: "GH Issue Fix"
+  short_description: "Implement issues + PR flow with gh CLI"
+  default_prompt: "Use $gh-issue-fix to implement issue 123 and open a PR with gh."

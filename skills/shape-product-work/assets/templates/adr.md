@@ -3,6 +3,10 @@
 Status: Draft | Approved | Superseded
 Last updated: {YYYY-MM-DD}
 
+## Terminology (Optional)
+
+{Define only new domain vocabulary needed by this document. Use ordinary language and vocabulary already established in the project everywhere else.}
+
 ## Context and Problem Statement
 
 {Describe the context and problem in two to three sentences or as an illustrative story. State the decision question and link relevant collaboration or issue records when useful.}

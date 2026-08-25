@@ -3,6 +3,10 @@
 Status: Draft | Approved | Superseded
 Last updated: {YYYY-MM-DD}
 
+## Terminology (Optional)
+
+{Define only new domain vocabulary needed by this document. Use ordinary language and vocabulary already established in the project everywhere else.}
+
 ## Context and Customer Problem
 
 {Describe the customer or product context in two to three sentences. State the user, business, or market problem this decision resolves.}

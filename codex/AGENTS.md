@@ -6,8 +6,7 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
 - Prime directive: ETC (Easy To Change). Patterns, best practices, abstractions = means, not goal; judge everything by change cost
   - Interfaces, abstractions, dep inversion, separation of responsibility, single responsibility = tools
   - Low-level details always unstable; identify core domain logic, extract it, abstract away from infra/platform deps
-- Use gpt-5.4-mini subagents extensively: initing session, exploring code, searching docs, well-defined verification, etc.
-- Prefer end-to-end verify; if blocked, say what’s missing
+- If blocked, say what’s missing
 - Branch name: `codex/[issue-]<slug>`
 - Better approach found during exploration: propose; wait for approval
 - Improvements noticed during work: mention at end
@@ -18,23 +17,15 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
   - `curl` GitHub file URLs (transform to GH raw link, then dl)
   - Otherwise: `https://markdown.new/<any-url-here>` - convert any page to md (GET returns raw md), save to temp file
 - Web: search early, prefer 2024+ sources
+- Docs for Deno modules and libs: `deno doc <registry>:<package name>`, e.g. `deno doc jsr:@std/encoding/hex`; see `deno doc --help` for options.
 - Deno cache inspect: `fd <pattern/pkg/file> --max-results 25 $HOME/Library/Caches/deno`
   - TS defs: huge; never read whole; use `rg`
 - `deno info`: always pipe, then trim/search (`head`/`tail`/`rg`)
-- For skills: read SKILL.md in full; read relevant skill reference files up to 1000 lines (do not read less than that)!
-- Use stdlib funcs for common use-cases (YAML, TOML, arg parsing, hashing, crypto, etc.), don't reinvent wheel
-  - Don't know => search if stdlib func exists
-  - Deno's stdlib in JSR under `@std`; can't find => use `node:` imports (Node API)
-  - Write common func only if stdlib func doesn't exist
-- Use `-q`/`--quiet` flag for CLIs that support it; especially `xcodebuild -quiet`
-
-## Ambiguity handling
-- Plan must be explicit
-- If multiple paths / unclear reqs:
-  1. Ask clarifying questions (single message)
-  2. Confirm impl choices (arch, libs)
-  3. State assumptions
-  4. Do not proceed until resolved
+- Use stdlib funcs for common use-cases (YAML, TOML, HTTP, arg parsing, hashing, crypto, etc.), don't reinvent wheel
+  - Deno: use Deno's stdlib (`Deno.*` and JSR `@std/*` packages) and Web APIs first, then fall back to Node's stdlib (`node:` imports)
+  - Don't know => search web if stdlib funcs exist
+  - Write minimal common funcs only if stdlib funcs doesn't exist
+- Always use `xcodebuild -quiet`, unless passing output to `xcsift` or other tools
 
 ## Professional objectivity
 - Truth > validating user
@@ -47,7 +38,7 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
 
 ## Critical Thinking
 - Fix root cause (not band-aid)
-- Unsure: read more code; if still stuck, ask w/ short options
+- Unsure: read more code; if still stuck, escalate to parent agent or ask w/ short options
 - Conflicts: call out; pick safer path
 - Unrecognized changes: assume other agent/user; keep going; focus your changes. If it causes issues, stop + ask user
 - Leave breadcrumb notes in thread
@@ -66,7 +57,7 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
 
 ## Language/Stack Notes
 - Swift: write for Swift 6.3+
-- TypeScript: write for Deno 2.8+
+- TypeScript: write for Deno 2.9+
 
 ## System tools
 - node, deno
@@ -81,7 +72,7 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
   - Use `efficient-axe` skill if available, fall back to `axe` skill if available.
   - Use `axe list-simulators` to enumerate devices.
   - Always trim `axe describe-ui` with `jq`.
-- tmux
+- tux
 - tofu (OpenTofu): Infra management
 
 ## Frontend Aesthetics

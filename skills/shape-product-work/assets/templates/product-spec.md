@@ -11,6 +11,10 @@ Mark uncertain claims as assumptions and unresolved choices as open questions. A
 
 {In one short paragraph, identify the user, their problem, the proposed change, and the intended outcome.}
 
+## Terminology (Optional)
+
+{Define only new domain vocabulary needed by this document. Use ordinary language and vocabulary already established in the project everywhere else.}
+
 ## Problem and Evidence (Optional)
 
 {Explain why this is worth solving now. Cite the strongest available evidence and clearly label assumptions.}

@@ -39,14 +39,19 @@ Once the direction is sufficiently clear, restate the intended outcome, scope, k
 
 For a Product Spec, keep the normal result to one to three pages and delete unused optional sections. Keep feature-scoped technical constraints in `Technical Direction`; promote only durable choices.
 
-Write every document for fast reading:
+Write Product Specs, PDRs, and ADRs for fast reading:
 
+- Use plain, simple, coherent, concise language, like one human talking clearly to another.
 - Prefer common words, short sentences, and one main idea per sentence.
+- Use only ordinary language and vocabulary already established in the project. Exceptions:
+  - If a new domain term is necessary, define it in the document's `Terminology` section before relying on it.
+  - Use technical terms only when they add needed precision. Explain them in plain language the first time they appear.
 - Use a clear subject and verb: "The service stores the record" is easier to process than "record persistence is performed by the service."
-- Use technical terms only when they add needed precision. Explain them in plain language the first time they appear.
 - Use short lists for parallel facts, rules, or trade-offs instead of dense paragraphs.
 - Keep exact constraints, edge cases, and acceptance meaning. Simpler wording must not weaken or remove product decisions.
 - On revision, remove abstract noun phrases and repeated qualifiers the reader does not need.
+
+Delete an unused `Terminology` section. Do not add one merely to restate common words or vocabulary the project already defines.
 
 ### 4. Keep authority clean
 
