@@ -3,9 +3,9 @@
 Status: Draft | Approved | Superseded
 Last updated: {YYYY-MM-DD}
 
-Keep this product contract short enough to review in one sitting; one to three pages is the normal target. Delete unused optional sections and all placeholder instructions. Leave implementation details to the ExecPlan.
+Keep this product contract short enough to review in one sitting; one to three pages is the normal target. Delete unused optional sections and all placeholder instructions. Leave detailed implementation choices out of the spec.
 
-Mark uncertain claims as assumptions and unresolved choices as open questions. Approve the spec only when no blocking product questions remain. After approval, record material product changes in the change log and update the ExecPlan.
+Mark uncertain claims as assumptions and unresolved choices as open questions. Approve the spec only when no blocking product questions remain. After approval, record material product changes in the change log.
 
 ## Summary
 
@@ -39,16 +39,9 @@ Mark uncertain claims as assumptions and unresolved choices as open questions. A
 
 - {Constraint and why it matters.}
 
-## Product Requirements (Optional)
-
-Use stable identifiers for observable rules that the ExecPlan and verification need to reference. Include only relevant edge cases and constraints.
-
-- **R1:** {When or while a user does X, the product does Y.}
-- **R2:** {If Z prevents the normal path, the user experiences A.}
-
 ## Acceptance
 
-Define concrete scenarios that prove the product contract. Keep test mechanics and commands in the ExecPlan.
+Define the observable rules and concrete scenarios that prove the product contract. Use stable identifiers that implementation and verification can reference. Include relevant edge cases and recovery behavior; keep test mechanics and commands out of the spec.
 
 - **A1:** Given {starting state}, when {user action}, then {observable result}.
 - **A2:** Given {edge state}, when {action or event}, then {result or recovery}.
@@ -65,7 +58,7 @@ Include only decisions needed to understand the product contract. Move durable, 
 
 ## Technical Direction (Optional)
 
-Include only high-level choices you want to control, such as the architecture, system boundary, source of truth, data lifetime, privacy, compatibility, platform capability, or required or forbidden dependency. Explain why each matters; leave detailed design to the ExecPlan. Keep unsettled choices in `Open Questions`.
+Include only high-level choices you want to control, such as the architecture, system boundary, source of truth, data lifetime, privacy, compatibility, platform capability, or required or forbidden dependency. Explain why each matters; leave detailed design out of the product contract. Keep unsettled choices in `Open Questions`.
 
 - **Direction:** {Constraint or choice.} **Rationale:** {Why it matters.}
 
