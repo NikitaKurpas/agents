@@ -56,6 +56,10 @@ Include only decisions needed to understand the product contract. Move durable, 
 
 - **Decision:** {Choice.} **Rationale:** {Why.} **Consequence:** {Cost or limit.}
 
+## Visual Direction (Optional)
+
+{Describe the intended UI character, hierarchy, layout, interaction patterns, motion, and accessibility considerations. Link visual references or mocks when they communicate the direction better than prose. Keep detailed screen specifications out of the product contract.}
+
 ## Technical Direction (Optional)
 
 Include only high-level choices you want to control, such as the architecture, system boundary, source of truth, data lifetime, privacy, compatibility, platform capability, or required or forbidden dependency. Explain why each matters; leave detailed design out of the product contract. Keep unsettled choices in `Open Questions`.
