@@ -3,7 +3,7 @@
 Status: Draft | Approved | Superseded
 Last updated: {YYYY-MM-DD}
 
-Keep this product contract short enough to review in one sitting; one to three pages is the normal target. Delete unused optional sections and all placeholder instructions. Leave detailed implementation choices out of the spec.
+Keep this product contract short enough to review in one sitting; one to three pages is the normal target. Delete optional sections unless they preserve meaningful, non-obvious context that a future reader cannot infer from the required sections or code. Include them when omitting that context would leave the reader wondering why the product works this way. Delete all placeholder instructions and leave detailed implementation choices out of the spec.
 
 Mark uncertain claims as assumptions and unresolved choices as open questions. Approve the spec only when no blocking product questions remain. After approval, record material product changes in the change log.
 
@@ -35,7 +35,7 @@ Mark uncertain claims as assumptions and unresolved choices as open questions. A
 
 ## Constraints (Optional)
 
-{List boundaries that shape the product, such as privacy, cost, monetization, compatibility, legal requirements, or platform limitations.}
+{List external product boundaries the solution must respect, such as privacy, cost, monetization, legal requirements, or supported environments. State the boundary without prescribing how the implementation satisfies it.}
 
 - {Constraint and why it matters.}
 
@@ -50,21 +50,19 @@ Define the observable rules and concrete scenarios that prove the product contra
 
 {List the smallest useful qualitative or quantitative signals. Include targets only when evidence supports them, and state how they can be evaluated.}
 
-## Product Decisions and Trade-offs (Optional)
-
-Include only decisions needed to understand the product contract. Move durable, cross-feature policy to a PDR.
-
-- **Decision:** {Choice.} **Rationale:** {Why.} **Consequence:** {Cost or limit.}
-
 ## Visual Direction (Optional)
 
 {Describe the intended UI character, hierarchy, layout, interaction patterns, motion, and accessibility considerations. Link visual references or mocks when they communicate the direction better than prose. Keep detailed screen specifications out of the product contract.}
 
 ## Technical Direction (Optional)
 
-Include only high-level choices you want to control, such as the architecture, system boundary, source of truth, data lifetime, privacy, compatibility, platform capability, or required or forbidden dependency. Explain why each matters; leave detailed design out of the product contract. Keep unsettled choices in `Open Questions`.
+Include only high-level implementation choices the product contract intentionally controls, such as the architecture, system boundary, source of truth, data lifetime, platform capability, or required or forbidden dependency. Explain why each choice matters; leave detailed design out of the product contract. Keep external product boundaries in `Constraints` and unsettled choices in `Open Questions`.
 
 - **Direction:** {Constraint or choice.} **Rationale:** {Why it matters.}
+
+## Testing Direction (Optional)
+
+{Describe the testing choices that materially shape implementation or verification. Define what makes a valuable test for this feature by naming the externally observable behavior and boundary to verify, without coupling tests to implementation details. Identify the modules that need coverage and link similar tests in the codebase when they provide useful precedent. Leave individual test cases, commands, and mechanics out of the product contract.}
 
 ## Open Questions (Optional)
 
