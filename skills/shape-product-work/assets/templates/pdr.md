@@ -3,11 +3,9 @@
 Status: Draft | Approved | Superseded
 Last updated: {YYYY-MM-DD}
 
-Delete optional sections unless they preserve meaningful, non-obvious context that a future reader cannot infer from the required sections or product. Include them when omitting the context would leave that reader wondering why the solution exists.
-
 ## Terminology (Optional)
 
-{Define only new domain vocabulary needed by this document. Use ordinary language and vocabulary already established in the project everywhere else.}
+{Define new domain terms only.}
 
 ## Context and Customer Problem
 

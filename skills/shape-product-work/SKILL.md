@@ -37,7 +37,7 @@ When a consequential choice has multiple viable paths, present two or three opti
 
 Once the direction is sufficiently clear, restate the intended outcome, scope, key constraints, and acceptance in one to three sentences. Draft the complete Product Spec, PDR, or ADR for review, then revise it with the user. Revisit earlier decisions when feedback exposes a conflict. Remove speculative scope and anything unnecessary to satisfy the agreed outcome. In a Product Spec, keep observable behavioral rules and proof scenarios together in `Acceptance` instead of restating them in separate requirements and acceptance sections. Mark unsupported claims as assumptions and unresolved choices as open questions. Do not invent evidence, metrics, current behavior, or user decisions.
 
-For a Product Spec, keep the normal result to one to three pages. Across all three document types, omit optional sections unless they preserve meaningful context that cannot be inferred from the required sections. Include them when a future reader could otherwise inspect the document or code and reasonably wonder why the chosen direction exists. Keep feature-scoped technical constraints in `Technical Direction`; promote only durable choices.
+For a Product Spec, keep the normal result to one to three pages. Across all three document types, omit optional sections unless they preserve meaningful, non-obvious context that a future reader cannot infer from the required sections, product, or code. Include one only when its absence would leave that reader wondering why the chosen direction exists. Keep feature-scoped technical constraints in `Technical Direction`; promote only durable choices.
 
 Write Product Specs, PDRs, and ADRs for fast reading:
 

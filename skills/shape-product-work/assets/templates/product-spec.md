@@ -3,7 +3,7 @@
 Status: Draft | Approved | Superseded
 Last updated: {YYYY-MM-DD}
 
-Keep this product contract short enough to review in one sitting; one to three pages is the normal target. Delete optional sections unless they preserve meaningful, non-obvious context that a future reader cannot infer from the required sections or code. Include them when omitting that context would leave the reader wondering why the product works this way. Delete all placeholder instructions and leave detailed implementation choices out of the spec.
+Keep this product contract short enough to review in one sitting; one to three pages is the normal target. Delete all placeholder instructions and leave detailed implementation choices out of the spec.
 
 Mark uncertain claims as assumptions and unresolved choices as open questions. Approve the spec only when no blocking product questions remain. After approval, record material product changes in the change log.
 
@@ -13,7 +13,7 @@ Mark uncertain claims as assumptions and unresolved choices as open questions. A
 
 ## Terminology (Optional)
 
-{Define only new domain vocabulary needed by this document. Use ordinary language and vocabulary already established in the project everywhere else.}
+{Define new domain terms only.}
 
 ## Problem and Evidence (Optional)
 
