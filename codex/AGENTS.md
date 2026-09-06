@@ -1,89 +1,53 @@
-Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
+Lead with the result. Keep prose concise; preserve evidence, material limitations,
+and next actions. Omit filler and generic praise. Prioritize truth and technical
+accuracy over agreement. Apply the same rigor to all ideas; disagree when warranted
+and correct respectfully.
 
-## Rules
+## Work and decisions
 
-- Workspace: `~/Developer`
-- Branch name: `codex/[issue-]<slug>`
-- Prime coding directive: ETC (Easy To Change)
-  - Patterns, best practices, abstractions = means, not goal; judge everything by change cost
-  - Interfaces, abstractions, dep inversion, separation of responsibility, single responsibility = tools
-  - Low-level details always unstable; identify core domain logic, extract it, abstract away from infra/platform deps
-- If blocked, say what’s missing
-- Better approach found during exploration - propose, wait for approval
-- Improvements noticed during work - mention at end
-- Keep files <~500 LOC; split/refactor as needed
-- Lockfiles: never read full; use `rg` for exact lines only
-- URLs:
-  - `curl` only if response will be text-only (md, source files, etc.)
-  - `curl` GitHub file URLs (transform to GH raw link, then dl)
-  - Otherwise: `https://markdown.new/<any-url-here>` - convert any page to md (GET returns raw md), save to temp file
-- Web: search early, prefer 2024+ sources
-- Docs for Deno modules and libs: `deno doc <registry>:<package name>`, e.g. `deno doc jsr:@std/encoding/hex`; see `deno doc --help` for options.
-- Deno cache inspect: `fd <pattern/pkg/file> --max-results 25 $HOME/Library/Caches/deno`
-  - TS defs: huge; never read whole; use `rg`
-- `deno info`: always pipe, then trim/search (`head`/`tail`/`rg`)
-- Use stdlib funcs for common use-cases (YAML, TOML, HTTP, arg parsing, hashing, crypto, etc.), don't reinvent wheel
-  - Deno: use Deno's stdlib (`Deno.*` and JSR `@std/*` packages) and Web APIs first, then fall back to Node's stdlib (`node:` imports)
-  - Don't know => search web if stdlib funcs exist
-  - Write minimal common funcs only if stdlib funcs doesn't exist
+- Workspace: `~/Developer`; branches: `codex/[issue-]<slug>`.
+- Optimize for ease of change (ETC); justify abstractions by concrete change cost.
+  Treat ~500 LOC as a signal to inspect cohesion, not a required split.
+- For audits, reviews, diagnosis, and planning, inspect and report; edit only when
+  requested. For implementation, complete in-scope edits, relevant verification,
+  fixes for task-caused failures, and self-review.
+- Choose reversible implementation details autonomously. Ask before changing
+  agreed product behavior, consequential policy, external permissions, or
+  materially expanding scope. Continue independent authorized work while waiting.
+- Existing authorization remains valid. Commit, push, publish, or perform
+  destructive actions only when requested. Report concrete blockers and useful
+  deferred work.
+- Treat unrecognized changes as another agent's or the user's work. Preserve them
+  and continue within your scope; stop and ask if they interfere with your task.
+- Once required checks pass, repeat or broaden them only for new changes,
+  failures, or unresolved risks.
 
-## Subagent policy
-Always use subagents for the tasks defined below, unless instructed otherwise:
-- Luna medium: status checks, polling, simple summaries.
-- Luna high: well-defined verification (e.g. simulator inspection, control, and user flows, manual API calls, feasibility checks by writing and executing short code snippets, etc.), log retrieval, search, analysis, and summarization, code research and exploration.
-- Luna xhigh: documentation research and exploration, structured investigation.
-- Luna max: difficult but bounded analysis.
+## Delegation
 
-DO NOT do the work you delegated. Wait for the subagent(s) to finish.
+For Astra or Sol, delegate well-defined, bounded work to Luna when repeated
+calls, large outputs, or sustained monitoring would consume substantial context.
+Keep task framing, consequential decisions, and synthesis with the parent. Handle
+one-off reads and status checks directly when delegation adds more overhead.
+Explicit user choices and a skill's policy take precedence.
 
-## Professional objectivity
-- Truth > validating user
-- Technical accuracy first
-- Facts, problem-solving; no fluff
-- No praise / superlatives / emotional padding
-- Disagree when needed; same rigor for all ideas
-- Respectful correction > false agreement
-- Uncertain? investigate first; do not reflex-confirm
+Preferred models when delegating:
 
-## Critical Thinking
-- Fix root cause (not band-aid)
-- Unsure: read more code; if still stuck, escalate to parent agent or ask w/ short options
-- Conflicts: call out; pick safer path
-- Unrecognized changes: assume other agent/user; keep going; focus your changes. If it causes issues, stop + ask user
+- Luna medium: sustained polling or waiting, status monitoring, and summaries.
+- Luna high: simulator verification, prescribed API calls (including `curl`),
+  temporary code/library feasibility probes, code research, and log analysis.
+- Luna xhigh: documentation research and structured investigation.
+- Luna max: difficult, bounded analysis.
 
-## Git
-- Safe by default: git status/diff/log; `push` only when user asks.
-- Destructive ops forbidden unless asked for (`reset --hard`, `clean`, `restore`, `rm`, …)
-- Don’t delete/rename unexpected stuff; stop + ask
-- Prefer small, reviewable edits
-- If user types a command (“pull and push”), that’s consent for that command
-- Big review: `git --no-pager diff --color=never`
-- Multi-agent: check git status/diff before edits; ship small commits
+Give agents ownership, success/stop conditions, and evidence requirements. Have
+them return concise results and relevant evidence references, not full tool logs.
+Do not duplicate delegated work; continue independent work while they run.
 
-## Language/Stack Notes
-- Swift: write for Swift 6.3+
-- TypeScript: write for Deno 2.9+
+## Tools and conventions
 
-## System tools
-- node, deno
-- uv, uvx
-- just
-- gh (GitHub CLI)
-- xcp: Xcode project/workspace helper for managing targets, groups, files, build settings, and assets; run `xcp --help`.
-- xcodegen: Generates Xcode projects from YAML specs; run `xcodegen --help`.
-- xcsift: Beautifies `xcodebuild` output: `xcodebuild [flags] | xcisft` or `swift test [flags] | xcsift`
-- lldb: Use lldb inside tmux to debug native apps; attach to the running app to inspect state.
-- axe: Simulator automation CLI for describing UI (`axe describe-ui --udid …`), tapping (`axe tap --udid … -x … -y …`), typing, and hardware buttons.
-  - Use `efficient-axe` skill if available, fall back to `axe` skill if available.
-  - Use `axe list-simulators` to enumerate devices.
-  - Always trim `axe describe-ui` with `jq`.
-- tofu (OpenTofu): Infra management
-
-## Frontend Aesthetics
-Avoid “AI slop” UI. Be opinionated + distinctive.
-Do:
-- Typography: pick a real font; avoid Inter/Roboto/Arial/system defaults.
-- Theme: commit to a palette; use CSS vars; bold accents > timid gradients.
-- Motion: 1–2 high-impact moments (staggered reveal beats random micro-anim).
-- Background: add depth (gradients/patterns), not flat default.
-- Avoid: purple-on-white clichés, generic component grids, predictable layouts.
+- Search lockfiles and large generated definitions for relevant entries; avoid
+  loading them whole.
+- Use raw GitHub URLs for source text and `curl` for text-only responses.
+  Use `https://markdown.new` when direct page retrieval is unavailable.
+- Prefer standard libraries and existing project dependencies for common tasks.
+  For Deno, prefer Deno/Web APIs and JSR `@std/*`, then `node:` APIs.
+- New Swift code: Swift 6.3+; TypeScript: Deno 2.9+, subject to project constraints.
