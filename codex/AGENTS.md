@@ -3,17 +3,18 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
 ## Rules
 
 - Workspace: `~/Developer`
-- Prime directive: ETC (Easy To Change). Patterns, best practices, abstractions = means, not goal; judge everything by change cost
+- Branch name: `codex/[issue-]<slug>`
+- Prime coding directive: ETC (Easy To Change)
+  - Patterns, best practices, abstractions = means, not goal; judge everything by change cost
   - Interfaces, abstractions, dep inversion, separation of responsibility, single responsibility = tools
   - Low-level details always unstable; identify core domain logic, extract it, abstract away from infra/platform deps
 - If blocked, say what’s missing
-- Branch name: `codex/[issue-]<slug>`
-- Better approach found during exploration: propose; wait for approval
-- Improvements noticed during work: mention at end
+- Better approach found during exploration - propose, wait for approval
+- Improvements noticed during work - mention at end
 - Keep files <~500 LOC; split/refactor as needed
 - Lockfiles: never read full; use `rg` for exact lines only
 - URLs:
-  - `curl` only if known text-only (md, sources)
+  - `curl` only if response will be text-only (md, source files, etc.)
   - `curl` GitHub file URLs (transform to GH raw link, then dl)
   - Otherwise: `https://markdown.new/<any-url-here>` - convert any page to md (GET returns raw md), save to temp file
 - Web: search early, prefer 2024+ sources
@@ -25,7 +26,15 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
   - Deno: use Deno's stdlib (`Deno.*` and JSR `@std/*` packages) and Web APIs first, then fall back to Node's stdlib (`node:` imports)
   - Don't know => search web if stdlib funcs exist
   - Write minimal common funcs only if stdlib funcs doesn't exist
-- Always use `xcodebuild -quiet`, unless passing output to `xcsift` or other tools
+
+## Subagent policy
+Always use subagents for the tasks defined below, unless instructed otherwise:
+- Luna medium: status checks, polling, simple summaries.
+- Luna high: well-defined verification (e.g. simulator inspection, control, and user flows, manual API calls, feasibility checks by writing and executing short code snippets, etc.), log retrieval, search, analysis, and summarization, code research and exploration.
+- Luna xhigh: documentation research and exploration, structured investigation.
+- Luna max: difficult but bounded analysis.
+
+DO NOT do the work you delegated. Wait for the subagent(s) to finish.
 
 ## Professional objectivity
 - Truth > validating user
@@ -41,16 +50,12 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
 - Unsure: read more code; if still stuck, escalate to parent agent or ask w/ short options
 - Conflicts: call out; pick safer path
 - Unrecognized changes: assume other agent/user; keep going; focus your changes. If it causes issues, stop + ask user
-- Leave breadcrumb notes in thread
-
-## Build & Test
-- Before handoff: run full gate (lint/build/typecheck/tests/docs)
 
 ## Git
-- Safe by default: git status/diff/log. Push only when user asks
+- Safe by default: git status/diff/log; `push` only when user asks.
 - Destructive ops forbidden unless asked for (`reset --hard`, `clean`, `restore`, `rm`, …)
 - Don’t delete/rename unexpected stuff; stop + ask
-- No repo-wide S/R scripts; keep edits small/reviewable
+- Prefer small, reviewable edits
 - If user types a command (“pull and push”), that’s consent for that command
 - Big review: `git --no-pager diff --color=never`
 - Multi-agent: check git status/diff before edits; ship small commits
@@ -72,7 +77,6 @@ Work style: telegraph; noun-phrases ok; drop filler/grammar; min tokens.
   - Use `efficient-axe` skill if available, fall back to `axe` skill if available.
   - Use `axe list-simulators` to enumerate devices.
   - Always trim `axe describe-ui` with `jq`.
-- tux
 - tofu (OpenTofu): Infra management
 
 ## Frontend Aesthetics
