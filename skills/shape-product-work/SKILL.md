@@ -1,71 +1,68 @@
 ---
 name: shape-product-work
-description: "Choose and collaboratively create the right planning artifact: Product Spec, PDR, ADR, or ExecPlan. Use when the user describes a product idea or change, asks to shape or specify a feature, wants to record a durable product or technical decision, or needs an implementation handoff. Cover intake through an approved document or implementation-ready ExecPlan; do not implement the change."
+description: >
+  Shape product ideas and durable decisions into the smallest appropriate
+  Product Spec, PDR, ADR, ExecPlan, or no document. Use when asked to specify a
+  feature, record product or technical direction, or create an implementation
+  handoff. Do not invoke for ordinary implementation.
 ---
 
 # Shape Product Work
 
-Turn an idea or decision into the smallest appropriate repository document, then stop at implementation handoff.
+Turn the request into the smallest useful planning artifact, then hand it off.
 
-## Workflow
+## 1. Choose the artifact
 
-### 1. Inspect context
+Read `docs/index.md` when it exists and only relevant code and durable decisions.
+Treat code and tests as observed behavior, not intended behavior. Preserve the
+user's latest explicit decisions.
 
-Read `docs/index.md` when it exists, the applicable bundled template, and only the code or durable docs needed to understand the request. Treat current code and tests as observed behavior, not automatically as intended behavior. Preserve the user's latest explicit decisions.
+- **Product Spec:** one feature's intended behavior and acceptance. Use [the template](assets/templates/product-spec.md); write to `docs/specs/<slug>.md`.
+- **PDR:** durable product policy beyond one feature. Use [the template](assets/templates/pdr.md); write to `docs/pdrs/<slug>.md`.
+- **ADR:** durable technical direction. Use [the template](assets/templates/adr.md); write to `docs/adrs/<slug>.md`.
+- **ExecPlan:** self-contained implementation handoff for complex work; write to `docs/plans/<slug>.md`.
+- **No document:** small fixes, mechanical edits, or unambiguous maintenance.
 
-For an ExecPlan, read [references/exec-plans.md](references/exec-plans.md) completely. If the repository has its own planning instructions, read them too; repository instructions take precedence where they conflict.
+Read the selected template. For an ExecPlan, read repository planning instructions
+and [the bundled guide](references/exec-plans.md) completely; repository
+instructions win conflicts.
 
-### 2. Choose the document
+Recommend one with a brief rationale. Confirm only when another choice would
+materially change the workflow. Create only what the request needs.
 
-Select by the scope and lifespan of the decision:
+## 2. Resolve decisions and draft
 
-- **Product Spec** — what one feature should do and why. Use [assets/templates/product-spec.md](assets/templates/product-spec.md); write to `docs/specs/<slug>.md`.
-- **PDR** — durable product policy that should outlive one feature. Use [assets/templates/pdr.md](assets/templates/pdr.md); write to `docs/pdrs/<slug>.md`.
-- **ADR** — durable technical direction that should constrain future work. Use [assets/templates/adr.md](assets/templates/adr.md); write to `docs/adrs/<slug>.md`.
-- **ExecPlan** — detailed, self-contained implementation handoff for complex or multi-step work. Use the skeleton in [references/exec-plans.md](references/exec-plans.md); write to `docs/plans/<slug>.md`.
-- **No document** — small bug, mechanical edit, or already-unambiguous bounded maintenance.
+Answer what inspection can establish. Ask one focused question at a time, only
+when the answer materially changes the outcome. When multiple consequential paths
+are viable, give two or three options with trade-offs and recommend one. State and
+confirm consequential assumptions before drafting. Resolve every blocking choice.
 
-Do not create every document by default. A substantial feature normally needs a Product Spec and later an ExecPlan. Add a PDR or ADR only when a decision must remain authoritative beyond that feature.
+Restate the outcome, scope, constraints, and acceptance in one to three sentences.
+Draft the complete artifact for review, then revise it with the user. Distinguish
+observed behavior, intended behavior, assumptions, and open questions. Use only
+supported evidence and metrics.
 
-State the recommended document and brief rationale. Ask for confirmation only when another choice would materially change the workflow.
+In Product Specs, keep behavioral rules and proof scenarios together in
+`Acceptance`, and feature-scoped technical constraints in `Technical Direction`.
+Use `Terminology` only for necessary new domain terms. Omit optional sections
+unless they preserve non-obvious context a future reader needs.
 
-### 3. Shape it collaboratively
+Write plain, concrete prose with common project vocabulary, short sentences, and
+one main idea per sentence. Prefer clear subjects and active verbs. Use short
+lists for parallel facts, rules, or trade-offs. Use technical terms only for
+needed precision and explain them on first use. Preserve exact constraints and
+edge cases; remove needless qualifiers and repetition without weakening decisions.
 
-Do not ask questions that a quick read-only inspection can answer. Ask one focused question at a time, prioritizing blockers whose answers eliminate materially different directions; defer or omit nice-to-know questions. Resolve the problem, intended experience, scope, constraints, behavior, acceptance, and consequential trade-offs only to the degree relevant to the selected document.
+Link related records instead of repeating them. Resolve consequential conflicts
+with the user.
 
-When a consequential choice has multiple viable paths, present two or three options with trade-offs and recommend one. Do not manufacture alternatives when the choice is straightforward. Do not commit a document to a direction while a blocking question remains. If the user prefers to proceed, state the consequential assumptions and confirm them first.
+## 3. Finalize and hand off
 
-Once the direction is sufficiently clear, restate the intended outcome, scope, key constraints, and acceptance in one to three sentences. Draft the complete Product Spec, PDR, or ADR for review, then revise it with the user. Revisit earlier decisions when feedback exposes a conflict. Remove speculative scope and anything unnecessary to satisfy the agreed outcome. In a Product Spec, keep observable behavioral rules and proof scenarios together in `Acceptance` instead of restating them in separate requirements and acceptance sections. Mark unsupported claims as assumptions and unresolved choices as open questions. Do not invent evidence, metrics, current behavior, or user decisions.
+Mark a Product Spec approved only after user approval. Validate introduced links,
+paths, and `git diff --check`; follow relevant repository verification instructions.
+Report remaining open questions.
 
-For a Product Spec, keep the normal result to one to three pages. Across all three document types, omit optional sections unless they preserve meaningful, non-obvious context that a future reader cannot infer from the required sections, product, or code. Include one only when its absence would leave that reader wondering why the chosen direction exists. Keep feature-scoped technical constraints in `Technical Direction`; promote only durable choices.
-
-Write Product Specs, PDRs, and ADRs for fast reading:
-
-- Use plain, simple, coherent, concise language, like one human talking clearly to another.
-- Prefer common words, short sentences, and one main idea per sentence.
-- Use only ordinary language and vocabulary already established in the project. Exceptions:
-  - If a new domain term is necessary, define it in the document's `Terminology` section before relying on it.
-  - Use technical terms only when they add needed precision. Explain them in plain language the first time they appear.
-- Use a clear subject and verb: "The service stores the record" is easier to process than "record persistence is performed by the service."
-- Use short lists for parallel facts, rules, or trade-offs instead of dense paragraphs.
-- Keep exact constraints, edge cases, and acceptance meaning. Simpler wording must not weaken or remove product decisions.
-- On revision, remove abstract noun phrases and repeated qualifiers the reader does not need.
-
-Delete an unused `Terminology` section. Do not add one merely to restate common words or vocabulary the project already defines.
-
-### 4. Keep authority clean
-
-- Update the Product Spec when user behavior, scope, constraints, or acceptance changes.
-- Create a PDR when the product rationale or policy crosses feature boundaries.
-- Create an ADR when a technical choice should constrain future implementations.
-- Keep incidental implementation choices and discoveries in the ExecPlan.
-
-Link or summarize related decisions; do not duplicate full documents. If a conflict appears, surface it and resolve the authoritative document with the user.
-
-### 5. Finalize and hand off
-
-Do not mark a Product Spec approved until the user approves it. Before handoff, resolve all blocking questions and validate introduced links, paths, formatting, and `git diff --check`. Follow repository-specific verification instructions when present.
-
-After an approved Product Spec, create an ExecPlan only when requested. When the ExecPlan is ready, provide a short digest covering the technical approach, consequential choices, risks or migrations, Product Spec coverage, required human verification, and any intentional deviation.
-
-Stop there. Do not implement, dispatch another agent, commit, or push unless the user separately requests it.
+Create an ExecPlan when requested; summarize its approach, risks, acceptance, and
+required human checks. The shaping workflow ends at handoff. If the request also
+includes implementation, continue afterward under the repository's implementation
+workflow. Dispatch agents, commit, or publish only when authorized.
