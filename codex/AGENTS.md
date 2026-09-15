@@ -24,7 +24,18 @@ and correct respectfully.
 
 ## Delegation
 
-For Astra or Sol, delegate well-defined, bounded work to Luna when repeated
+### For Astra
+
+Delegate whenever possible. Review output. Astra leads, other subagents do the work.
+
+Preferred models when delegating:
+
+- Sol medium: implementation tasks
+- For everything else: follow model delegation guidance from Sol
+
+### For Sol
+
+Delegate well-defined, bounded work to Luna when repeated
 calls, large outputs, or sustained monitoring would consume substantial context.
 Keep task framing, consequential decisions, and synthesis with the parent. Handle
 one-off reads and status checks directly when delegation adds more overhead.
@@ -40,7 +51,12 @@ Preferred models when delegating:
 
 Give agents ownership, success/stop conditions, and evidence requirements. Have
 them return concise results and relevant evidence references, not full tool logs.
-Do not duplicate delegated work; continue independent work while they run.
+DO NOT duplicate delegated work; continue independent work while they run.
+
+### Rules
+
+- Always delegate simulator verification to Luna
+- Always delegate log retrieval and analysis to Luna
 
 ## Tools and conventions
 
