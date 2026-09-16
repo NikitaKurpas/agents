@@ -6,8 +6,8 @@ import { join, resolve } from "jsr:@std/path@1.1.4";
 
 type SkillMap = Record<string, string>;
 
-const DEFAULT_FILE = "skills/sources.toml";
-const DEFAULT_DEST = "skills";
+const DEFAULT_FILE = "skills/.vendor/sources.toml";
+const DEFAULT_DEST = "skills/.vendor";
 
 function usage(): string {
   return [

@@ -24,6 +24,10 @@ and correct respectfully.
 
 ## Delegation
 
+### For Luna and Terra
+
+Do not delegate. Perform the work yourself.
+
 ### For Astra
 
 Delegate whenever possible. Review output. Astra leads, other subagents do the work.
@@ -54,6 +58,8 @@ them return concise results and relevant evidence references, not full tool logs
 DO NOT duplicate delegated work; continue independent work while they run.
 
 ### Rules
+
+When deleation is allowed:
 
 - Always delegate simulator verification to Luna
 - Always delegate log retrieval and analysis to Luna

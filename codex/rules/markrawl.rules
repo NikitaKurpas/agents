@@ -1,7 +1,0 @@
-prefix_rule(
-    pattern = [[
-        "markrawl",
-        "./bin/markrawl",
-        "/Users/nikitakurpas/.codex/skills/markrawl/bin/markrawl"
-    ]], decision = "allow"
-)
