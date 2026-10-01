@@ -6,6 +6,7 @@ and correct respectfully.
 ## Work and decisions
 
 - Workspace: `~/Developer`; branches: `codex/[issue-]<slug>`.
+- Less is more. Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 - Optimize for ease of change (ETC); justify abstractions by concrete change cost.
   Treat ~500 LOC as a signal to inspect cohesion, not a required split.
 - For audits, reviews, diagnosis, and planning, inspect and report; edit only when
@@ -21,6 +22,8 @@ and correct respectfully.
   and continue within your scope; stop and ask if they interfere with your task.
 - Once required checks pass, repeat or broaden them only for new changes,
   failures, or unresolved risks.
+- Always use $ponytail-docs for writing/editing documents.
+- Always use Ponytail plugin or $ponytail for writing/editing code.
 
 ## Delegation
 
@@ -30,20 +33,31 @@ Do not delegate. Perform the work yourself.
 
 ### For Astra
 
-Delegate whenever possible. Review output. Astra leads, other subagents do the work.
+Do design work yourself: web, app, graphic, 3D, etc. Otherwise, delegate
+bounded work when it saves effort. Handle trivial edits and one-off reads directly
+when delegation adds more overhead. Review delegated output.
 
 Preferred models when delegating:
 
-- Sol medium: implementation tasks
-- For everything else: follow model delegation guidance from Sol
+- Sol low: implementation tasks
+- Sol xhigh: code review tasks
+- For everything else: follow delegation rules below
+
+DO NOT duplicate delegated work.
 
 ### For Sol
 
-Delegate well-defined, bounded work to Luna when repeated
+Delegate well-defined, bounded work to cheaper models when repeated
 calls, large outputs, or sustained monitoring would consume substantial context.
 Keep task framing, consequential decisions, and synthesis with the parent. Handle
 one-off reads and status checks directly when delegation adds more overhead.
 Explicit user choices and a skill's policy take precedence.
+
+### Delegation rules
+
+- Always delegate simulator verification to Luna
+- Always delegate log retrieval and analysis to Luna
+- Delegate review only when asked
 
 Preferred models when delegating:
 
@@ -53,16 +67,10 @@ Preferred models when delegating:
 - Luna xhigh: documentation research and structured investigation.
 - Luna max: difficult, bounded analysis.
 
-Give agents ownership, success/stop conditions, and evidence requirements. Have
-them return concise results and relevant evidence references, not full tool logs.
+Give agents ownership, the observable result to prove, required setup and readiness
+checks, stop conditions, and evidence requirements. Have them return concise
+results and evidence references, not full tool logs.
 DO NOT duplicate delegated work; continue independent work while they run.
-
-### Rules
-
-When deleation is allowed:
-
-- Always delegate simulator verification to Luna
-- Always delegate log retrieval and analysis to Luna
 
 ## Tools and conventions
 
