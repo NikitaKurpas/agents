@@ -47,6 +47,9 @@ In Product Specs, keep behavioral rules and proof scenarios together in
 Use `Terminology` only for necessary new domain terms. Omit optional sections
 unless they preserve non-obvious context a future reader needs.
 
+Keep Product Specs, ADRs, and PDRs short and high-level. Include APIs or
+implementation details only when needed to understand the decision.
+
 Write plain, concrete prose with common project vocabulary, short sentences, and
 one main idea per sentence. Prefer clear subjects and active verbs. Use short
 lists for parallel facts, rules, or trade-offs. Use technical terms only for
