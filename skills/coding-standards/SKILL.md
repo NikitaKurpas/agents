@@ -29,7 +29,7 @@ Read the repository's instructions and `CODING_STANDARDS.md`, if it exists, firs
 - Let design emerge through duplication removal, expressiveness, and minimal structure; do not add needless abstractions or infrastructure.
 - Share code that has the same responsibility. Keep similar-looking code separate when it changes for different reasons.
 - Prefer standard libraries, platform features, and existing dependencies over writing custom utiltiies where practical.
-- Add abstractions only when they reduce concrete duplication or change cost.
+- Add small abstractions only when they clarify responsibilities, reduce concrete duplication or change cost, hide distracting details, or make required behavior testable. Keep them limited to current needs.
 - When touching code, remove the smell that most increases change cost, but do not silently broaden the task beyond the smallest cleanup that makes the requested change safe.
 
 ## Trigger rules

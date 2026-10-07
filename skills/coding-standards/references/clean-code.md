@@ -129,9 +129,11 @@ Follow these instructions before making any code, test, refactor, review, or doc
 
 ## Boundaries and external dependencies
 
-- Isolate third-party libraries behind local adapters or wrappers when practical.
+- Isolate third-party libraries or low-level operations behind small local adapters or wrappers when practical.
+- Expose the operations the application needs.
 - Avoid coupling core logic directly to unstable external APIs.
-- Create narrow interfaces around dependencies.
+- Keep dependency interfaces narrow.
+- Before adding an interface for testing, apply the [testing standards](testing.md#before-writing-a-test).
 - When a dependency does not exist yet, define interfaces from local needs, not from guesses about future implementations.
 
 ## System construction rules

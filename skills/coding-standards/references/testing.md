@@ -17,6 +17,9 @@ Answer these questions before adding or changing a test:
 
 If an answer is missing, improve the test design first.
 
+- Avoid adding interfaces solely for tests. The ability to substitute a mock alone is not enough.
+- Introduce an interface for testing only when it substantially simplifies test setup or isolates a third-party dependency.
+- Keep that interface limited to the operations the caller needs.
 - Test through the interface responsible for the behavior. Test another layer only when it covers a different risk, such as transport errors or cleanup.
 - Prefer adding a case to an existing test over copying the same setup and assertions. When changing tests, combine repeated setup where it makes them clearer.
 - Keep expected results independent of the code under test. A mock must not perform the behavior the test claims to verify.
@@ -78,7 +81,7 @@ Check new and existing tests for these patterns:
 - Matching exact source text, imports, or strings that can change without affecting behavior.
 - Checking private helpers or exact calls when a public-interface test already covers the behavior.
 - Repeating the same scenario without covering a different failure.
-- Keeping unused production code or extra interfaces solely for tests.
+- Keeping unused production code or exposing internal details solely for tests.
 - Computing expected values with the function being tested.
 - Using mocks that produce the result the real code should produce.
 - Using the same mock for different APIs in a way that hides differences in their behavior.
