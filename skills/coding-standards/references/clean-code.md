@@ -178,7 +178,7 @@ Follow these instructions before making any code, test, refactor, review, or doc
 
 ## Smells to detect and eliminate
 
-Actively look for and fix these issues when touching code:
+Actively look for and fix (or report when auditing) these issues when touching code:
 
 - vague or misleading names
 - duplicated logic

@@ -1,6 +1,6 @@
 ---
 name: coding-standards
-description: Apply language-agnostic coding standards when implementing, refactoring, or reviewing code, or turning retrospective lessons into durable engineering rules.
+description: Apply language-agnostic coding standards when implementing, refactoring, or reviewing code, auditing or cleaning up a codebase.
 ---
 
 # Coding standards
@@ -44,6 +44,12 @@ Read the repository's instructions and `CODING_STANDARDS.md`, if it exists, firs
 - When fixing a bug or changing behavior, add or update the test that protects the intended contract and meets the testing standards.
 - When an API or design tradeoff needs more detail, or the work involves external boundaries, resources, or concurrency, read the relevant section of [detailed guidance](references/clean-code.md).
 - When cleanup spreads into unrelated areas, cut back to the smallest refactor, keeping the requested change safe and readable.
+
+For a codebase audit or cleanup:
+
+- You MUST read [clean-code.md](references/clean-code.md) in full first.
+- Review the requested codebase or paths module by module, including their dependencies. Track progress until all areas are reviewed; report any blockers or gaps.
+- For audits, report each finding's location and impact. For cleanup, fix the smells that most increase change cost in small, verified steps. Explain anything left for later.
 
 ## Final checklist
 
