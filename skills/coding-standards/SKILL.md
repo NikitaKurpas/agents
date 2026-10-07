@@ -35,6 +35,9 @@ Use this file for routine coding, review, and testing. Read the references when 
 - Share code that has the same responsibility. Keep similar-looking code separate when it changes for different reasons.
 - Prefer standard libraries, platform features, and existing dependencies over writing custom utiltiies where practical.
 - Add small abstractions only when they clarify responsibilities, reduce concrete duplication or change cost, hide distracting details, or make required behavior testable. Keep them limited to current needs.
+- Build for current requirements. Avoid extension points, configuration, and fallback paths for very distant or uncertain needs.
+- Match edge-case handling to the likelihood and impact of failure. A theoretical possibility alone does not justify complexity; rare failures with serious consequences can.
+- Capture context that helps explain unexpected behavior: what happened, where, and under what conditions. Prefer enriching existing signals (e.g. logs, events, traces) over adding new ones. Each field should add useful context.
 - When touching code, remove the smell that most increases change cost, but do not silently broaden the task beyond the smallest cleanup that makes the requested change safe.
 
 ## Trigger rules
