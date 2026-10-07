@@ -9,6 +9,8 @@ Working code is not automatically clean code.
 
 Read the repository's instructions and `CODING_STANDARDS.md`, if it exists, first. If a rule in the repository's `CODING_STANDARDS.md` conflicts with this skill, follow the repository's rule for that conflict. Apply the rest of this skill. You MUST follow every applicable rule below; rules beginning with “Prefer” allow a justified tradeoff.
 
+Use this file for routine coding, review, and testing. Read the references when the work needs deeper guidance.
+
 ## Decision rules
 
 - Treat cleanliness as part of delivery. Preserve behavior, leave touched code cleaner within scope.
@@ -25,7 +27,10 @@ Read the repository's instructions and `CODING_STANDARDS.md`, if it exists, firs
 - Make public APIs small, explicit, and hard to misuse. Encode boundary logic, required order, and likely changes where readers can see them.
 - Use parameters and types that make invalid inputs difficult to pass.
 - Use comments for rationale, constraints, warnings, and external contracts. Do not narrate code instead of improving it. Keep them accurate as code changes.
-- Treat tests as production code: readable, deterministic, aligned with the behavior or contract they protect, and backed by proportionate validation before calling the change done.
+- Treat tests as production code: readable, deterministic, and backed by proportionate validation.
+- Every test MUST justify its maintenance cost. Name the behavior it protects, the bug it catches, and why existing tests would miss it.
+- Test behavior through the interface responsible for it. Keep expected results independent; mocks must not do the work being tested. Keep tests stable when refactoring preserves behavior.
+- Avoid interfaces solely for tests. Mock substitution alone is not enough; require substantially simpler test setup or isolation of a third-party dependency. Expose only what the caller needs.
 - Let design emerge through duplication removal, expressiveness, and minimal structure; do not add needless abstractions or infrastructure.
 - Share code that has the same responsibility. Keep similar-looking code separate when it changes for different reasons.
 - Prefer standard libraries, platform features, and existing dependencies over writing custom utiltiies where practical.
@@ -40,14 +45,15 @@ Read the repository's instructions and `CODING_STANDARDS.md`, if it exists, firs
 - When duplication, repeated switches, or primitive clusters appear, name the concept with an argument object, polymorphism, special case, or other small abstraction.
 - When a boundary leaks framework, vendor, or persistence details, add or strengthen a local adapter.
 - When async or concurrency enters, isolate threading/scheduling policy and minimize shared mutable state, and test timing-sensitive behavior.
-- When writing, changing, reviewing, or auditing tests, you MUST read [testing standards](references/testing.md). Use the audit workflow only for a requested audit or cleanup.
-- When fixing a bug or changing behavior, add or update the test that protects the intended contract and meets the testing standards.
-- When an API or design tradeoff needs more detail, or the work involves external boundaries, resources, or concurrency, read the relevant section of [detailed guidance](references/clean-code.md).
+- When fixing a bug or changing behavior, add or update the test that protects the intended contract. A bug regression test must fail for the right reason before the fix and pass afterward.
+- When code needs a deeper review or cleanup, read [clean-code.md](references/clean-code.md) in full.
+- When test quality or coverage needs a deeper review, read [testing.md](references/testing.md) in full.
+- When removing existing tests, read the [removal rules](references/testing.md#before-removing-a-test) first.
+- When these rules do not settle a design or testing question, read the relevant section of [clean-code.md](references/clean-code.md) or [testing.md](references/testing.md).
 - When cleanup spreads into unrelated areas, cut back to the smallest refactor, keeping the requested change safe and readable.
 
 For a codebase audit or cleanup:
 
-- You MUST read [clean-code.md](references/clean-code.md) in full first.
 - Review the requested codebase or paths module by module, including their dependencies. Track progress until all areas are reviewed; report any blockers or gaps.
 - For audits, report each finding's location and impact. For cleanup, fix the smells that most increase change cost in small, verified steps. Explain anything left for later.
 

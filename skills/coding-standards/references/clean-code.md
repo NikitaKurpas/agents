@@ -133,7 +133,7 @@ Follow these instructions before making any code, test, refactor, review, or doc
 - Expose the operations the application needs.
 - Avoid coupling core logic directly to unstable external APIs.
 - Keep dependency interfaces narrow.
-- Before adding an interface for testing, apply the [testing standards](testing.md#before-writing-a-test).
+- When unsure whether a test needs a new interface, read the [testing standards](testing.md#before-writing-a-test).
 - When a dependency does not exist yet, define interfaces from local needs, not from guesses about future implementations.
 
 ## System construction rules
