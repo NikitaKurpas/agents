@@ -1,6 +1,6 @@
 # Clean Code by Robert C. Martin
 
-Apply these rules to the code in scope. For deeper testing questions, read the relevant [testing standards](testing.md).
+Apply these rules to the code in scope. For deeper testing rules, read [testing standards](testing.md).
 
 ## Priority and behavior
 
@@ -157,7 +157,7 @@ Apply these rules to the code in scope. For deeper testing questions, read the r
 - Know the execution model before changing concurrent code.
 - Avoid dependencies between synchronized methods.
 - Get non-concurrent behavior correct before adding threading.
-- Make concurrency configurable only when current requirements need it.
+- Make concurrency or threaded code configurable only when current requirements need it.
 
 ## Refactoring rules
 
@@ -212,7 +212,7 @@ Look for these issues throughout the code in scope. Report them during audits; f
 
 ## Change Process
 
-For each non-trivial change or cleanup batch:
+For each non-trivial change:
 
 1. Understand the intent and affected behavior.
 2. Identify the simplest correct change.
@@ -226,8 +226,10 @@ For each non-trivial change or cleanup batch:
 ## Implementation preferences
 
 - Prefer explicit, boring, maintainable solutions.
-- Prefer standard library and existing project patterns over new dependencies.
+- Prefer standard libraries, platform features, and existing project patterns and dependencies when they fit the task.
 - Do not add a dependency unless it clearly reduces overall complexity.
+- Use established, well-maintained utility libraries for missing capabilities. Favor focused libraries that fit the application's design over custom parsing, validation, logging, or similar utilities.
+- Treat dependencies that shape application structure, control flow, or data models as framework choices. Propose them when the gains in simplicity, maintenance, reliability, or readability justify the design changes; adopt them once agreed.
 - Reuse established project conventions unless the user explicitly asks otherwise.
 - Keep interfaces small.
 - Keep state transitions obvious.

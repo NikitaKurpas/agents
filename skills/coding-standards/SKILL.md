@@ -33,7 +33,8 @@ Use this file for routine coding, review, and testing. Read the references when 
 - Avoid interfaces solely for tests. Mock substitution alone is not enough; require substantially simpler test setup or isolation of a third-party dependency. Expose only what the caller needs.
 - Let design emerge through duplication removal, expressiveness, and minimal structure; do not add needless abstractions or infrastructure.
 - Share code that has the same responsibility. Keep similar-looking code separate when it changes for different reasons.
-- Prefer standard libraries, platform features, and existing dependencies over writing custom utilities where practical.
+- Prefer standard libraries, platform features, and existing dependencies over writing custom utilities where practical. Use established, well-maintained utility libraries to fill gaps without reshaping the application's design.
+- Propose frameworks that would significantly simplify the code, reduce maintenance, or improve reliability or readability. Explain the benefit and the design changes before adopting them, unless already agreed.
 - Add small abstractions only when they clarify responsibilities, reduce concrete duplication or change cost, hide distracting details, or make required behavior testable. Keep them limited to current needs.
 - Build for current requirements. Avoid extension points, configuration, and fallback paths for very distant or uncertain needs.
 - Match edge-case handling to the likelihood and impact of failure. A theoretical possibility alone does not justify complexity; rare failures with serious consequences can.
@@ -48,6 +49,7 @@ Use this file for routine coding, review, and testing. Read the references when 
 - When duplication, repeated switches, or primitive clusters reveal a shared responsibility, name the concept with a small abstraction.
 - When a boundary leaks framework, vendor, or persistence details, add or strengthen a local adapter.
 - When async or concurrency enters, isolate threading/scheduling policy and minimize shared mutable state, and test timing-sensitive behavior.
+- When choosing utility or observability dependencies, read [dependencies.md](references/dependencies.md).
 - When fixing a bug or changing behavior, add or update the test that protects the intended contract. A bug regression test must fail for the right reason before the fix and pass afterward. If you cannot run the old code, report that limitation.
 - When code needs a deeper review or cleanup, read [clean-code.md](references/clean-code.md) in full.
 - When test quality or coverage needs a deeper review, read [testing.md](references/testing.md) in full.
@@ -69,5 +71,5 @@ For a codebase audit or cleanup:
 - Do functions and modules have clear responsibilities?
 - Does the change follow the repository's standards?
 - Was cleanup justified and kept within the requested scope?
-- Do tests protect behavior or an independent contract rather than incidental implementation details?
+- Do tests protect the changed behavior or contract without depending on implementation details?
 - Did I inspect the final diff and run the relevant checks after the last edit?
