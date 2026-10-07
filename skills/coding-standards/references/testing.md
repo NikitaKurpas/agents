@@ -1,6 +1,6 @@
 # Testing standards
 
-You MUST apply these rules when writing, changing, or reviewing tests. If a rule in the repository's `CODING_STANDARDS.md` conflicts with this skill, follow the repository's rule for that conflict. Apply the rest of this skill. Review existing tests without editing them unless an audit with fixes or a cleanup is requested.
+You MUST apply these rules when writing, changing, or reviewing tests. If a rule in the repository's `CODING_STANDARDS.md` conflicts with this skill, follow the repository's rule for that conflict. Apply the rest of this skill. For reviews and audits, report findings; edit tests only when changes are requested.
 
 ## Value bar
 

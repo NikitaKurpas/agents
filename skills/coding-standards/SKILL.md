@@ -71,5 +71,5 @@ For a codebase audit or cleanup:
 - Do functions and modules have clear responsibilities?
 - Does the change follow the repository's standards?
 - Was cleanup justified and kept within the requested scope?
-- Do tests protect the changed behavior or contract without depending on implementation details?
+- Do tests protect the changed behavior or contract without depending on irrelevant implementation details?
 - Did I inspect the final diff and run the relevant checks after the last edit?
