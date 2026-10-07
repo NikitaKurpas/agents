@@ -1,21 +1,17 @@
 # SwiftUI Composition Patterns
 
-**Version 1.0.0**  
-Engineering  
+**Version 1.0.0**\
+Engineering\
 January 2026
 
-> **Note:**  
-> For agents and LLMs maintaining, generating, or refactoring SwiftUI codebases
-> using composition. Optimized for automation and consistency.
+> **Note:**\
+> For agents and LLMs maintaining, generating, or refactoring SwiftUI codebases using composition. Optimized for automation and consistency.
 
 ---
 
 ## Abstract
 
-Composition patterns for building flexible, maintainable SwiftUI views. Avoid
-flag proliferation by using compound views, lifting state, and composing
-internals. These patterns make codebases easier for both humans and AI agents
-to work with as they scale.
+Composition patterns for building flexible, maintainable SwiftUI views. Avoid flag proliferation by using compound views, lifting state, and composing internals. These patterns make codebases easier for both humans and AI agents to work with as they scale.
 
 ---
 
@@ -38,15 +34,13 @@ to work with as they scale.
 
 **Impact: HIGH**
 
-Fundamental patterns for structuring views to avoid flag proliferation and
-enable flexible composition.
+Fundamental patterns for structuring views to avoid flag proliferation and enable flexible composition.
 
 ### 1.1 Avoid Boolean Flag Proliferation
 
 **Impact: CRITICAL (prevents unmaintainable view variants)**
 
-Don't add boolean flags to customize behavior. Each flag multiplies state and
-creates conditional sprawl. Use composition instead.
+Don't add boolean flags to customize behavior. Each flag multiplies state and creates conditional sprawl. Use composition instead.
 
 **Incorrect: flag-driven view**
 
@@ -92,9 +86,7 @@ struct EditComposerView: View {
 
 **Impact: HIGH (enables flexible composition without prop drilling)**
 
-Structure complex views as compound components with shared environment. Each
-subview reads shared state via `@Environment` (or `@EnvironmentObject` for
-legacy code).
+Structure complex views as compound components with shared environment. Each subview reads shared state via `@Environment` (or `@EnvironmentObject` for legacy code).
 
 **Incorrect: monolithic view with flags and render closures**
 
@@ -200,8 +192,7 @@ Consumers compose slots instead of toggling flags.
 
 **Impact: MEDIUM**
 
-Patterns for lifting state and managing shared environment across composed
-views.
+Patterns for lifting state and managing shared environment across composed views.
 
 ### 2.1 Decouple State Management from UI
 
@@ -246,8 +237,7 @@ struct ComposerInput: View {
 
 **Impact: MEDIUM (enables dependency injection and previews)**
 
-Define a context interface with `state`, `actions`, and `meta` so subviews rely
-on a stable contract.
+Define a context interface with `state`, `actions`, and `meta` so subviews rely on a stable contract.
 
 ```swift
 struct ComposerContext {
@@ -324,9 +314,7 @@ Specific techniques for implementing compound views and ViewBuilder slots.
 
 **Impact: MEDIUM (reduces mode branching)**
 
-Avoid `isX` boolean mode flags. For finite flows, both explicit variants and
-enum-driven routing can be valid. Prefer explicit variant types when you want a
-clearer public API.
+Avoid `isX` boolean mode flags. For finite flows, both explicit variants and enum-driven routing can be valid. Prefer explicit variant types when you want a clearer public API.
 
 ```swift
 struct ChannelComposerView: View { var body: some View { ChannelLayout() } }
@@ -339,8 +327,7 @@ Enum-driven routing is also acceptable for finite internal flows.
 
 **Impact: MEDIUM (avoids AnyView erasure)**
 
-Use typed `@ViewBuilder` slots instead of `renderX` closures returning
-`AnyView`.
+Use typed `@ViewBuilder` slots instead of `renderX` closures returning `AnyView`.
 
 ```swift
 struct CardView<Header: View, Footer: View, Content: View>: View {

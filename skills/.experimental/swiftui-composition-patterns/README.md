@@ -1,8 +1,6 @@
 # SwiftUI Composition Patterns
 
-A structured repository for SwiftUI composition patterns that scale. These
-patterns help avoid flag proliferation by using compound views, lifting state,
-and composing internals.
+A structured repository for SwiftUI composition patterns that scale. These patterns help avoid flag proliferation by using compound views, lifting state, and composing internals.
 
 ## Structure
 
@@ -17,32 +15,26 @@ and composing internals.
 
 ### Component Architecture (CRITICAL)
 
-- `architecture-avoid-boolean-props.md` - Don't add boolean flags to customize
-  behavior
-- `architecture-compound-components.md` - Structure as compound views with
-  shared environment
+- `architecture-avoid-boolean-props.md` - Don't add boolean flags to customize behavior
+- `architecture-compound-components.md` - Structure as compound views with shared environment
 
 ### State Management (HIGH)
 
 - `state-lift-state.md` - Lift state into provider views
-- `state-context-interface.md` - Define clear context interfaces
-  (state/actions/meta)
+- `state-context-interface.md` - Define clear context interfaces (state/actions/meta)
 - `state-decouple-implementation.md` - Decouple state management from UI
 
 ### Implementation Patterns (MEDIUM)
 
-- `patterns-children-over-render-props.md` - Prefer ViewBuilder slots and child
-  views over renderX closures or AnyView erasure
+- `patterns-children-over-render-props.md` - Prefer ViewBuilder slots and child views over renderX closures or AnyView erasure
 - `patterns-explicit-variants.md` - Create explicit view variants
 
 ## Core Principles
 
-1. **Composition over configuration** — Instead of adding flags, let consumers
-   compose
+1. **Composition over configuration** — Instead of adding flags, let consumers compose
 2. **Lift your state** — State in provider views, not trapped in leaves
 3. **Compose your internals** — Subviews access environment, not prop chains
-4. **Explicit variants** — Create `ThreadComposerView`, `EditComposerView`, not
-   `ComposerView` with `isThread`
+4. **Explicit variants** — Create `ThreadComposerView`, `EditComposerView`, not `ComposerView` with `isThread`
 
 ## Creating a New Rule
 

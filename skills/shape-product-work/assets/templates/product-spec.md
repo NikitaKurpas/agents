@@ -1,6 +1,6 @@
 # {Feature name}
 
-Status: Draft | Approved | Superseded
+Status: Draft | Approved | Superseded\
 Last updated: {YYYY-MM-DD}
 
 Keep this product contract short enough to review in one sitting; one to three pages is the normal target. Delete all placeholder instructions and leave detailed implementation choices out of the spec.

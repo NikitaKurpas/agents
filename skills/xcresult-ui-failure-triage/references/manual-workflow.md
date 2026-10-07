@@ -19,6 +19,7 @@ xcrun xcresulttool get test-results tests --path /path/to/result.xcresult
 ## Inspect Activities
 
 Inspect activity trees for the failing test. Look for:
+
 - `Collecting debug information to assist test failure triage`
 - `Requesting snapshot of accessibility hierarchy`
 - attachment names beginning with `App UI hierarchy`

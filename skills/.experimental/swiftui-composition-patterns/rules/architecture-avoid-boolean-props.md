@@ -7,9 +7,7 @@ tags: composition, swiftui, architecture
 
 ## Avoid Boolean Prop Proliferation
 
-Don't add boolean flags like `isThread`, `isEditing`, `isDMThread` to customize
-view behavior. Each flag multiplies states and creates conditional sprawl. Use
-composition instead.
+Don't add boolean flags like `isThread`, `isEditing`, `isDMThread` to customize view behavior. Each flag multiplies states and creates conditional sprawl. Use composition instead.
 
 **Incorrect (flags create exponential complexity):**
 
@@ -94,5 +92,4 @@ struct EditComposerView: View {
 }
 ```
 
-Each variant is explicit about what it renders. We can share internals without
-a single monolithic parent view.
+Each variant is explicit about what it renders. We can share internals without a single monolithic parent view.

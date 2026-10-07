@@ -7,9 +7,7 @@ tags: composition, swiftui, architecture
 
 ## Use Compound Components
 
-Structure complex views as compound components with shared environment. Each
-subview reads shared state via `@Environment` (or `@EnvironmentObject` for
-legacy code), not prop chains. Consumers compose the pieces they need.
+Structure complex views as compound components with shared environment. Each subview reads shared state via `@Environment` (or `@EnvironmentObject` for legacy code), not prop chains. Consumers compose the pieces they need.
 
 **Incorrect (monolithic view with render closures and flags):**
 
@@ -128,5 +126,4 @@ struct ComposerFooter<Content: View>: View {
 }
 ```
 
-Consumers compose slots instead of toggling flags. Shared state lives in the
-environment and is available wherever needed.
+Consumers compose slots instead of toggling flags. Shared state lives in the environment and is available wherever needed.

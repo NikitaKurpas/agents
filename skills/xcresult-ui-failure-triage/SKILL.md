@@ -64,11 +64,13 @@ Print hierarchy from exported directory:
 ## Fallback
 
 If the scripts do not work, read:
+
 - `references/manual-workflow.md`
 
 ## Output Expectations
 
 Report:
+
 - failing test id
 - export directory
 - hierarchy text file path

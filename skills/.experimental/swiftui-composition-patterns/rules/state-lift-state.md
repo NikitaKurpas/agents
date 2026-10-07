@@ -7,9 +7,7 @@ tags: state, swiftui, composition
 
 ## Lift State Into Provider Views
 
-State should live in a provider view so sibling subviews can coordinate through
-shared context. Avoid `@State` scattered across leaf views when the data is
-shared.
+State should live in a provider view so sibling subviews can coordinate through shared context. Avoid `@State` scattered across leaf views when the data is shared.
 
 **Incorrect (state trapped in leaf views):**
 

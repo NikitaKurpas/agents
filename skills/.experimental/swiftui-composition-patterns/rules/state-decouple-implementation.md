@@ -7,9 +7,7 @@ tags: state, swiftui, composition
 
 ## Decouple State Management From UI
 
-The provider is the only place that knows how state is managed. Views consume a
-stable context interface (state/actions/meta). This keeps UI stable even if you
-swap `@Observable`, `ObservableObject` (legacy), or external stores.
+The provider is the only place that knows how state is managed. Views consume a stable context interface (state/actions/meta). This keeps UI stable even if you swap `@Observable`, `ObservableObject` (legacy), or external stores.
 
 **Incorrect (views bind to a concrete store type):**
 
@@ -59,5 +57,4 @@ struct ComposerInput: View {
 }
 ```
 
-The store is created and owned by a provider view; leaf views depend only on
-interfaces.
+The store is created and owned by a provider view; leaf views depend only on interfaces.

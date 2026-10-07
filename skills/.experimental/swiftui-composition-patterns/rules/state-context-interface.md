@@ -7,9 +7,7 @@ tags: state, swiftui, composition
 
 ## Define Generic Context Interfaces
 
-Define a context interface with `state`, `actions`, and optional `meta` so
-subviews only depend on a stable contract. This enables dependency injection,
-previewing, and easy replacement of state sources.
+Define a context interface with `state`, `actions`, and optional `meta` so subviews only depend on a stable contract. This enables dependency injection, previewing, and easy replacement of state sources.
 
 **Incorrect (implicit, ad-hoc environment values):**
 

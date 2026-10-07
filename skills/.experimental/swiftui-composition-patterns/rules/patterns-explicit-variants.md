@@ -7,9 +7,7 @@ tags: patterns, swiftui, composition
 
 ## Create Explicit View Variants
 
-Avoid `isX` boolean mode flags. For finite flows, both explicit variants and
-enum-driven routing can be valid. Prefer explicit variant types when you want a
-clearer public API and reusable composition slots.
+Avoid `isX` boolean mode flags. For finite flows, both explicit variants and enum-driven routing can be valid. Prefer explicit variant types when you want a clearer public API and reusable composition slots.
 
 **Incorrect (boolean mode flags):**
 

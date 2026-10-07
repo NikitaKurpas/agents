@@ -7,9 +7,7 @@ tags: patterns, swiftui, composition
 
 ## Prefer ViewBuilder Slots Over Render Closures
 
-Avoid `renderX` closures that return `AnyView`.
-Prefer `@ViewBuilder` slots and generic content parameters so composition stays
-type-safe, flexible, and easier for SwiftUI to diff.
+Avoid `renderX` closures that return `AnyView`. Prefer `@ViewBuilder` slots and generic content parameters so composition stays type-safe, flexible, and easier for SwiftUI to diff.
 
 **Incorrect (render closures with AnyView):**
 

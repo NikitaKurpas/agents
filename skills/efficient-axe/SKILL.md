@@ -8,6 +8,7 @@ description: Token-efficient overlay for AXe CLI on iOS Simulator tasks. Use for
 Thin wrapper; not full AXe reference.
 
 If the `axe` skill is available, use it for:
+
 - full command guidance
 - interaction patterns
 - screenshots, typing, swipes, buttons

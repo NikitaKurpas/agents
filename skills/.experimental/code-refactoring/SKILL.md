@@ -10,12 +10,14 @@ license: MIT
 ## Refactoring Principles
 
 ### When to Refactor
+
 - Before adding new features (make change easy, then make easy change)
 - After getting tests passing (red-green-refactor)
 - When you see code smells
 - During code review feedback
 
 ### When NOT to Refactor
+
 - Without tests covering the code
 - Under tight deadlines with no safety net
 - Code that will be replaced soon
@@ -24,6 +26,7 @@ license: MIT
 ## Common Code Smells
 
 ### Long Methods
+
 ```typescript
 // BEFORE: Method doing too much
 function processOrder(order: Order) {
@@ -40,6 +43,7 @@ function processOrder(order: Order) {
 ```
 
 ### Deeply Nested Conditionals
+
 ```typescript
 // BEFORE: Arrow code
 function getDiscount(user: User, order: Order) {
@@ -66,6 +70,7 @@ function getDiscount(user: User, order: Order) {
 ```
 
 ### Primitive Obsession
+
 ```typescript
 // BEFORE: Primitives everywhere
 function createUser(name: string, email: string, phone: string) {
@@ -87,6 +92,7 @@ function createUser(name: string, email: Email, phone: Phone) {
 ```
 
 ### Feature Envy
+
 ```typescript
 // BEFORE: Method uses another object's data extensively
 function calculateShipping(order: Order) {
@@ -107,6 +113,7 @@ class Order {
 ## Refactoring Techniques
 
 ### Extract Method
+
 ```typescript
 // Identify a code block that does one thing
 // Move it to a new method with a descriptive name
@@ -123,6 +130,7 @@ function printReport(data: ReportData) {
 ```
 
 ### Replace Conditional with Polymorphism
+
 ```typescript
 // BEFORE: Switch on type
 function getArea(shape: Shape) {
@@ -150,6 +158,7 @@ class Rectangle implements Shape {
 ```
 
 ### Introduce Parameter Object
+
 ```typescript
 // BEFORE: Too many parameters
 function searchProducts(
@@ -175,6 +184,7 @@ function searchProducts(params: SearchParams) { ... }
 ```
 
 ### Replace Magic Numbers with Constants
+
 ```typescript
 // BEFORE
 if (user.age >= 18 && order.total >= 50) {

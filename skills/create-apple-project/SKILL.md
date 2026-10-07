@@ -52,6 +52,7 @@ npx skills add rorkai/app-store-connect-cli-skills --skill asc-xcode-build --age
 ```
 
 If the project will use SwiftData, also add the SwiftData skill:
+
 ```bash
 npx skills add twostraws/SwiftData-Agent-Skill --skill swiftdata-pro --agent codex --yes
 ```
@@ -277,6 +278,7 @@ Copy the `./assets/AGENTS.md` template to the new project root as `AGENTS.md`.
 First, list all available simulators to find the name and ID of the latest simulator for the primary platform (or use at least iPhone 17/Apple Watch Series 11).
 
 Then, copy the following template to the project root as `.xcodebuildmcp/config.yaml`:
+
 ```yaml
 schemaVersion: 1
 debug: false
@@ -286,7 +288,7 @@ sessionDefaults:
   scheme: <scheme name>
   simulatorId: <iPhone/Apple Watch simulator id>
   simulatorName: <iPhone/Apple Watch simulator name>
-  ```
+```
 
 ## Finalize
 

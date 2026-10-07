@@ -13,10 +13,7 @@ metadata:
 
 # SwiftUI Composition Patterns
 
-Composition patterns for building flexible, maintainable SwiftUI views. Avoid
-flag/boolean parameter proliferation by using compound views, lifting state,
-and composing internals. These patterns make codebases easier for both humans
-and AI agents to work with as they scale.
+Composition patterns for building flexible, maintainable SwiftUI views. Avoid flag/boolean parameter proliferation by using compound views, lifting state, and composing internals. These patterns make codebases easier for both humans and AI agents to work with as they scale.
 
 ## When to Apply
 
@@ -40,26 +37,19 @@ Reference these guidelines when:
 
 ### 1. Component Architecture (HIGH)
 
-- `architecture-avoid-boolean-props` - Don't add boolean flags to customize
-  behavior; use composition
-- `architecture-compound-components` - Structure complex views as compound
-  components with shared environment
+- `architecture-avoid-boolean-props` - Don't add boolean flags to customize behavior; use composition
+- `architecture-compound-components` - Structure complex views as compound components with shared environment
 
 ### 2. State Management (MEDIUM)
 
-- `state-decouple-implementation` - Provider is the only place that knows how
-  state is managed
-- `state-context-interface` - Define generic interfaces with state, actions,
-  meta for dependency injection
+- `state-decouple-implementation` - Provider is the only place that knows how state is managed
+- `state-context-interface` - Define generic interfaces with state, actions, meta for dependency injection
 - `state-lift-state` - Move state into provider views for sibling access
 
 ### 3. Implementation Patterns (MEDIUM)
 
-- `patterns-explicit-variants` - Avoid boolean mode flags; use explicit
-  variants when API clarity matters (enum routing is also valid for finite
-  internal flows)
-- `patterns-children-over-render-props` - Prefer ViewBuilder slots and child
-  views over renderX-style closures or AnyView erasure
+- `patterns-explicit-variants` - Avoid boolean mode flags; use explicit variants when API clarity matters (enum routing is also valid for finite internal flows)
+- `patterns-children-over-render-props` - Prefer ViewBuilder slots and child views over renderX-style closures or AnyView erasure
 
 ## How to Use
 

@@ -48,9 +48,9 @@ Use `-quiet -hideShellScriptEnvironment` flags to omit diagnostic output.
 ## Logs
 
 If you know in advance you will need logs to debug/verify, stream logs in background terminal: `xcrun simctl spawn booted/<device-udid> log stream --style compact --predicate '...'`
-  - To reduce output size, use `--style ndjson` and pipe to sed and jq: `sed -n '/^{/p' | jq -r --unbuffered '[.messageType,.subsystem,.category,.eventMessage] | @tsv'`
-Otherwise, show past logs: `xcrun simctl spawn booted/<device-udid> log show --style compact --last <timeframe or use 2m> --predicate '...'`
-  - To reduce output size, use `--style json` and pipe to jq: `jq -r '.[] | [.messageType,.subsystem,.category,.eventMessage] | @tsv'`
+
+- To reduce output size, use `--style ndjson` and pipe to sed and jq: `sed -n '/^{/p' | jq -r --unbuffered '[.messageType,.subsystem,.category,.eventMessage] | @tsv'` Otherwise, show past logs: `xcrun simctl spawn booted/<device-udid> log show --style compact --last <timeframe or use 2m> --predicate '...'`
+- To reduce output size, use `--style json` and pipe to jq: `jq -r '.[] | [.messageType,.subsystem,.category,.eventMessage] | @tsv'`
 
 - Strongly prefer to narrow logs down using subsystem and category, if known: `--predicate 'subsystem == "..." [AND category == "..."]'`.
 - Otherwise, use app process name to filter logs: `--predicate 'process == "<AppProcessName>"'`; this will output a lot of noise, so try filtering.

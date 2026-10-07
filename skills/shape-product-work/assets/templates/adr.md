@@ -1,6 +1,6 @@
 # {short title, representative of solved problem and chosen solution}
 
-Status: Draft | Approved | Superseded
+Status: Draft | Approved | Superseded\
 Last updated: {YYYY-MM-DD}
 
 ## Terminology (Optional)

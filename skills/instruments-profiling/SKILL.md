@@ -7,8 +7,7 @@ metadata:
 
 # Instruments Profiling (macOS/iOS)
 
-Use this skill when the user wants performance profiling or stack analysis for native apps.
-Focus: Time Profiler, `xctrace` CLI, and picking the correct binary/app instance.
+Use this skill when the user wants performance profiling or stack analysis for native apps. Focus: Time Profiler, `xctrace` CLI, and picking the correct binary/app instance.
 
 ## Quick Start (CLI)
 
@@ -25,8 +24,7 @@ Note: `xcrun xctrace --help` is not a valid subcommand. Use `xcrun xctrace help 
 
 ## Picking the Correct Binary (Critical)
 
-**Gotcha: Instruments may profile the wrong app** (e.g., one in `/Applications`) if LaunchServices resolves a different bundle.
-Use these rules:
+**Gotcha: Instruments may profile the wrong app** (e.g., one in `/Applications`) if LaunchServices resolves a different bundle. Use these rules:
 
 - Prefer direct binary path for deterministic launch:
   - `xcrun xctrace record ... --launch -- /path/App.app/Contents/MacOS/App`
@@ -85,5 +83,5 @@ Use these rules:
 
 - Confirm trace process path matches target build.
 - Confirm stacks show expected app frames.
-- Capture covers the slow operation (startup/refresh). 
+- Capture covers the slow operation (startup/refresh).
 - Export stacks for automated diffing if optimizing.
