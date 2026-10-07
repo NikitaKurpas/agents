@@ -1,0 +1,3 @@
+interface:
+  display_name: "Coding Standards"
+  short_description: "Write clear, readable, maintainable code"
