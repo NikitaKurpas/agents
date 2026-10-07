@@ -31,27 +31,15 @@ and correct respectfully.
 
 Do not delegate. Perform the work yourself.
 
-### For Astra
-
-Do design work yourself: web, app, graphic, 3D, etc. Otherwise, delegate
-bounded work when it saves effort. Handle trivial edits and one-off reads directly
-when delegation adds more overhead. Review delegated output.
-
-Preferred models when delegating:
-
-- Sol low: implementation tasks
-- Sol xhigh: code review tasks
-- For everything else: follow delegation rules below
-
-DO NOT duplicate delegated work.
-
-### For Sol
+### For Astra and Sol
 
 Delegate well-defined, bounded work to cheaper models when repeated
 calls, large outputs, or sustained monitoring would consume substantial context.
 Keep task framing, consequential decisions, and synthesis with the parent. Handle
 one-off reads and status checks directly when delegation adds more overhead.
 Explicit user choices and a skill's policy take precedence.
+
+DO NOT duplicate delegated work.
 
 ### Delegation rules
 
