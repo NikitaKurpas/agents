@@ -22,18 +22,18 @@ Use this file for routine coding, review, and testing. Read the references when 
 - Keep the happy path readable. Isolate error handling, invalid-state handling, and cleanup; prefer explicit optionality or typed results over null-like sentinel flow when the language supports it.
 - Give each fact one owner. Derive values instead of keeping copies in sync.
 - Expose behavior rather than raw/internal representation. Keep related behavior together and give each module a clear responsibility. Avoid train-wreck access and utility dumping grounds.
-- Keep construction, framework, persistence, transaction, security, and vendor details outside business behavior.
+- Keep construction, framework, persistence, transaction, and vendor details outside business behavior. Isolate security mechanisms while keeping permission rules with the behavior they protect.
 - Validate untrusted data at the boundary before using it as trusted input.
 - Make public APIs small, explicit, and hard to misuse. Encode boundary logic, required order, and likely changes where readers can see them.
 - Use parameters and types that make invalid inputs difficult to pass.
 - Use comments for rationale, constraints, warnings, and external contracts. Do not narrate code instead of improving it. Keep them accurate as code changes.
 - Treat tests as production code: readable, deterministic, and backed by proportionate validation.
-- Every test MUST justify its maintenance cost. Name the behavior it protects, the bug it catches, and why existing tests would miss it.
-- Test behavior through the interface responsible for it. Keep expected results independent; mocks must not do the work being tested. Keep tests stable when refactoring preserves behavior.
+- Every test MUST justify its maintenance cost. Name the behavior or contract it protects, the bug it catches, and why existing tests would miss it.
+- Test behavior through the interface responsible for it. Keep expected results independent; mocks must not do the work being tested. Keep tests stable when refactoring preserves the tested contract.
 - Avoid interfaces solely for tests. Mock substitution alone is not enough; require substantially simpler test setup or isolation of a third-party dependency. Expose only what the caller needs.
 - Let design emerge through duplication removal, expressiveness, and minimal structure; do not add needless abstractions or infrastructure.
 - Share code that has the same responsibility. Keep similar-looking code separate when it changes for different reasons.
-- Prefer standard libraries, platform features, and existing dependencies over writing custom utiltiies where practical.
+- Prefer standard libraries, platform features, and existing dependencies over writing custom utilities where practical.
 - Add small abstractions only when they clarify responsibilities, reduce concrete duplication or change cost, hide distracting details, or make required behavior testable. Keep them limited to current needs.
 - Build for current requirements. Avoid extension points, configuration, and fallback paths for very distant or uncertain needs.
 - Match edge-case handling to the likelihood and impact of failure. A theoretical possibility alone does not justify complexity; rare failures with serious consequences can.
@@ -45,10 +45,10 @@ Use this file for routine coding, review, and testing. Read the references when 
 - When a function mixes setup, validation, computation, and side effects, split the phases.
 - When a comment explains control flow, simplify names or structure before keeping it.
 - When a query hides mutation or a flag switches behavior, separate the responsibilities.
-- When duplication, repeated switches, or primitive clusters appear, name the concept with an argument object, polymorphism, special case, or other small abstraction.
+- When duplication, repeated switches, or primitive clusters reveal a shared responsibility, name the concept with a small abstraction.
 - When a boundary leaks framework, vendor, or persistence details, add or strengthen a local adapter.
 - When async or concurrency enters, isolate threading/scheduling policy and minimize shared mutable state, and test timing-sensitive behavior.
-- When fixing a bug or changing behavior, add or update the test that protects the intended contract. A bug regression test must fail for the right reason before the fix and pass afterward.
+- When fixing a bug or changing behavior, add or update the test that protects the intended contract. A bug regression test must fail for the right reason before the fix and pass afterward. If you cannot run the old code, report that limitation.
 - When code needs a deeper review or cleanup, read [clean-code.md](references/clean-code.md) in full.
 - When test quality or coverage needs a deeper review, read [testing.md](references/testing.md) in full.
 - When removing existing tests, read the [removal rules](references/testing.md#before-removing-a-test) first.
@@ -68,6 +68,6 @@ For a codebase audit or cleanup:
 - Did framework, persistence, vendor, and construction details stay behind boundaries?
 - Do functions and modules have clear responsibilities?
 - Does the change follow the repository's standards?
-- Did I remove at least one smell from the touched area?
-- Do tests protect the changed behavior or contract without depending on implementation details?
+- Was cleanup justified and kept within the requested scope?
+- Do tests protect behavior or an independent contract rather than incidental implementation details?
 - Did I inspect the final diff and run the relevant checks after the last edit?

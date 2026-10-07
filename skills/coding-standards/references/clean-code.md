@@ -1,6 +1,6 @@
 # Clean Code by Robert C. Martin
 
-Follow these instructions before making any code, test, refactor, review, or documentation change. For detailed testing rules, read [testing standards](testing.md).
+Apply these rules to the code in scope. For deeper testing questions, read the relevant [testing standards](testing.md).
 
 ## Priority and behavior
 
@@ -50,14 +50,14 @@ Follow these instructions before making any code, test, refactor, review, or doc
 - Organize code top-down so readers see the high-level story before details.
 - Prefer descriptive names over short names.
 - Minimize the number of parameters.
-- Avoid boolean flag parameters. Split behavior into separate functions instead.
+- Prefer separate functions to boolean parameters that switch between different operations. Keep booleans that represent input data.
 - Avoid output parameters unless language conventions make them necessary.
 - Eliminate hidden side effects.
 - Prefer splitting functions that both query and mutate where practical.
 - When an operation must both mutate and return a result, make the mutation clear at the call site.
 - Prefer exceptions or explicit result types over ad hoc error codes, according to project language norms.
 - Isolate error handling from main logic.
-- Eliminate duplication aggressively.
+- Remove duplication when it represents the same responsibility. Keep similar code separate when it changes for different reasons.
 - Prefer straightforward control flow over clever control flow.
 - Refactor deep nesting into clearer structure.
 
@@ -157,7 +157,7 @@ Follow these instructions before making any code, test, refactor, review, or doc
 - Know the execution model before changing concurrent code.
 - Avoid dependencies between synchronized methods.
 - Get non-concurrent behavior correct before adding threading.
-- Make threaded code pluggable and tunable when its policy or concurrency level may vary.
+- Make concurrency configurable only when current requirements need it.
 
 ## Refactoring rules
 
@@ -180,7 +180,7 @@ Follow these instructions before making any code, test, refactor, review, or doc
 
 ## Smells to detect and eliminate
 
-Actively look for and fix (or report when auditing) these issues when touching code:
+Look for these issues throughout the code in scope. Report them during audits; fix them when changes are requested:
 
 - vague or misleading names
 - duplicated logic
@@ -212,7 +212,7 @@ Actively look for and fix (or report when auditing) these issues when touching c
 
 ## Change Process
 
-For every non-trivial task:
+For each non-trivial change or cleanup batch:
 
 1. Understand the intent and affected behavior.
 2. Identify the simplest correct change.
@@ -236,7 +236,7 @@ For every non-trivial task:
 
 ## Review checklist
 
-Before finishing, verify all of the following:
+Use these criteria to report audit findings or review completed changes:
 
 - Names reveal intent.
 - Functions are small and focused.
