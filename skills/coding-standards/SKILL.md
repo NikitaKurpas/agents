@@ -18,13 +18,16 @@ Read the repository's instructions and `CODING_STANDARDS.md`, if it exists, firs
 - Keep parameters few and meaningful. Prefer named concepts to grab-bag arguments and separate operations to boolean mode switches.
 - Prefer splitting functions that both query and mutate where practical. Make mutation explicit in the operation's name and contract.
 - Keep the happy path readable. Isolate error handling, invalid-state handling, and cleanup; prefer explicit optionality or typed results over null-like sentinel flow when the language supports it.
-- Give each fact one owner. Derive values instead of keeping copies in sync, and make invalid states hard to represent.
+- Give each fact one owner. Derive values instead of keeping copies in sync.
 - Expose behavior rather than raw/internal representation. Keep related behavior together and give each module a clear responsibility. Avoid train-wreck access and utility dumping grounds.
 - Keep construction, framework, persistence, transaction, security, and vendor details outside business behavior.
+- Validate untrusted data at the boundary before using it as trusted input.
 - Make public APIs small, explicit, and hard to misuse. Encode boundary logic, required order, and likely changes where readers can see them.
+- Use parameters and types that make invalid inputs difficult to pass.
 - Use comments for rationale, constraints, warnings, and external contracts. Do not narrate code instead of improving it. Keep them accurate as code changes.
 - Treat tests as production code: readable, deterministic, aligned with the behavior or contract they protect, and backed by proportionate validation before calling the change done.
 - Let design emerge through duplication removal, expressiveness, and minimal structure; do not add needless abstractions or infrastructure.
+- Share code that has the same responsibility. Keep similar-looking code separate when it changes for different reasons.
 - Prefer standard libraries, platform features, and existing dependencies over writing custom utiltiies where practical.
 - Add abstractions only when they reduce concrete duplication or change cost.
 - When touching code, remove the smell that most increases change cost, but do not silently broaden the task beyond the smallest cleanup that makes the requested change safe.

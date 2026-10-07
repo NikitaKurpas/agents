@@ -53,8 +53,8 @@ Follow these instructions before making any code, test, refactor, review, or doc
 - Avoid boolean flag parameters. Split behavior into separate functions instead.
 - Avoid output parameters unless language conventions make them necessary.
 - Eliminate hidden side effects.
-- Separate commands from queries.
-- A function that answers a question should not also mutate state.
+- Prefer splitting functions that both query and mutate where practical.
+- When an operation must both mutate and return a result, make the mutation clear at the call site.
 - Prefer exceptions or explicit result types over ad hoc error codes, according to project language norms.
 - Isolate error handling from main logic.
 - Eliminate duplication aggressively.
@@ -100,6 +100,7 @@ Follow these instructions before making any code, test, refactor, review, or doc
 - Avoid train-wreck call chains and unnecessary knowledge of internal structure.
 - Respect loose coupling and local boundaries.
 - Keep persistence, framework, and third-party details from obscuring business behavior or core logic.
+- When states cannot occur together, represent them as alternatives in one state value rather than separate flags that allow invalid combinations.
 
 ## Class and module design
 
@@ -109,6 +110,7 @@ Follow these instructions before making any code, test, refactor, review, or doc
 - Split classes that accumulate unrelated behavior.
 - Organize code so likely changes remain local.
 - Public APIs should be small, obvious, and hard to misuse.
+- When operations must happen in a specific order, design the API to enforce that order where practical.
 - Prefer composition over complex inheritance unless inheritance is clearly the simpler and more stable model.
 - Keep constructors and setup logic from overwhelming domain behavior.
 
@@ -117,6 +119,8 @@ Follow these instructions before making any code, test, refactor, review, or doc
 - Design error handling deliberately.
 - Keep the happy path easy to read.
 - Provide enough context in error messages for diagnosis.
+- Handle an error where you can recover or translate it meaningfully. Keep the original cause when translating, if possible.
+- Use fallbacks only when they represent valid behavior. Do not hide a broken invariant or make failure look like success.
 - Use error types or exception classes that support caller decisions.
 - Do not return `null` or equivalent absence sentinels when a safer model exists.
 - Do not pass `null` or equivalent invalid states unless the API explicitly models that case.
@@ -222,7 +226,7 @@ For every non-trivial task:
 - Prefer explicit, boring, maintainable solutions.
 - Prefer standard library and existing project patterns over new dependencies.
 - Do not add a dependency unless it clearly reduces overall complexity.
-- Reuse established project conventions unless they conflict with these rules or the user explicitly asks otherwise.
+- Reuse established project conventions unless the user explicitly asks otherwise.
 - Keep interfaces small.
 - Keep state transitions obvious.
 - Avoid premature optimization.

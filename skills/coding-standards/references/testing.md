@@ -56,6 +56,7 @@ If an answer is missing, improve the test design first.
 - Add learning tests or focused integration tests for tricky external behavior.
 - Test-drive architectural decisions with executable slices, not only diagrams or configuration.
 - Test concurrent behavior carefully where it matters.
+- Timing-sensitive tests must coordinate on observable events or a controlled clock instead of assuming elapsed sleeps prove ordering.
 - Run concurrency-sensitive tests under varied thread counts, schedules, and platforms where practical.
 - Treat spurious failures as possible concurrency defects until evidence says otherwise.
 
