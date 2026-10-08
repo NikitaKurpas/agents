@@ -39,14 +39,15 @@ Use this file for routine coding, review, and testing. Read the references when 
 - Build for current requirements. Avoid extension points, configuration, and fallback paths for very distant or uncertain needs.
 - Match edge-case handling to the likelihood and impact of failure. A theoretical possibility alone does not justify complexity; rare failures with serious consequences can.
 - Capture context that helps explain unexpected behavior: what happened, where, and under what conditions. Prefer enriching existing signals (e.g. logs, events, traces) over adding new ones. Each field should add useful context.
-- When touching code, remove the smell that most increases change cost, but do not silently broaden the task beyond the smallest cleanup that makes the requested change safe.
+- When touching code, remove the smell that most increases change cost. Keep cleanup tied to the requested result, what the affected code owns, and the behavior it must preserve.
+- Prefer code that is easy to understand and change over fewer lines, files, or edits.
 
 ## Trigger rules
 
 - When a function mixes setup, validation, computation, and side effects, split the phases.
 - When a comment explains control flow, simplify names or structure before keeping it.
 - When a query hides mutation or a flag switches behavior, separate the responsibilities.
-- When duplication, repeated switches, or primitive clusters reveal a shared responsibility, name the concept with a small abstraction.
+- When duplication, repeated switches, primitive clusters, or special cases spread across the code reveal a shared responsibility, name the concept with a small abstraction.
 - When a boundary leaks framework, vendor, or persistence details, add or strengthen a local adapter.
 - When async or concurrency enters, isolate threading/scheduling policy and minimize shared mutable state, and test timing-sensitive behavior.
 - When choosing utility or observability dependencies, read [dependencies.md](references/dependencies.md).
