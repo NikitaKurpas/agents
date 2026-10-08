@@ -52,7 +52,7 @@ Give agents ownership, the observable result to prove, required setup and readin
 ## Repository identity
 
 - These rules choose identity for otherwise authorized actions; they do not authorize comments, commits, or pushes.
-- Determine ownership from the intended canonical target repository, not just a fork remote. Treat `NikitaKurpas` repositories as mine; include another owned account only after verifying ownership. For external/upstream targets (e.g. `open-telemetry`), use my normal user identity for both comments and commits, even from my fork. Resolve uncertain ownership before applying `ami`.
-- On my repositories, use installed `gh ami comment` / `gh ami reply` for PR conversation comments and inline review replies, with explicit `--repo OWNER/REPO`, `--pr NUMBER`, and approved content. Follow [the extension README](/Users/nikitakurpas/Developer/gh-ami/README.md). If bot authentication/access fails, report the blocker; never fall back to my human identity.
-- For new commits on my repositories, set author **and** committer name to `ami` and reuse the existing locally verified configured email for both, through per-command `GIT_AUTHOR_NAME`, `GIT_COMMITTER_NAME`, `GIT_AUTHOR_EMAIL`, and `GIT_COMMITTER_EMAIL`. Preserve original authorship when cherry-picking. Keep existing signing/Keylet, normal GitHub/SSH authentication, and global Git configuration unchanged; other gh actions and pushes use normal authentication.
-- Do not rewrite past commits to change identity.
+- Use canonical target ownership, even from forks: `NikitaKurpas` repositories are mine; verify other ownership before using `ami`. Use my normal identity for external repository comments and commits.
+- On my repositories, use `gh ami comment` / `gh ami reply` for PR comments and inline replies, with approved content, `--repo OWNER/REPO`, and `--pr NUMBER`; `gh ami --help` for more info. Report bot authentication/access failures; never fall back to my identity.
+- For new commits on my repositories, set author and committer name to `ami` and both emails to the existing locally verified configured email via per-command Git environment variables. Preserve signing/Keylet, global Git config, and normal GitHub/SSH authentication for other gh actions and pushes.
+- Preserve authorship when cherry-picking; do not rewrite past commits to change identity.
