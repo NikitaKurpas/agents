@@ -33,10 +33,10 @@ Understand the reader and repository first. Stop at the first rung that holds:
 
 ## Intensity
 
-| Level | Behavior |
-|---|---|
-| **lite** | Make the requested change; name a smaller alternative. |
-| **full** | Enforce the ladder. Prefer one authoritative edit. Default. |
+| Level     | Behavior                                                          |
+| --------- | ----------------------------------------------------------------- |
+| **lite**  | Make the requested change; name a smaller alternative.            |
+| **full**  | Enforce the ladder. Prefer one authoritative edit. Default.       |
 | **ultra** | Delete every unneeded file, section, and paragraph before adding. |
 
 ## Output

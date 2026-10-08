@@ -3,6 +3,7 @@ Lead with the result. Keep prose concise; preserve evidence, material limitation
 ## Work and decisions
 
 - Workspace: `~/Developer`; branches: `codex/[issue-]<slug>`.
+- If you create a branch, create it in a worktree separate from the main checkout.
 - Less is more. Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 - Optimize for ease of change (ETC); justify abstractions by concrete change cost. Treat ~500 LOC as a signal to inspect cohesion, not a required split.
 - For audits, reviews, diagnosis, and planning, inspect and report; edit only when requested. For implementation, complete in-scope edits, relevant verification, fixes for task-caused failures, and self-review.
@@ -47,3 +48,11 @@ Give agents ownership, the observable result to prove, required setup and readin
 - Use raw GitHub URLs for source text and `curl` for text-only responses. Use `https://markdown.new` when direct page retrieval is unavailable.
 - Prefer standard libraries and existing project dependencies for common tasks. For Deno, prefer Deno/Web APIs and JSR `@std/*`, then `node:` APIs.
 - New Swift code: Swift 6.3+; TypeScript: Deno 2.9+, subject to project constraints.
+
+## Repository identity
+
+- These rules choose identity for otherwise authorized actions; they do not authorize comments, commits, or pushes.
+- Determine ownership from the intended canonical target repository, not just a fork remote. Treat `NikitaKurpas` repositories as mine; include another owned account only after verifying ownership. For external/upstream targets (e.g. `open-telemetry`), use my normal user identity for both comments and commits, even from my fork. Resolve uncertain ownership before applying `ami`.
+- On my repositories, use installed `gh ami comment` / `gh ami reply` for PR conversation comments and inline review replies, with explicit `--repo OWNER/REPO`, `--pr NUMBER`, and approved content. Follow [the extension README](/Users/nikitakurpas/Developer/gh-ami/README.md). If bot authentication/access fails, report the blocker; never fall back to my human identity.
+- For new commits on my repositories, set author **and** committer name to `ami` and reuse the existing locally verified configured email for both, through per-command `GIT_AUTHOR_NAME`, `GIT_COMMITTER_NAME`, `GIT_AUTHOR_EMAIL`, and `GIT_COMMITTER_EMAIL`. Preserve original authorship when cherry-picking. Keep existing signing/Keylet, normal GitHub/SSH authentication, and global Git configuration unchanged; other gh actions and pushes use normal authentication.
+- Do not rewrite past commits to change identity.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Hygiene"
+  short_description: "Audit Codex context and local activity"
+  default_prompt: "Use $codex-hygiene for a compact read-only Codex context and tool-surface measurement. A specified lookback period or retrospective calls for the private local activity review with observed evidence, interpretation, unknowns, source coverage, and suppressed comparisons."

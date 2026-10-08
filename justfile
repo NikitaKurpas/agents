@@ -23,7 +23,7 @@ sync-skills:
       [ -z "$skill" ] && continue
       case "$skill" in \#*) continue ;; esac
       printf '%s\n' "$skill"
-    done < "{{ justfile_directory() }}/codex/enabled-skills" | sort -u > "$enabled_tmp"
+    done < "{{ justfile_directory() }}/user/codex/enabled-skills" | sort -u > "$enabled_tmp"
 
     # Sync enabled skills by replacing destination directories.
     while IFS= read -r skill || [ -n "$skill" ]; do

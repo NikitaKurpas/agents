@@ -1,0 +1,788 @@
+{
+  "version": 3,
+  "skills": {
+    "deno-expert": {
+      "source": "denoland/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/denoland/skills.git",
+      "skillPath": "skills/deno-expert/SKILL.md",
+      "skillFolderHash": "278b2fa7ca7d573fe10dc42e4b6ae45a87ce609a",
+      "installedAt": "2026-05-23T02:40:53.597Z",
+      "updatedAt": "2026-05-23T02:40:53.597Z"
+    },
+    "deno-frontend": {
+      "source": "denoland/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/denoland/skills.git",
+      "skillPath": "skills/deno-frontend/SKILL.md",
+      "skillFolderHash": "83bec3724454842dde729558cc8be1181ab9c3a0",
+      "installedAt": "2026-05-23T02:40:53.600Z",
+      "updatedAt": "2026-05-23T02:40:53.600Z"
+    },
+    "deno-guidance": {
+      "source": "denoland/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/denoland/skills.git",
+      "skillPath": "skills/deno-guidance/SKILL.md",
+      "skillFolderHash": "5e2b66105440b56d1c3690e3f2f281389b478bb5",
+      "installedAt": "2026-05-23T02:40:53.602Z",
+      "updatedAt": "2026-05-23T02:40:53.602Z"
+    },
+    "deno-project-templates": {
+      "source": "denoland/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/denoland/skills.git",
+      "skillPath": "skills/deno-project-templates/SKILL.md",
+      "skillFolderHash": "5c25e9da2333490e49a8684add8fe6e35803c5f6",
+      "installedAt": "2026-05-23T02:40:53.603Z",
+      "updatedAt": "2026-05-23T02:40:53.603Z"
+    },
+    "cli-creator": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/cli-creator/SKILL.md",
+      "skillFolderHash": "4f534f22c18693e327ea79e6d429f454a5c0059b",
+      "installedAt": "2026-05-23T03:09:18.286Z",
+      "updatedAt": "2026-05-23T03:09:18.286Z"
+    },
+    "define-goal": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/define-goal/SKILL.md",
+      "skillFolderHash": "eac32ae7b2ef0061267e908c316c29ec18f87a33",
+      "installedAt": "2026-05-23T03:09:18.289Z",
+      "updatedAt": "2026-05-23T03:09:18.289Z"
+    },
+    "aso": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/aso/SKILL.md",
+      "skillFolderHash": "d2cf58c9d882af3ca6a5cc3696034668f2e46713",
+      "installedAt": "2026-05-23T03:14:20.955Z",
+      "updatedAt": "2026-05-23T03:14:20.955Z"
+    },
+    "product-marketing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/product-marketing/SKILL.md",
+      "skillFolderHash": "bde3b9a89daf5c8b0e1f26d9c34029f08a9b1825",
+      "installedAt": "2026-05-23T03:14:20.959Z",
+      "updatedAt": "2026-05-23T03:14:20.959Z"
+    },
+    "pricing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/pricing/SKILL.md",
+      "skillFolderHash": "e9ad493f6888c4a06cbab4cf644fdeab1d2590fa",
+      "installedAt": "2026-05-23T03:14:20.960Z",
+      "updatedAt": "2026-06-29T13:20:05.506Z"
+    },
+    "paywalls": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/paywalls/SKILL.md",
+      "skillFolderHash": "311cf4073370289060c62f34f6fbfff462275599",
+      "installedAt": "2026-05-23T03:14:20.962Z",
+      "updatedAt": "2026-05-23T03:14:20.962Z"
+    },
+    "onboarding": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/onboarding/SKILL.md",
+      "skillFolderHash": "76522c2d0ae672a8dd390af7b3e04ba8d404a370",
+      "installedAt": "2026-05-23T03:14:20.963Z",
+      "updatedAt": "2026-05-23T03:14:20.963Z"
+    },
+    "marketing-psychology": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/marketing-psychology/SKILL.md",
+      "skillFolderHash": "0a527bd6cff5ab2fe2b5a60b97d86013a385326a",
+      "installedAt": "2026-05-23T03:14:20.964Z",
+      "updatedAt": "2026-05-23T03:14:20.964Z"
+    },
+    "marketing-ideas": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/marketing-ideas/SKILL.md",
+      "skillFolderHash": "332eaf2f71e0fca00be2b64d4d90034e36714b63",
+      "installedAt": "2026-05-23T03:14:20.965Z",
+      "updatedAt": "2026-06-02T03:06:17.062Z"
+    },
+    "launch": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/launch/SKILL.md",
+      "skillFolderHash": "099a6a26299ad0c948a4c4e4337130e6f456195c",
+      "installedAt": "2026-05-23T03:14:20.966Z",
+      "updatedAt": "2026-06-29T13:20:07.222Z"
+    },
+    "image": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/image/SKILL.md",
+      "skillFolderHash": "03c0c80ec888685403cd5f9b17e90f6ae6ed9d25",
+      "installedAt": "2026-05-23T03:14:20.967Z",
+      "updatedAt": "2026-05-23T03:14:20.967Z"
+    },
+    "customer-research": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/customer-research/SKILL.md",
+      "skillFolderHash": "a38da0c2c4c68747672695ac67de9f76be15053e",
+      "installedAt": "2026-05-23T03:14:20.967Z",
+      "updatedAt": "2026-06-02T03:06:18.503Z"
+    },
+    "copywriting": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/copywriting/SKILL.md",
+      "skillFolderHash": "13d216690bbbcb88e2fee9f3e2d8f5a5bbc4b338",
+      "installedAt": "2026-05-23T03:14:20.968Z",
+      "updatedAt": "2026-06-29T13:20:08.438Z"
+    },
+    "copy-editing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/copy-editing/SKILL.md",
+      "skillFolderHash": "4d29a5bcbbf92f159f713c17db9d3d0bf6217b48",
+      "installedAt": "2026-05-23T03:14:20.969Z",
+      "updatedAt": "2026-05-23T03:14:20.969Z"
+    },
+    "content-strategy": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/content-strategy/SKILL.md",
+      "skillFolderHash": "8a2387b41d046b1b5a72a346103120b3c28e8bf5",
+      "installedAt": "2026-05-23T03:14:20.969Z",
+      "updatedAt": "2026-05-23T03:14:20.969Z"
+    },
+    "competitors": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/competitors/SKILL.md",
+      "skillFolderHash": "28b1ff203ffa89d63364fefc16117a1da8a2b78b",
+      "installedAt": "2026-05-23T03:14:20.970Z",
+      "updatedAt": "2026-05-23T03:14:20.970Z"
+    },
+    "competitor-profiling": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/competitor-profiling/SKILL.md",
+      "skillFolderHash": "ca9e34f462ca12a6b03f72937ecdcc48028bec8d",
+      "installedAt": "2026-05-23T03:14:20.970Z",
+      "updatedAt": "2026-06-02T03:06:20.032Z"
+    },
+    "community-marketing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/community-marketing/SKILL.md",
+      "skillFolderHash": "cf5d8c13f77c940a8a844ac69847948c05117f19",
+      "installedAt": "2026-05-23T03:14:20.971Z",
+      "updatedAt": "2026-05-23T03:14:20.971Z"
+    },
+    "social": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/social/SKILL.md",
+      "skillFolderHash": "d8d07c0b778522197035e6585e150009948ce00b",
+      "installedAt": "2026-05-23T03:14:20.971Z",
+      "updatedAt": "2026-06-29T13:20:09.910Z"
+    },
+    "video": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyhaines31/marketingskills.git",
+      "skillPath": "skills/video/SKILL.md",
+      "skillFolderHash": "5fda4b62e1b67db3c1f833e845eea3b357d72b18",
+      "installedAt": "2026-05-23T03:14:20.972Z",
+      "updatedAt": "2026-05-23T03:14:20.972Z"
+    },
+    "efficient-axe": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/efficient-axe/SKILL.md",
+      "skillFolderHash": "223610f2a8e5a04b7234cbe29b77cb566404c712fbccbfc2eca9466d7b2d9617",
+      "installedAt": "2026-05-23T03:18:04.346Z",
+      "updatedAt": "2026-06-29T13:20:14.557Z"
+    },
+    "ask-questions-if-underspecified": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/ask-questions-if-underspecified/SKILL.md",
+      "skillFolderHash": "7e1b49b8e343bf1bd3788d094a0f3f88679bc2817c2ba0dc212dbb103342297a",
+      "installedAt": "2026-05-23T03:20:00.115Z",
+      "updatedAt": "2026-06-29T13:20:14.553Z"
+    },
+    "brainstorming": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/brainstorming/SKILL.md",
+      "skillFolderHash": "37007357e298d928e5173dce08f6d45580077a03b5f5c0e5090213d6726b6d39",
+      "installedAt": "2026-05-23T03:20:00.116Z",
+      "updatedAt": "2026-06-29T13:20:14.554Z"
+    },
+    "llm-council": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/llm-council/SKILL.md",
+      "skillFolderHash": "3a5b27187697e2e436f8eaa4de1524f62b9f1ddbcb12f06818479050d3d02cca",
+      "installedAt": "2026-05-23T03:20:00.117Z",
+      "updatedAt": "2026-06-29T13:20:14.560Z"
+    },
+    "markdown-converter": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/markdown-converter/SKILL.md",
+      "skillFolderHash": "81e69d2f89ae3a0e5a15880f82480ebb8d7661ea0572abd86a31c3bd8f704c70",
+      "installedAt": "2026-05-23T03:20:00.117Z",
+      "updatedAt": "2026-06-29T13:20:14.561Z"
+    },
+    "create-apple-project": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/create-apple-project/SKILL.md",
+      "skillFolderHash": "d89ddb92052634c3bff90f8ae5c3acd330c0c5f15eb5ff8b19decb028a85271f",
+      "installedAt": "2026-05-23T03:20:00.118Z",
+      "updatedAt": "2026-06-29T13:20:14.556Z"
+    },
+    "hono": {
+      "source": "yusukebe/hono-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/yusukebe/hono-skill.git",
+      "skillPath": "skills/hono/SKILL.md",
+      "skillFolderHash": "16c9105ba9528eaa17a375ee56efb3c2376439ab",
+      "pluginName": "hono-skill",
+      "installedAt": "2026-05-23T05:58:12.141Z",
+      "updatedAt": "2026-05-23T05:58:12.141Z"
+    },
+    "xcodebuildmcp-cli": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/xcodebuildmcp-cli/SKILL.md",
+      "skillFolderHash": "4bdeb5d978bf410d4e99a7b89dda396e49ef457945633174f7f9ad0eff056cfb",
+      "installedAt": "2026-05-23T09:59:18.579Z",
+      "updatedAt": "2026-06-29T13:20:14.570Z"
+    },
+    "app-store-screenshots": {
+      "source": "ParthJadhav/app-store-screenshots",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ParthJadhav/app-store-screenshots.git",
+      "skillPath": "skills/app-store-screenshots/SKILL.md",
+      "skillFolderHash": "13386dbd34487b33aabcb36ec0b116bfac9086b6",
+      "installedAt": "2026-05-28T01:36:53.647Z",
+      "updatedAt": "2026-06-02T03:06:21.571Z"
+    },
+    "sosumi": {
+      "source": "sosumi.ai",
+      "sourceType": "well-known",
+      "sourceUrl": "https://sosumi.ai/.well-known/agent-skills/sosumi/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-05-28T03:41:17.249Z",
+      "updatedAt": "2026-06-29T13:21:20.947Z"
+    },
+    "lathe": {
+      "source": "devenjarvis/lathe",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/devenjarvis/lathe.git",
+      "skillPath": ".claude/skills/lathe/SKILL.md",
+      "skillFolderHash": "2631f7cc3d4a349bf4851574a494a20207dd8007",
+      "installedAt": "2026-06-09T03:09:46.910Z",
+      "updatedAt": "2026-06-29T13:20:16.380Z"
+    },
+    "lathe-ask": {
+      "source": "devenjarvis/lathe",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/devenjarvis/lathe.git",
+      "skillPath": ".claude/skills/lathe-ask/SKILL.md",
+      "skillFolderHash": "ba941d5a10c8afd7088bf0b4227fb39773462789",
+      "installedAt": "2026-06-09T03:09:46.915Z",
+      "updatedAt": "2026-06-09T03:09:46.915Z"
+    },
+    "lathe-extend": {
+      "source": "devenjarvis/lathe",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/devenjarvis/lathe.git",
+      "skillPath": ".claude/skills/lathe-extend/SKILL.md",
+      "skillFolderHash": "e513c5b8166ae89df48a8352d19d5b420fb56ef1",
+      "installedAt": "2026-06-09T03:09:46.917Z",
+      "updatedAt": "2026-06-09T03:09:46.917Z"
+    },
+    "lathe-verify": {
+      "source": "devenjarvis/lathe",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/devenjarvis/lathe.git",
+      "skillPath": ".claude/skills/lathe-verify/SKILL.md",
+      "skillFolderHash": "45254a3efda6d3a6ac7ec75495ddd3661e6d0548",
+      "installedAt": "2026-06-09T03:09:46.919Z",
+      "updatedAt": "2026-06-09T03:09:46.919Z"
+    },
+    "lathe-voice": {
+      "source": "devenjarvis/lathe",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/devenjarvis/lathe.git",
+      "skillPath": ".claude/skills/lathe-voice/SKILL.md",
+      "skillFolderHash": "e0b92a7d9402b64161c998ba892296284a108407",
+      "installedAt": "2026-06-09T03:09:46.920Z",
+      "updatedAt": "2026-06-09T03:09:46.920Z"
+    },
+    "here-now": {
+      "source": "heredotnow/skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/heredotnow/skill.git",
+      "skillPath": "here-now/SKILL.md",
+      "skillFolderHash": "e4a10e34c79faa6a5eb8f6021721823bb2745a36",
+      "installedAt": "2026-06-09T23:29:44.003Z",
+      "updatedAt": "2026-06-29T13:20:18.468Z"
+    },
+    "swift-concurrency-expert": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.archive/swift-concurrency-expert/SKILL.md",
+      "skillFolderHash": "a3eafb7cad3d7810284f51ebdca1b3e336c44b61e2ade6ed3c9136b79f16a9d6",
+      "installedAt": "2026-06-29T13:20:14.545Z",
+      "updatedAt": "2026-06-29T13:20:14.545Z"
+    },
+    "app-lifecycle-manager": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/app-lifecycle-manager/SKILL.md",
+      "skillFolderHash": "a4a63d1163b36b6adc48f9007deb26e2ccfc34ec00540604f95d74dc09008ee8",
+      "installedAt": "2026-06-29T13:20:14.546Z",
+      "updatedAt": "2026-06-29T13:20:14.546Z"
+    },
+    "app-store-changelog": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/app-store-changelog/SKILL.md",
+      "skillFolderHash": "3a59863f1cabefdaf342d994ebd2641a19186b7816085f1027578ef7baf63a89",
+      "installedAt": "2026-06-29T13:20:14.547Z",
+      "updatedAt": "2026-06-29T13:20:14.547Z"
+    },
+    "build-run-device": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/build-run-device/SKILL.md",
+      "skillFolderHash": "40500f145900fe88f6dd2d07a90a0001fb3e136609ac04c98e03feccab1c1950",
+      "installedAt": "2026-06-29T13:20:14.547Z",
+      "updatedAt": "2026-06-29T13:20:14.547Z"
+    },
+    "build-run-simulator": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/build-run-simulator/SKILL.md",
+      "skillFolderHash": "8183bb282318a2a257f01e77379349bd07d95fa0a4ecbb35014c31d877847701",
+      "installedAt": "2026-06-29T13:20:14.548Z",
+      "updatedAt": "2026-06-29T13:20:14.548Z"
+    },
+    "code-refactoring": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/code-refactoring/SKILL.md",
+      "skillFolderHash": "6f19dccc896d729e152f34c4486d8f0fb38a694b8fbeaf002a8e4cf5380896da",
+      "installedAt": "2026-06-29T13:20:14.548Z",
+      "updatedAt": "2026-06-29T13:20:14.548Z"
+    },
+    "device-log-workflow": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/device-log-workflow/SKILL.md",
+      "skillFolderHash": "c62b457040326533f8e1204bae1836cdf86a6129ee9b511693544a3e04b36ad6",
+      "installedAt": "2026-06-29T13:20:14.549Z",
+      "updatedAt": "2026-06-29T13:20:14.549Z"
+    },
+    "doctor-env-audit": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/doctor-env-audit/SKILL.md",
+      "skillFolderHash": "7ed4132f60b1d69d2fc468e44f063e403ead3f942d4e3ffca6dbba1c0fd1f048",
+      "installedAt": "2026-06-29T13:20:14.549Z",
+      "updatedAt": "2026-06-29T13:20:14.549Z"
+    },
+    "macos-app-e2e": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/macos-app-e2e/SKILL.md",
+      "skillFolderHash": "c900c4f084e425d795cf3631a3ef5c538e8681ea6278878ba0720e0682d7891f",
+      "installedAt": "2026-06-29T13:20:14.549Z",
+      "updatedAt": "2026-06-29T13:20:14.549Z"
+    },
+    "project-bootstrap": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/project-bootstrap/SKILL.md",
+      "skillFolderHash": "bc7d17c814488d9b084633c9a722f02ae27f0b7b72df7a6ac87a823f873c6a61",
+      "installedAt": "2026-06-29T13:20:14.550Z",
+      "updatedAt": "2026-06-29T13:20:14.550Z"
+    },
+    "scaffold-and-run": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/scaffold-and-run/SKILL.md",
+      "skillFolderHash": "f9df800431a4858e253f9b63caaf585884f65a4db5219301b22392d05578c019",
+      "installedAt": "2026-06-29T13:20:14.550Z",
+      "updatedAt": "2026-06-29T13:20:14.550Z"
+    },
+    "simulator-lab-setup": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/simulator-lab-setup/SKILL.md",
+      "skillFolderHash": "fdecf327ba421bc3f56ae65eb0234d0742c34f4a2887d5386c359bf128ca3e47",
+      "installedAt": "2026-06-29T13:20:14.550Z",
+      "updatedAt": "2026-06-29T13:20:14.550Z"
+    },
+    "simulator-log-workflow": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/simulator-log-workflow/SKILL.md",
+      "skillFolderHash": "25e9cf9d82ca12a68bfda0b83ea744473afd2e3f64471e98bb7dfacf886eb9fc",
+      "installedAt": "2026-06-29T13:20:14.551Z",
+      "updatedAt": "2026-06-29T13:20:14.551Z"
+    },
+    "spm-dev-cycle": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/spm-dev-cycle/SKILL.md",
+      "skillFolderHash": "20a7abd2ad5a06afd6c153d1188b60451a9d4c2d8446b78993c9c134b94bf09e",
+      "installedAt": "2026-06-29T13:20:14.551Z",
+      "updatedAt": "2026-06-29T13:20:14.551Z"
+    },
+    "swiftui-composition-patterns": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/swiftui-composition-patterns/SKILL.md",
+      "skillFolderHash": "268cdfe0f7d951b05415b28fe74e215e9350797e5ec97972f2ab87e0a2fef1b0",
+      "installedAt": "2026-06-29T13:20:14.552Z",
+      "updatedAt": "2026-06-29T13:20:14.552Z"
+    },
+    "test-device": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/test-device/SKILL.md",
+      "skillFolderHash": "9adef4dc1304f6ec93aa5ba2f6212121ec6233d58c1e1632e6dfd1253879dfd1",
+      "installedAt": "2026-06-29T13:20:14.552Z",
+      "updatedAt": "2026-06-29T13:20:14.552Z"
+    },
+    "test-simulator": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/test-simulator/SKILL.md",
+      "skillFolderHash": "8fd75c0eaa1f69de5dbb599f0a0732c19a431c5d7d24c58732263ba8da4841fd",
+      "installedAt": "2026-06-29T13:20:14.553Z",
+      "updatedAt": "2026-06-29T13:20:14.553Z"
+    },
+    "ui-automation-e2e": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/.experimental/ui-automation-e2e/SKILL.md",
+      "skillFolderHash": "b6baa59e5b036e41d63515766d0a0d4fd606222bc9747ce88d4db0933014e683",
+      "installedAt": "2026-06-29T13:20:14.553Z",
+      "updatedAt": "2026-06-29T13:20:14.553Z"
+    },
+    "atlas": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/atlas/SKILL.md",
+      "skillFolderHash": "038d10ea34ea475f612fd6bd4e76f68b91983c1ce17788385be019f60451a082",
+      "installedAt": "2026-06-29T13:20:14.554Z",
+      "updatedAt": "2026-06-29T13:20:14.554Z"
+    },
+    "vercel-composition-patterns": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "skillFolderHash": "f98931159fa9c7fed043bcd18a891a46dcf89ababa38df13a4c5b7b30dc0ce07",
+      "installedAt": "2026-06-29T13:20:14.555Z",
+      "updatedAt": "2026-06-29T13:20:14.555Z"
+    },
+    "continuity": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/continuity/SKILL.md",
+      "skillFolderHash": "580c057f54bf417ad95c8d9a602ee28eeee6408b7c89cd5fff144eae8680ccc5",
+      "installedAt": "2026-06-29T13:20:14.556Z",
+      "updatedAt": "2026-06-29T13:20:14.556Z"
+    },
+    "frontend-design": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "skillFolderHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67",
+      "installedAt": "2026-06-29T13:20:14.557Z",
+      "updatedAt": "2026-06-29T13:20:14.557Z"
+    },
+    "frontend-skill": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/frontend-skill/SKILL.md",
+      "skillFolderHash": "2074b8fa089e7ac633689b7202965513a5fd069fd1baf2ea49a928bb85bb4c9c",
+      "installedAt": "2026-06-29T13:20:14.557Z",
+      "updatedAt": "2026-06-29T13:20:14.557Z"
+    },
+    "gh-address-comments": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/gh-address-comments/SKILL.md",
+      "skillFolderHash": "0a480d4fe8deb31852cd47ec8708e66b66b94875a23ba7679b17cf11ae9255a0",
+      "installedAt": "2026-06-29T13:20:14.558Z",
+      "updatedAt": "2026-06-29T13:20:14.558Z"
+    },
+    "imagegen": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/imagegen/SKILL.md",
+      "skillFolderHash": "473ddcb8fa4a5e815e51b7309996d051317d575ae0fcd40883d427452f7be76e",
+      "installedAt": "2026-06-29T13:20:14.559Z",
+      "updatedAt": "2026-06-29T13:20:14.559Z"
+    },
+    "instruments-profiling": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/instruments-profiling/SKILL.md",
+      "skillFolderHash": "84907d88d4b34e97a6aeb2b6752e2fe67a19c38edaba44ac5e90e9db6c4c7fb3",
+      "installedAt": "2026-06-29T13:20:14.559Z",
+      "updatedAt": "2026-06-29T13:20:14.559Z"
+    },
+    "ios-simulator-e2e": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/ios-simulator-e2e/SKILL.md",
+      "skillFolderHash": "a733eb60fcb1fed22fc207f81ce67ec694e209b814f95642a6118abb57dc9db2",
+      "installedAt": "2026-06-29T13:20:14.560Z",
+      "updatedAt": "2026-06-29T13:20:14.560Z"
+    },
+    "local-skill-installer": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/local-skill-installer/SKILL.md",
+      "skillFolderHash": "48a4450b2a55492ff3206199ce8f723136ce5f7ea0f36ece7951aebd4c570cb9",
+      "installedAt": "2026-06-29T13:20:14.560Z",
+      "updatedAt": "2026-06-29T13:20:14.560Z"
+    },
+    "markrawl": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/markrawl/SKILL.md",
+      "skillFolderHash": "d18a1220022dba39f5e4da68066ea303c8f35ad37066ba28d4b10a5a210a91ee",
+      "installedAt": "2026-06-29T13:20:14.562Z",
+      "updatedAt": "2026-06-29T13:20:14.562Z"
+    },
+    "openai-docs": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/openai-docs/SKILL.md",
+      "skillFolderHash": "f30e060aa8f10dbd0b921205b76a44debed70a954d2fdfbdfb9c0a2bd0b96f56",
+      "installedAt": "2026-06-29T13:20:14.562Z",
+      "updatedAt": "2026-06-29T13:20:14.562Z"
+    },
+    "playwright": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/playwright/SKILL.md",
+      "skillFolderHash": "595a334de3bd5335f442a33d1bdefb01207c88c99fe43e3bd99b0d5435f230de",
+      "installedAt": "2026-06-29T13:20:14.563Z",
+      "updatedAt": "2026-06-29T13:20:14.563Z"
+    },
+    "security-threat-model": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/security-threat-model/SKILL.md",
+      "skillFolderHash": "b3ad2dc0b2eee1f189680fdb8cf3b17853f12ab3403d389393f4237ebc6f9821",
+      "installedAt": "2026-06-29T13:20:14.563Z",
+      "updatedAt": "2026-06-29T13:20:14.563Z"
+    },
+    "swift-api-design-guidelines": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swift-api-design-guidelines/SKILL.md",
+      "skillFolderHash": "b8800c218d37b41a96e19e7180d96e3fbe4372ea2321133825490519f063d4e4",
+      "installedAt": "2026-06-29T13:20:14.564Z",
+      "updatedAt": "2026-06-29T13:20:14.564Z"
+    },
+    "swift-concurrency": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swift-concurrency/SKILL.md",
+      "skillFolderHash": "fb91a851df4a0aabcb8eb8f9b3af98aa2fda5775c0f2ebc9aa61e8206e37d6ef",
+      "installedAt": "2026-06-29T13:20:14.565Z",
+      "updatedAt": "2026-06-29T13:20:14.565Z"
+    },
+    "swift-testing-expert": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swift-testing-expert/SKILL.md",
+      "skillFolderHash": "cd86f35466a2d831467ef748b402bfddfb063ca3ddd03f63305864d91367da0c",
+      "installedAt": "2026-06-29T13:20:14.565Z",
+      "updatedAt": "2026-06-29T13:20:14.565Z"
+    },
+    "swiftui-expert-skill": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swiftui-expert-skill/SKILL.md",
+      "skillFolderHash": "99c7f49015d0b051447365f2ed6a0884dd8e6e60615d49c5ea7c03d7056fd2fc",
+      "installedAt": "2026-06-29T13:20:14.566Z",
+      "updatedAt": "2026-06-29T13:20:14.566Z"
+    },
+    "swiftui-liquid-glass": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swiftui-liquid-glass/SKILL.md",
+      "skillFolderHash": "6ca3eecfe3ebfa838adbbe3e547f6a6ff9284db05310ee7838e03fdf8937be66",
+      "installedAt": "2026-06-29T13:20:14.567Z",
+      "updatedAt": "2026-06-29T13:20:14.567Z"
+    },
+    "swiftui-performance-audit": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swiftui-performance-audit/SKILL.md",
+      "skillFolderHash": "0c4029813d8085be2337ddef76cfa8b932b9c33a95f1a592e5e1926054ffc319",
+      "installedAt": "2026-06-29T13:20:14.567Z",
+      "updatedAt": "2026-06-29T13:20:14.567Z"
+    },
+    "swiftui-ui-patterns": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swiftui-ui-patterns/SKILL.md",
+      "skillFolderHash": "127d27ab992b1bba4be62f6fe972e25fc688301077f3e2d92ded8f45b94b4813",
+      "installedAt": "2026-06-29T13:20:14.568Z",
+      "updatedAt": "2026-06-29T13:20:14.568Z"
+    },
+    "swiftui-view-refactor": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/swiftui-view-refactor/SKILL.md",
+      "skillFolderHash": "8934a53708a788434dc1a0f81d52e2b22b2dade869993abae43051ee3c7d4914",
+      "installedAt": "2026-06-29T13:20:14.569Z",
+      "updatedAt": "2026-06-29T13:20:14.569Z"
+    },
+    "using-tuist-generated-projects": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/tuist-generated-projects/SKILL.md",
+      "skillFolderHash": "21a9a953d38f1e4ee12cba585f7f6e993d40bfe77052393dadfbad87cd8d4765",
+      "installedAt": "2026-06-29T13:20:14.569Z",
+      "updatedAt": "2026-06-29T13:20:14.569Z"
+    },
+    "migrating-to-tuist-generated-projects": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/tuist-migrate/SKILL.md",
+      "skillFolderHash": "458f8047ce1b93820c9d27d2267750904cd0384fd5a0e7f5b0f1079dbe9d19a9",
+      "installedAt": "2026-06-29T13:20:14.570Z",
+      "updatedAt": "2026-06-29T13:20:14.570Z"
+    },
+    "xcresult-ui-failure-triage": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/xcresult-ui-failure-triage/SKILL.md",
+      "skillFolderHash": "80681bd1751c9accaa2c44f3656800184a61d6bfb0addb091a9e3e807650fa8f",
+      "installedAt": "2026-06-29T13:20:14.571Z",
+      "updatedAt": "2026-06-29T13:20:14.571Z"
+    },
+    "xcsift": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/xcsift/SKILL.md",
+      "skillFolderHash": "6e6a9f2976c7b41fb58716ac9bf913765dab93e27b7b19af385670dac9191227",
+      "installedAt": "2026-06-29T13:20:14.571Z",
+      "updatedAt": "2026-06-29T13:20:14.571Z"
+    },
+    "yeet": {
+      "source": "git@github.com:NikitaKurpas/agents.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:NikitaKurpas/agents.git",
+      "skillPath": "skills/yeet/SKILL.md",
+      "skillFolderHash": "09d77be4566a654c0a7aa64fafbf4244ea154e7df09bc61814e71510bdad9f0c",
+      "installedAt": "2026-06-29T13:20:14.572Z",
+      "updatedAt": "2026-06-29T13:20:14.572Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "antigravity",
+    "antigravity-cli",
+    "cline",
+    "codex",
+    "cursor",
+    "deepagents",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-code-cli",
+    "opencode",
+    "warp",
+    "zed"
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "version": 3,
+  "skills": {
+    "deno-project-templates": {
+      "source": "denoland/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/denoland/skills.git",
+      "skillPath": "skills/deno-project-templates/SKILL.md",
+      "skillFolderHash": "5c25e9da2333490e49a8684add8fe6e35803c5f6",
+      "installedAt": "2026-07-08T05:41:14.474Z",
+      "updatedAt": "2026-07-08T05:41:14.474Z"
+    },
+    "cli-creator": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/cli-creator/SKILL.md",
+      "skillFolderHash": "4f534f22c18693e327ea79e6d429f454a5c0059b",
+      "installedAt": "2026-07-08T05:41:59.188Z",
+      "updatedAt": "2026-07-08T05:41:59.188Z"
+    },
+    "define-goal": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/define-goal/SKILL.md",
+      "skillFolderHash": "eac32ae7b2ef0061267e908c316c29ec18f87a33",
+      "installedAt": "2026-07-08T05:42:16.576Z",
+      "updatedAt": "2026-07-08T05:42:16.576Z"
+    },
+    "sosumi": {
+      "source": "sosumi.ai",
+      "sourceType": "well-known",
+      "sourceUrl": "https://sosumi.ai/.well-known/agent-skills/sosumi/SKILL.md",
+      "skillFolderHash": "",
+      "sourceBaseUrl": "https://sosumi.ai",
+      "wellKnownDigest": "sha256:4530e014b0499b09aa99f7aa6468065021d7ebbf429524ddfcb5348e596f9db5",
+      "installedAt": "2026-07-08T05:45:31.510Z",
+      "updatedAt": "2026-09-04T10:56:14.841Z"
+    },
+    "bro": {
+      "source": "dmmulroy/.dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dmmulroy/.dotfiles.git",
+      "skillPath": "home/.agents/skills/bro/SKILL.md",
+      "skillFolderHash": "53c3b2c5dc11fe0ee4156468da27505df9239dc6",
+      "installedAt": "2026-08-18T00:44:03.754Z",
+      "updatedAt": "2026-08-18T00:44:03.754Z"
+    },
+    "show-me": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "skillPath": "plugins/show-me/skills/show-me/SKILL.md",
+      "skillFolderHash": "362200ac2fb3c17b765049444e88de73767e6d08",
+      "installedAt": "2026-08-25T02:55:43.905Z",
+      "updatedAt": "2026-10-05T06:18:46.871Z"
+    },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
+      "skillFolderHash": "ad2925850efb8973a72d2e666f7a975f9a2d4a9b",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-25T03:59:26.780Z",
+      "updatedAt": "2026-08-25T03:59:26.780Z"
+    },
+    "writing-clearly-and-concisely": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
+      "skillPath": "skills/writing-clearly-and-concisely/SKILL.md",
+      "skillFolderHash": "4bb2d919b567277219f7a18358bd05e0a1679a77",
+      "installedAt": "2026-09-10T05:44:49.416Z",
+      "updatedAt": "2026-09-10T05:44:49.416Z"
+    },
+    "clean-code": {
+      "source": "ciembor/agent-rules-books",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ciembor/agent-rules-books.git",
+      "skillPath": "clean-code/SKILL.md",
+      "skillFolderHash": "7a746649e5eb77326cf54d381adf030994f4e311",
+      "installedAt": "2026-10-06T01:41:15.533Z",
+      "updatedAt": "2026-10-06T01:41:15.533Z"
+    },
+    "refactoring-guru": {
+      "source": "ciembor/agent-rules-books",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ciembor/agent-rules-books.git",
+      "skillPath": "refactoring-guru/SKILL.md",
+      "skillFolderHash": "d2a480b38b590c2292b047223290b6a4cfd9b0da",
+      "installedAt": "2026-10-06T02:09:17.594Z",
+      "updatedAt": "2026-10-06T02:09:17.594Z"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "skillFolderHash": "3df14e2d3a89459bf300614be9247e3ce74798f8",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-10-08T01:45:13.434Z",
+      "updatedAt": "2026-10-08T01:45:13.434Z"
+    },
+    "handoff": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/handoff/SKILL.md",
+      "skillFolderHash": "ce24892bd2d4b9e7fd5ac9b95c03175e18bef388",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-10-08T01:45:13.437Z",
+      "updatedAt": "2026-10-08T01:45:13.437Z"
+    },
+    "pr": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/pr/SKILL.md",
+      "skillFolderHash": "00b896d811adffad747c7ca30078d909d60c7f93",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-10-08T01:45:13.438Z",
+      "updatedAt": "2026-10-08T01:45:13.438Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "cline",
+    "codex",
+    "cursor",
+    "droid",
+    "gemini-cli",
+    "github-copilot",
+    "kilo",
+    "kimi-code-cli",
+    "opencode",
+    "warp",
+    "zed"
+  ]
+}
