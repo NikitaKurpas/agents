@@ -57,5 +57,5 @@ Give agents ownership, the observable result to prove, required setup and readin
 - These rules choose identity for otherwise authorized actions; they do not authorize comments, commits, or pushes.
 - Use canonical target ownership, even from forks: `NikitaKurpas` repositories are mine; verify other ownership before using `ami`. Use my normal identity for external repository comments and commits.
 - On my repositories, use `gh ami comment` / `gh ami reply` for PR comments and inline replies, with approved content, `--repo OWNER/REPO`, and `--pr NUMBER`; `gh ami --help` for more info. Report bot authentication/access failures; never fall back to my identity.
-- For new commits on my repositories, set author and committer name to `ami` and both emails to the existing locally verified configured email via per-command Git environment variables. Preserve signing/Keylet, global Git config, and normal GitHub/SSH authentication for other gh actions and pushes.
+- For new commits on my repositories, set author and committer name to `ami` via per-command Git environment variables. Preserve global Git config for other gh actions and pushes.
 - Preserve authorship when cherry-picking; do not rewrite past commits to change identity.
