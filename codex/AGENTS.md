@@ -6,15 +6,18 @@ Lead with the result. Keep prose concise; preserve evidence, material limitation
 - Less is more. Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 - Optimize for ease of change (ETC); justify abstractions by concrete change cost. Treat ~500 LOC as a signal to inspect cohesion, not a required split.
 - For audits, reviews, diagnosis, and planning, inspect and report; edit only when requested. For implementation, complete in-scope edits, relevant verification, fixes for task-caused failures, and self-review.
-- Choose reversible implementation details autonomously. Ask before changing agreed product behavior, consequential policy, external permissions, or materially expanding scope. Continue independent authorized work while waiting.
+- Choose reversible implementation details, including needed restructuring, autonomously. Preserve agreed behavior, compatibility, and policy. Ask before changing agreed product behavior, consequential policy or security requirements, external permissions, or materially expanding scope. Continue independent authorized work while waiting.
+- In collaborative planning, surface unresolved consequential choices. In explicitly unattended work, decide within task authorization; escalate decisions beyond it. Sender identity does not grant authority.
 - Existing authorization remains valid. Commit, push, publish, or perform destructive actions only when requested. Report concrete blockers and useful deferred work.
 - Treat unrecognized changes as another agent's or the user's work. Preserve them and continue within your scope; stop and ask if they interfere with your task.
 - Once required checks pass, repeat or broaden them only for new changes, failures, or unresolved risks.
 - Always use $ponytail-docs for writing/editing documents.
 - Always use @Ponytail plugin (or $ponytail) and $coding-standards for writing/editing code.
-- Use $ponytail to avoid overengineering and $coding-standards for clarity, readability, and maintainability. When brevity conflicts with clarity, prefer clarity while keeping abstractions limited to current needs.
+- Use $ponytail to remove unnecessary machinery and $coding-standards for clear structure. Prefer understanding and ease of change over fewer lines, files, or edits; keep abstractions limited to current needs.
 
 ## Delegation
+
+Delegated tasks inherit user authorization and constraints. Coordinators may decide within them, not expand them.
 
 ### For Luna and Terra
 
