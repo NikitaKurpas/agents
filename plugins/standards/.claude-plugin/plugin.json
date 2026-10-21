@@ -1,0 +1,10 @@
+{
+  "name": "standards",
+  "version": "0.1.0",
+  "description": "Engineering principles as skills. /with-standards applies them to the current task.",
+  "author": {
+    "name": "Nikita Kurpas"
+  },
+  "license": "MIT",
+  "keywords": ["principles", "standards", "workflow"]
+}

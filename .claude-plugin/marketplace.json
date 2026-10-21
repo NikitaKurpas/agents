@@ -1,0 +1,16 @@
+{
+  "name": "nikitakurpas-agents",
+  "owner": {
+    "name": "Nikita Kurpas"
+  },
+  "metadata": {
+    "description": "Nikita Kurpas's agent plugins."
+  },
+  "plugins": [
+    {
+      "name": "standards",
+      "source": "./plugins/standards",
+      "description": "Engineering principles as skills. /with-standards applies them to the current task."
+    }
+  ]
+}
