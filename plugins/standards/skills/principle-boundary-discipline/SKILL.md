@@ -25,10 +25,13 @@ Validation and error handling:
 - Parse raw data into domain types at the boundary
 - Do not re-export transport, storage, framework, or wire types through the public surface
 - No redundant nil checks deep in call chains if the boundary already validated
+- When translating an error, keep the original cause
 
 Code organization:
 
 - Business logic in pure functions with no framework dependencies
+- Keep construction, dependency wiring, persistence, and vendor APIs out of business logic. Wrap a vendor API only where it would leak; an adapter that only forwards calls is a one-caller wrapper
+- Isolate security mechanisms; keep permission rules with the behavior they protect
 - Parse functions: pure transforms from raw bytes to typed state
 - Prompt construction: structured state in, string out
 - Scoring and assessment: pure transforms from state to results

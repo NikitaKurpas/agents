@@ -14,6 +14,9 @@ Maintainability is the work a reader must do to understand code. Track two axes:
 - **Shrink state scope:** prefer pure functions (returns over mutations), locals over fields, fields over module state, and module state over globals. Derive instead of sync.
 - **Name the invariant at the boundary,** not in every consumer, so the reader learns it once.
 - **Name what a thing is of.** A name answers "of what?" without a trip to the definition: `readEntitlements`, not `read`; `hasResolvedPlan`, not `hasResolved`. A wrapper around a platform API reuses the platform's name for the same concept.
+- **Let names carry meaning.** One term per concept, domain words for domain concepts. Rename when a name hides intent or needs a comment to explain it.
+- **Make mutation visible.** Separate queries from mutations, split boolean mode switches into separate operations, and keep parameters few.
+- **Comment what code can't say:** rationale, constraints, warnings, external contracts. If a comment explains control flow, fix the structure instead.
 - **Restructure code you have to defend.** If a line needs an argument for why it is not redundant, the next reader will doubt it too. Change the shape until the question does not come up.
 - Treat a file near 500 lines as a prompt to check cohesion, not a required split.
 - Before adding a layer or a piece of state, ask: does it reduce reader load elsewhere by at least as much?

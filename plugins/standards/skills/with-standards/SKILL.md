@@ -7,7 +7,7 @@ Bundled skills live at ../<name>/SKILL.md from this file.
 
 # With standards
 
-The Principles section below grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf SKILL.md you read this session.
+The Principles section below grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf SKILL.md you read this session. Repository instructions and standards docs override these principles on conflict.
 
 Remaining triggers:
 

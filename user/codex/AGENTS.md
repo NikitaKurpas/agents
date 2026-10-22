@@ -49,6 +49,7 @@ Give agents ownership, the observable result to prove, required setup and readin
 
 - Use raw GitHub URLs for source text and `curl` for text-only responses. Use `https://markdown.new` when direct page retrieval is unavailable.
 - For Deno, prefer Deno/Web APIs and JSR `@std/*`, then `node:` APIs.
+- Defaults: Zod for TypeScript boundary validation; swift-argument-parser for Swift CLIs; swift-log, swift-distributed-tracing, and swift-metrics in Swift; `@opentelemetry/api` elsewhere, using Deno's built-in OpenTelemetry.
 - New Swift code: Swift 6.3+; TypeScript: Deno 2.9+, subject to project constraints.
 
 ## Repository identity
