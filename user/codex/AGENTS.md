@@ -16,6 +16,7 @@ Lead with the result. Omit filler and generic praise. Preserve evidence, materia
 - Treat unrecognized changes as another agent's or the user's work. Preserve them and continue within your scope; stop and ask if they interfere with your task.
 - Once required checks pass, repeat or broaden them only for new changes, failures, or unresolved risks.
 - Always use $ponytail-docs for writing/editing documents.
+- When writing, refactoring, or reviewing code, use $with-standards; where it is unavailable, use $coding-standards.
 
 ## Delegation
 
