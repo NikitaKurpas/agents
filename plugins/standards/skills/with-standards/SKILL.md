@@ -1,7 +1,6 @@
 ---
 name: with-standards
-description: "Applies the Standards principles to the current task and names the ones that shaped each decision."
-disable-model-invocation: true
+description: "Applies the Standards principles to the current task and names the ones that shaped each decision. Use when writing, refactoring, or reviewing code, or designing a change."
 ---
 
 Bundled skills live at ../<name>/SKILL.md from this file.
