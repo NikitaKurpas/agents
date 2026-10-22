@@ -1,10 +1,10 @@
 {
-  "name": "nikitakurpas-agents",
+  "name": "nikitakurpas",
   "owner": {
     "name": "Nikita Kurpas"
   },
   "metadata": {
-    "description": "Nikita Kurpas's agent plugins."
+    "description": "Nik's agent plugins."
   },
   "plugins": [
     {

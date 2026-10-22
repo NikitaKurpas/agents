@@ -1,0 +1,20 @@
+{
+  "name": "nikitakurpas",
+  "interface": {
+    "displayName": "Nikita Kurpas"
+  },
+  "plugins": [
+    {
+      "name": "standards",
+      "source": {
+        "source": "local",
+        "path": "./plugins/standards"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
