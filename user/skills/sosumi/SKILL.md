@@ -72,12 +72,12 @@ Replace `developer.apple.com` with `sosumi.ai`:
 
 Use these when Sosumi is configured as an MCP server (`https://sosumi.ai/mcp`):
 
-| Tool                         | Parameters      | Use                                                      |
-| ---------------------------- | --------------- | -------------------------------------------------------- |
-| `searchAppleDocumentation`   | `query: string` | Search Apple documentation and return structured results |
-| `fetchAppleDocumentation`    | `path: string`  | Fetch Apple docs or HIG content by path as Markdown      |
-| `fetchAppleVideoTranscript`  | `path: string`  | Fetch Apple video transcript by `/videos/play/...` path  |
-| `fetchExternalDocumentation` | `url: string`   | Fetch external Swift-DocC page by absolute HTTPS URL     |
+| Tool | Parameters | Use |
+|---|---|---|
+| `searchAppleDocumentation` | `query: string` | Search Apple documentation and return structured results |
+| `fetchAppleDocumentation` | `path: string` | Fetch Apple docs or HIG content by path as Markdown |
+| `fetchAppleVideoTranscript` | `path: string` | Fetch Apple video transcript by `/videos/play/...` path |
+| `fetchExternalDocumentation` | `url: string` | Fetch external Swift-DocC page by absolute HTTPS URL |
 
 ## Best Practices
 
@@ -85,6 +85,7 @@ Use these when Sosumi is configured as an MCP server (`https://sosumi.ai/mcp`):
 - Fetch targeted symbol pages for coding questions.
 - Keep source links in answers so users can verify details quickly.
 - Use Sosumi paths directly in responses whenever referencing Apple documentation pages.
+- Don't rely on conformance conditions, such as "Conforms when `Element` conforms to `Hashable`." Apple's documentation data leaves some out and gets some wrong. When a condition matters, read the declaration in the module's `.swiftinterface` file in the SDK.
 
 ## Troubleshooting
 

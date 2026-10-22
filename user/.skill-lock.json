@@ -25,9 +25,9 @@
       "sourceUrl": "https://sosumi.ai/.well-known/agent-skills/sosumi/SKILL.md",
       "skillFolderHash": "",
       "sourceBaseUrl": "https://sosumi.ai",
-      "wellKnownDigest": "sha256:4530e014b0499b09aa99f7aa6468065021d7ebbf429524ddfcb5348e596f9db5",
+      "wellKnownDigest": "sha256:858b3080a57e02e6b5911ca735309d31289cbf68950a7a110cddd1fdfeafbb43",
       "installedAt": "2026-07-08T05:45:31.510Z",
-      "updatedAt": "2026-09-04T10:56:14.841Z"
+      "updatedAt": "2026-10-22T00:33:20.571Z"
     },
     "bro": {
       "source": "dmmulroy/.dotfiles",
