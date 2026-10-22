@@ -21,7 +21,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Core
 
-- **Laziness Protocol.** Refactoring, sizing a diff, or tempted to add abstractions or layers. Bias to deletion and the smallest change that solves the problem.
+- **Laziness Protocol.** Refactoring, sizing a diff, writing code that repeats work, or tempted to add abstractions or layers. Bias to deletion, reuse, and the smallest change that solves the problem.
 - **Foundational Thinking.** Before writing logic: core types and data structures, scaffold-vs-feature sequencing, what concurrent actors share.
 - **Redesign from First Principles.** Integrating a new requirement into an existing design. Redesign as if it had been foundational from day one.
 - **Subtract Before You Add.** Sequencing an addition, refactor, or rewrite. Remove dead weight first, then build on the simpler base.

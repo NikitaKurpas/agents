@@ -15,6 +15,7 @@ Place validation, type narrowing, and error handling at system boundaries. Trust
 - **At boundaries** (CLI args, config files, external APIs, network protocols): validate, return errors, handle defensively.
 - **Inside the system:** typed data, error propagation, no re-validation. Trust the types.
 - **Across the boundary.** Expose domain concepts, not the boundary's private representation. Keep general-purpose mechanism inside and special-purpose policy at the edge.
+- **Read the platform's contract.** Before changing the order or timing of calls into a framework, such as lifecycle steps, delivery, or acknowledgment, read its documented contract and cite it when you offer options. Your memory of an API is a proxy for it.
 
 **Applications:**
 

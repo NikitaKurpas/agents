@@ -8,3 +8,5 @@ disable-model-invocation: true
 
 - **Consolidate decisions.** Do not repeat the same choice in several places. Put it behind one source of truth and pass the result as a simple flag.
 - **Minimize the diff.** Make the smallest change that solves the problem. Fewer lines beat "elegant" boilerplate.
+- **Reuse before you write.** Search for an existing helper, type, or pattern that already does the job, and use it the way its callers do.
+- **Make the program lazy too.** Do not repeat a read or call another path already made. Do not write an unchanged value when observers re-run on every write. Run independent waits concurrently. Act and handle the failure instead of checking first, since the check goes stale.
