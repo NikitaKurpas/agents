@@ -48,3 +48,11 @@ sync-skills:
         echo "Removed: $skill"
       fi
     done
+
+# Fails when the standards plugin's copy of ponytail-docs drifts from skills/ponytail-docs.
+check-plugin-skills:
+    diff -r skills/ponytail-docs plugins/standards/skills/ponytail-docs
+
+# Points this clone's Git hooks at the tracked .githooks directory.
+setup-hooks:
+    git config core.hooksPath .githooks

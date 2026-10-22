@@ -14,6 +14,8 @@
 
 - `just update-skills`: pull skills listed in `skills/.vendor/sources.toml` into `skills/.vendor/` (uses `scripts/update_skills.ts`).
 - `just sync-skills`: copy skills listed in `user/codex/enabled-skills` into `~/.codex/skills` for local use.
+- `just setup-hooks`: run once per worktree to enable `.githooks/pre-commit`.
+- `just check-plugin-skills` check for drifts between `plugins/standards/skills/ponytail-docs` and `skills/ponytail-docs`. Edit the source skill and copy it into the plugin.
 - `./scripts/update_skills.ts --help`: show flags (`--file`, `--dest`, `--overwrite`, `--dry-run`).
 
 Requires Deno for running TypeScript scripts (see shebang in `scripts/update_skills.ts`).

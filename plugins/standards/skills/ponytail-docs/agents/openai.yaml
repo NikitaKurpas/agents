@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ponytail for docs"
+  short_description: "Keep project documentation small and accurate"
+  default_prompt: "Use $ponytail-docs to simplify this project documentation while preserving its meaning."
