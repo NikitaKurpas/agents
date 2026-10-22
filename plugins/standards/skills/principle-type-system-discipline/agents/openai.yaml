@@ -1,0 +1,7 @@
+interface:
+  display_name: "Type system discipline"
+  short_description: "Make invalid states unrepresentable with types"
+  default_prompt: "Use $principle-type-system-discipline to model these types so invalid states cannot be represented."
+
+policy:
+  allow_implicit_invocation: false

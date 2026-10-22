@@ -1,0 +1,7 @@
+interface:
+  display_name: "Model the domain"
+  short_description: "Encode domain rules in a clear data structure"
+  default_prompt: "Use $principle-model-the-domain to choose a data structure that makes these domain rules explicit."
+
+policy:
+  allow_implicit_invocation: false

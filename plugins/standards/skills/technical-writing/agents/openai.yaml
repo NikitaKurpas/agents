@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical writing"
+  short_description: "Write clear docs, RFCs, PRs, and commit messages"
+  default_prompt: "Use $technical-writing to edit this technical text for clarity and accuracy."

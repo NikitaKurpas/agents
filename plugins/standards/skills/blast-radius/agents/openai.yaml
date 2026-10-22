@@ -1,0 +1,7 @@
+interface:
+  display_name: "Blast radius"
+  short_description: "Find what a change could break beyond its diff"
+  default_prompt: "Use $blast-radius to check the blast radius of this change and verify the fact that makes it safe."
+
+policy:
+  allow_implicit_invocation: false

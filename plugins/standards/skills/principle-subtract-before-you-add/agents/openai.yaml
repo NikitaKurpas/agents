@@ -1,0 +1,7 @@
+interface:
+  display_name: "Subtract before you add"
+  short_description: "Remove dead weight before extending the design"
+  default_prompt: "Use $principle-subtract-before-you-add to identify dead code and redundant pieces to remove before this change."
+
+policy:
+  allow_implicit_invocation: false

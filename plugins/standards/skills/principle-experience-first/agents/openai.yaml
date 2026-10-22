@@ -1,0 +1,7 @@
+interface:
+  display_name: "Experience first"
+  short_description: "Choose scope and design around the user experience"
+  default_prompt: "Use $principle-experience-first to assess this product tradeoff from the user experience."
+
+policy:
+  allow_implicit_invocation: false

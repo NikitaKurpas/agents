@@ -1,0 +1,7 @@
+interface:
+  display_name: "Never block on the human"
+  short_description: "Proceed with authorized reversible work"
+  default_prompt: "Use $principle-never-block-on-the-human to carry out the authorized reversible work and present the result."
+
+policy:
+  allow_implicit_invocation: false

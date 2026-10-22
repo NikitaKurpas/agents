@@ -1,0 +1,7 @@
+interface:
+  display_name: "TypeScript best practices"
+  short_description: "Model types and validate TypeScript boundaries"
+  default_prompt: "Use $typescript-best-practices to review this TypeScript code for type modeling and boundary validation."
+
+policy:
+  allow_implicit_invocation: false

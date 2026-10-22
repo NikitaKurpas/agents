@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minimize reader load"
+  short_description: "Reduce layers and hidden state readers must trace"
+  default_prompt: "Use $principle-minimize-reader-load to simplify the layers and hidden state in this code."
+
+policy:
+  allow_implicit_invocation: false

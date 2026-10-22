@@ -1,0 +1,7 @@
+interface:
+  display_name: "Encode lessons in structure"
+  short_description: "Turn repeated lessons into checks or structure"
+  default_prompt: "Use $principle-encode-lessons-in-structure to turn this repeated correction into a structural check."
+
+policy:
+  allow_implicit_invocation: false

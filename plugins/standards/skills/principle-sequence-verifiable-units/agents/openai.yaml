@@ -1,0 +1,7 @@
+interface:
+  display_name: "Sequence verifiable units"
+  short_description: "Split multi-step work into independently checked units"
+  default_prompt: "Use $principle-sequence-verifiable-units to sequence this work into small units that each end with verification."
+
+policy:
+  allow_implicit_invocation: false

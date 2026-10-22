@@ -1,0 +1,4 @@
+interface:
+  display_name: "With standards"
+  short_description: "Apply engineering principles and explain the choices"
+  default_prompt: "Use $with-standards to apply the Standards principles to this task and name the choices they shaped."

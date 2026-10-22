@@ -1,0 +1,7 @@
+interface:
+  display_name: "Foundational thinking"
+  short_description: "Settle core types and shared state before logic"
+  default_prompt: "Use $principle-foundational-thinking to settle the core types, data structures, and shared state for this change."
+
+policy:
+  allow_implicit_invocation: false

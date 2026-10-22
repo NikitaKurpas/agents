@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prove it works"
+  short_description: "Verify the real task output with direct evidence"
+  default_prompt: "Use $principle-prove-it-works to verify the finished work against the actual artifacts."
+
+policy:
+  allow_implicit_invocation: false

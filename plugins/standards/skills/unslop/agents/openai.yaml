@@ -1,0 +1,7 @@
+interface:
+  display_name: "Unslop"
+  short_description: "Remove filler, stock phrasing, and jargon from prose"
+  default_prompt: "Use $unslop to edit this prose to remove filler, stock phrasing, and jargon."
+
+policy:
+  allow_implicit_invocation: false

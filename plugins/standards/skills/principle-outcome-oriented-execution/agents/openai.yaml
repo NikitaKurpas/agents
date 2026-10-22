@@ -1,0 +1,7 @@
+interface:
+  display_name: "Outcome-oriented execution"
+  short_description: "Complete migrations without throwaway code"
+  default_prompt: "Use $principle-outcome-oriented-execution to plan this migration around the final architecture."
+
+policy:
+  allow_implicit_invocation: false

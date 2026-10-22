@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "standards",
+  "version": "0.1.3",
+  "description": "Engineering principles as skills. /with-standards applies them to the current task.",
+  "author": {
+    "name": "Nikita Kurpas"
+  },
+  "license": "MIT",
+  "keywords": [
+    "principles",
+    "standards",
+    "workflow"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Standards",
+        "shortDescription": "Engineering principles",
+        "longDescription": "Apply engineering principles to code, documentation, reviews, and design decisions. Use $with-standards to select relevant principles and explain the choices they shaped, or invoke individual skills for focused guidance.",
+        "developerName": "Nikita Kurpas",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "defaultPrompt": "Use $with-standards to apply engineering principles to this task and explain the choices they shaped."
+      }
+    }
+  }
+}

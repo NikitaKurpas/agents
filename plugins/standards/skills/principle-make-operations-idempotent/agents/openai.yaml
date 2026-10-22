@@ -1,0 +1,7 @@
+interface:
+  display_name: "Make operations idempotent"
+  short_description: "Make retries converge on the same final state"
+  default_prompt: "Use $principle-make-operations-idempotent to check that this operation reaches the same state after retries."
+
+policy:
+  allow_implicit_invocation: false
