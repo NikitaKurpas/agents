@@ -17,6 +17,7 @@ Lead with the result. Omit filler and generic praise. Preserve evidence, materia
 - Once required checks pass, repeat or broaden them only for new changes, failures, or unresolved risks.
 - Always use $ponytail-docs for writing/editing documents.
 - When writing, refactoring, or reviewing code, use $with-standards; where it is unavailable, use $coding-standards.
+- When addressing comments from bots on GitHub, always reply to them; resolve them if the comment is addressed.
 
 ## Delegation
 
