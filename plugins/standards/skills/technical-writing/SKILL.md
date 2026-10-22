@@ -1,7 +1,6 @@
 ---
 name: technical-writing
 description: "Writing standard for docs, readmes, RFCs, PR descriptions, and commit messages, built on Diátaxis, Google developer style, STE, and Global English."
-disable-model-invocation: true
 ---
 
 # Technical writing

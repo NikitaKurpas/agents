@@ -13,3 +13,4 @@ The human supervises asynchronously. Agents must stay unblocked. Make reasonable
 - Irreversible actions (force-push, delete production data, send external messages) still require confirmation.
 - Reversible actions (write code, edit notes, split tasks) should proceed without blocking.
 - Product direction comes from the human. Execution should not block.
+- Ask before changing agreed product behavior, consequential policy or security requirements, or external permissions, or before materially expanding scope. Continue independent work while waiting.

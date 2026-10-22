@@ -11,3 +11,4 @@ disable-model-invocation: true
 **Pattern:**
 
 - **Size phases and cap scope.** Limit files per phase, set turn budgets, account for mechanism costs.
+- **Search large generated files.** Grep lockfiles and generated definitions for the entries you need instead of loading them whole.

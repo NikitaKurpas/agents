@@ -1,6 +1,6 @@
 ---
 name: with-standards
-description: "Applies the Standards principles to the current task and names the ones that shaped each decision. Use when writing, refactoring, or reviewing code, or designing a change."
+description: "Applies the Standards principles to the current task and names the ones that shaped each decision. Use when writing, refactoring, or reviewing code or docs, or designing a change."
 ---
 
 Bundled skills live at ../<name>/SKILL.md from this file.
@@ -12,7 +12,8 @@ The Principles section below grounds every trigger. In your reply, name each pri
 Remaining triggers:
 
 - Any code → name the data shape first, and choose its organizing structure per principle-model-the-domain.
-- Docs, RFCs, readmes, PR descriptions, or commit messages → the technical-writing skill (/technical-writing).
+- Repository docs, RFCs, or readmes → the ponytail-docs skill to decide what to write and where, then the technical-writing skill for how it reads.
+- PR descriptions or commit messages → the technical-writing skill, cutting every word that changes neither meaning nor behavior.
 - Any prose surface, your reply to the user included → the unslop skill.
 
 # Principles

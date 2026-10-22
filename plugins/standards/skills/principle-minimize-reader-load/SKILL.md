@@ -15,6 +15,7 @@ Maintainability is the work a reader must do to understand code. Track two axes:
 - **Name the invariant at the boundary,** not in every consumer, so the reader learns it once.
 - **Name what a thing is of.** A name answers "of what?" without a trip to the definition: `readEntitlements`, not `read`; `hasResolvedPlan`, not `hasResolved`. A wrapper around a platform API reuses the platform's name for the same concept.
 - **Restructure code you have to defend.** If a line needs an argument for why it is not redundant, the next reader will doubt it too. Change the shape until the question does not come up.
+- Treat a file near 500 lines as a prompt to check cohesion, not a required split.
 - Before adding a layer or a piece of state, ask: does it reduce reader load elsewhere by at least as much?
 
 **The test:** can a new reader answer "where does X come from?" and "what can change X?" in under 30 seconds? If not, cut layers or cut state.
