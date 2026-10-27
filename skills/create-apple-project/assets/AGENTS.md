@@ -4,7 +4,7 @@
 
 - Target Swift 6.3 or later, using modern Swift concurrency.
 - Use `mise` for tools; read `mise.toml` before assuming available tools.
-- Use `tuist` with `$using-tuist-generated-projects` to generate the Xcode project.
+- The Xcode project uses the JSON `project.xcproj` format. Change it only with `xcrun xcodeproj`, see `$xcproj`.
 - Use `$xcodebuildmcp-cli` to build, test, run, inspect logs, and create/list/start/stop simulators.
 - Use `$efficient-axe` for compact simulator UI inspection when possible.
 - If AXe is blocked or incomplete, write/maintain basic UI tests using XCUIAutomation with XCTest.
@@ -16,7 +16,7 @@
 ## Commands
 
 ```bash
-mise exec -- tuist generate --no-open
+xcrun xcodeproj target list
 mise exec -- xcodebuildmcp --help
 mise exec -- xcodebuildmcp tools
 mise exec -- axe --help
@@ -25,14 +25,14 @@ mise exec -- asc --help
 
 ## Project Defaults
 
-Xcode workspace/scheme/simulator defaults are already set in `.xcodebuildmcp/config.yaml`. `xcodebuildmcp` commands should work without explicit arguments.
+Xcode project/scheme/simulator defaults are already set in `.xcodebuildmcp/config.yaml`. `xcodebuildmcp` commands should work without explicit arguments.
 
 ## Verification
 
 Run at minimum:
 
 ```bash
-mise exec -- tuist generate --no-open
+xcrun xcodeproj target list
 mise exec -- xcodebuildmcp --help
 mise exec -- xcodebuildmcp tools
 ```
@@ -40,12 +40,12 @@ mise exec -- xcodebuildmcp tools
 Then use `xcodebuildmcp` to discover schemes, if unknown, and build/test the project. If `xcodebuildmcp` cannot cover a needed build/test path, use:
 
 ```bash
-xcodebuild -workspace <ProjectName>.xcworkspace -scheme <ProjectName> 2>&1 | mise exec -- xcsift -f toon
+xcodebuild -project <ProjectName>.xcodeproj -scheme <ProjectName> 2>&1 | mise exec -- xcsift -f toon
 ```
 
 ## Build Notes
 
-- Prefer Tuist `buildableFolders`.
+- Prefer filesystem-synchronized folders; create files on disk instead of adding file references.
 - Keep XCTest UI test targets on `"SWIFT_DEFAULT_ACTOR_ISOLATION": "nonisolated"`.
 - Use Swift Testing for unit test targets.
 - Keep app code on Swift 6.3+ approachable concurrency defaults.

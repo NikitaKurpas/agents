@@ -1,6 +1,6 @@
 ---
 name: create-apple-project
-description: Create a new iOS, macOS, or watchOS project base with Git, mise-managed tools, Apple-agent skills, Tuist manifests, Swift Testing unit tests, buildable folders, and an AGENTS.md project instruction template. Use when Codex is asked to initialize, scaffold, bootstrap, or set up a fresh Apple platform app project.
+description: Create a new iOS, macOS, or watchOS project base with Git, mise-managed tools, Apple-agent skills, Swift Testing unit tests, buildable folders, and an AGENTS.md project instruction template. Use when Codex is asked to initialize, scaffold, bootstrap, or set up a fresh Apple platform app project.
 ---
 
 # Create Apple Project
@@ -32,7 +32,7 @@ git branch -M main
 
 ```bash
 mise settings -l lockfile=true
-noglob mise use tuist@latest github:getsentry/XcodeBuildMCP@latest github:cameroncooke/AXe[asset_pattern="AXe-macOS-*-universal.tar.gz"]@latest xcsift@latest github:rorkai/App-Store-Connect-CLI[asset_pattern="asc_*_macOS_arm64",bin="asc"]@latest
+noglob mise use github:getsentry/XcodeBuildMCP@latest github:cameroncooke/AXe[asset_pattern="AXe-macOS-*-universal.tar.gz"]@latest xcsift@latest github:rorkai/App-Store-Connect-CLI[asset_pattern="asc_*_macOS_arm64",bin="asc"]@latest
 noglob mise config set tools."github:cameroncooke/AXe".asset_pattern "AXe-macOS-*-universal.tar.gz"
 noglob mise config set tools."github:rorkai/App-Store-Connect-CLI".asset_pattern "asc_*_macOS_arm64"
 mise config set tools."github:rorkai/App-Store-Connect-CLI".bin asc
@@ -43,7 +43,7 @@ mise config set tools."github:rorkai/App-Store-Connect-CLI".bin asc
 ```bash
 npx skills add cameroncooke/axe --skill axe --agent codex --yes
 npx skills add git@github.com:NikitaKurpas/agents.git --skill efficient-axe --agent codex --yes
-npx skills add tuist/agent-skills --skill using-tuist-generated-projects --agent codex --yes
+npx skills add git@github.com:NikitaKurpas/agents.git --skill xcproj --agent codex --yes
 npx skills add getsentry/xcodebuildmcp --skill xcodebuildmcp-cli --agent codex --yes
 npx skills add https://github.com/ldomaradzki/xcsift/tree/master/plugins/codex --agent codex --yes
 npx skills add twostraws/Swift-Testing-Agent-Skill --skill swift-testing-pro --agent codex --yes
@@ -60,181 +60,116 @@ npx skills add twostraws/SwiftData-Agent-Skill --skill swiftdata-pro --agent cod
 5. Create folders:
 
 ```text
-Tuist/
 <ProjectName>/Sources/
 <ProjectName>/Resources/
 <ProjectName>/Tests/
 <ProjectName>/UITests/
 ```
 
-6. Add `Tuist/Package.swift`, `Tuist.swift`, `Project.swift`, and `AGENTS.md` using the templates below.
-7. Add a minimal app entry point, Swift Testing unit tests, and XCUIAutomation UI tests appropriate to the platform.
-8. Run `mise exec -- tuist generate --no-open`.
+6. Add a minimal app entry point, Swift Testing unit tests, and XCUIAutomation UI tests appropriate to the platform. The files must exist before step 7 links their folders.
+7. Create the Xcode project in the JSON format with `xcrun xcodeproj`, following `$xcproj` and the commands below.
+8. Copy `AGENTS.md` from the template below.
 
-## Tuist Templates
+## Xcode Project
 
-`Tuist/Package.swift`:
+Run from the project root. Each command is one `xcodeproj` call. Replace `<Name>` with the project name and `<bundle id>` with the bundle slug.
 
-```swift
-// swift-tools-version: 6.0
-import PackageDescription
+Project-level settings, shared by every target:
 
-#if TUIST
-    import struct ProjectDescription.PackageSettings
-
-    let packageSettings = PackageSettings(
-        // Customize the product types for specific package product
-        // Default is .staticFramework
-        // productTypes: ["Alamofire": .framework,]
-        productTypes: [:]
-    )
-#endif
-
-let package = Package(
-    name: "<project name>",
-    dependencies: [
-        // Add your own dependencies here:
-        // .package(url: "https://github.com/Alamofire/Alamofire", from: "5.0.0"),
-    ]
-)
+```bash
+xcrun xcodeproj init <Name>.xcodeproj
+xcrun xcodeproj setting set SWIFT_VERSION 6.0
+xcrun xcodeproj setting set SWIFT_APPROACHABLE_CONCURRENCY YES
+xcrun xcodeproj setting set SWIFT_DEFAULT_ACTOR_ISOLATION MainActor
+xcrun xcodeproj setting set ENABLE_USER_SCRIPT_SANDBOXING YES
+xcrun xcodeproj setting set COMPILATION_CACHE_ENABLE_CACHING YES
+xcrun xcodeproj setting set ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS YES
+xcrun xcodeproj setting set STRING_CATALOG_GENERATE_SYMBOLS YES
+xcrun xcodeproj setting set CODE_SIGN_STYLE Automatic
+xcrun xcodeproj setting set DEVELOPMENT_TEAM FC235PA96B
+xcrun xcodeproj setting set CODE_SIGN_IDENTITY "Apple Development"
+xcrun xcodeproj setting set --config Debug SWIFT_COMPILATION_MODE singlefile
+xcrun xcodeproj setting set --config Release SWIFT_COMPILATION_MODE wholemodule
+xcrun xcodeproj setting set --config Debug ENABLE_TESTABILITY YES
+xcrun xcodeproj setting set ALWAYS_SEARCH_USER_PATHS NO
 ```
 
-`Tuist.swift`:
+Platform settings. Use the current SDK's major version with `.0` as the deployment target unless the user names one; a minor version like `27.2` won't run on older simulator runtimes.
 
-```swift
-import ProjectDescription
+| Platform | Settings |
+| --- | --- |
+| iOS | `SDKROOT iphoneos`, `IPHONEOS_DEPLOYMENT_TARGET <v>`, `TARGETED_DEVICE_FAMILY 1,2` |
+| macOS | `SDKROOT macosx`, `MACOSX_DEPLOYMENT_TARGET <v>` |
+| watchOS | `SDKROOT watchos`, `WATCHOS_DEPLOYMENT_TARGET <v>`, `TARGETED_DEVICE_FAMILY 4` |
+| Multi-platform | `SDKROOT auto`, `SUPPORTED_PLATFORMS` with each platform and its simulator (e.g. `"iphoneos iphonesimulator macosx"`), plus each platform's deployment target |
 
-let tuist = Tuist(project: .tuist())
+Only add platforms the user requested.
+
+Targets. Add build phases before including folders; otherwise Xcode writes per-file exclusions and nothing compiles:
+
+```bash
+xcrun xcodeproj target add <Name> --product-type application
+xcrun xcodeproj target phase add sources --target <Name>
+xcrun xcodeproj target phase add frameworks --target <Name>
+xcrun xcodeproj target phase add resources --target <Name>
+xcrun xcodeproj target add <Name>Tests --product-type unit-test-bundle
+xcrun xcodeproj target phase add sources --target <Name>Tests
+xcrun xcodeproj target add <Name>UITests --product-type ui-test-bundle
+xcrun xcodeproj target phase add sources --target <Name>UITests
+xcrun xcodeproj target add-dependency <Name>Tests <Name>
+xcrun xcodeproj target add-dependency <Name>UITests <Name>
 ```
 
-`Project.swift`:
+Synchronized folders:
 
-Only add targets required for the app. Do not include iOS, macOS, and watchOS targets unless the user requested a multi-platform app. Adjust the watchOS target's `infoPlist` if the iOS companion app is required.
-
-```swift
-import ProjectDescription
-
-// All test targets that use XCTest must set "SWIFT_DEFAULT_ACTOR_ISOLATION": "nonisolated".
-// This does not apply to test targets that use Swift Testing.
-
-let project = Project(
-    name: "<project name>",
-    settings: .settings(
-        base: [
-            "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
-            "SWIFT_APPROACHABLE_CONCURRENCY": "YES",
-            "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor",
-            "COMPILATION_CACHE_ENABLE_CACHING": "YES",
-            "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES",
-            "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
-        ]
-        .swiftVersion("6.2")
-        .automaticCodeSigning(devTeam: "FC235PA96B")
-        .codeSignIdentityAppleDevelopment(),
-        debug: [
-            "SWIFT_COMPILATION_MODE": "singlefile"
-        ],
-        release: [
-            "SWIFT_COMPILATION_MODE": "wholemodule"
-        ]
-    ),
-    targets: [
-        // iOS app target example. Include only for iOS apps.
-        .target(
-            name: "<project name>",
-            destinations: .iOS,
-            product: .app,
-            bundleId: "me.kurpas.<project bundle id>",
-            infoPlist: .extendingDefault(
-                with: [
-                    "UILaunchScreen": [
-                        "UIColorName": "",
-                        "UIImageName": "",
-                    ],
-                ]
-            ),
-            buildableFolders: [
-                "<project name>/Sources",
-                "<project name>/Resources",
-            ],
-            dependencies: []
-        ),
-        // macOS app target example. Include only for macOS apps.
-        .target(
-            name: "<project name>",
-            destinations: .macOS,
-            product: .app,
-            bundleId: "me.kurpas.<project bundle id>",
-            infoPlist: .default,
-            buildableFolders: [
-                "<project name>/Sources",
-                "<project name>/Resources",
-            ],
-            dependencies: []
-        ),
-        // watchOS app target example. Include only for watchOS apps.
-        .target(
-            name: "<project name>",
-            destinations: .watchOS,
-            product: .app,
-            bundleId: "me.kurpas.<project bundle id>",
-            infoPlist: .extendingDefault(
-                with: [
-                    "WKApplication": true,
-                    "WKWatchOnly": true,
-                ]
-            ),
-            buildableFolders: [
-                "<project name>/Sources",
-                "<project name>/Resources",
-            ],
-            dependencies: []
-        ),
-        .target(
-            name: "<project name>Tests",
-            destinations: <same destinations as app target>,
-            product: .unitTests,
-            bundleId: "me.kurpas.<project bundle test id>",
-            infoPlist: .default,
-            buildableFolders: [
-                "<project name>/Tests"
-            ],
-            dependencies: [.target(name: "<project name>")]
-        ),
-        .target(
-            name: "<project name>UITests",
-            destinations: <same destinations as app target>,
-            product: .uiTests,
-            bundleId: "me.kurpas.<project bundle ui test id>",
-            infoPlist: .default,
-            buildableFolders: [
-                "<project name>/UITests"
-            ],
-            dependencies: [.target(name: "<project name>")],
-            settings: .settings(
-                base: ["SWIFT_DEFAULT_ACTOR_ISOLATION": "nonisolated"],
-                defaultSettings: .essential
-            ),
-        ),
-        // any other targets as needed
-    ],
-    schemes: [
-        .scheme(
-            name: "<project name>",
-            shared: true,
-            buildAction: .buildAction(targets: [
-                "<project name>",
-                "<project name>Tests",
-                "<project name>UITests",
-            ]),
-            testAction: .targets([
-                "<project name>Tests",
-                "<project name>UITests",
-            ])
-        ),
-    ]
-)
+```bash
+xcrun xcodeproj group add <Name>
+xcrun xcodeproj group add Sources --parent /<Name> --filesystem-path Sources
+xcrun xcodeproj group add Resources --parent /<Name> --filesystem-path Resources
+xcrun xcodeproj group add Tests --parent /<Name> --filesystem-path Tests
+xcrun xcodeproj group add UITests --parent /<Name> --filesystem-path UITests
+xcrun xcodeproj group include --group /<Name>/Sources --target <Name>
+xcrun xcodeproj group include --group /<Name>/Resources --target <Name>
+xcrun xcodeproj group include --group /<Name>/Tests --target <Name>Tests
+xcrun xcodeproj group include --group /<Name>/UITests --target <Name>UITests
 ```
+
+Target settings:
+
+```bash
+xcrun xcodeproj setting set PRODUCT_BUNDLE_IDENTIFIER me.kurpas.<bundle id> --target <Name>
+xcrun xcodeproj setting set PRODUCT_BUNDLE_IDENTIFIER me.kurpas.<bundle id>.tests --target <Name>Tests
+xcrun xcodeproj setting set TEST_HOST '$(BUILT_PRODUCTS_DIR)/<Name>.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/<Name>' --target <Name>Tests
+xcrun xcodeproj setting set BUNDLE_LOADER '$(TEST_HOST)' --target <Name>Tests
+xcrun xcodeproj setting set PRODUCT_BUNDLE_IDENTIFIER me.kurpas.<bundle id>.uitests --target <Name>UITests
+xcrun xcodeproj setting set TEST_TARGET_NAME <Name> --target <Name>UITests
+# XCTest UI tests can't run on MainActor default isolation; Swift Testing targets keep it.
+xcrun xcodeproj setting set SWIFT_DEFAULT_ACTOR_ISOLATION nonisolated --target <Name>UITests
+```
+
+App target Info.plist keys, per platform:
+
+- iOS: `INFOPLIST_KEY_UILaunchScreen_Generation YES`.
+- watchOS: `INFOPLIST_KEY_WKApplication YES`, plus `INFOPLIST_KEY_WKWatchOnly YES` without an iOS companion, or `INFOPLIST_KEY_WKCompanionAppBundleIdentifier me.kurpas.<bundle id>` with one.
+
+Check the result:
+
+```bash
+xcrun xcprojformatter <Name>.xcodeproj | diff <Name>.xcodeproj/project.xcproj -
+xcrun xcodeproj target list
+```
+
+The diff must print nothing.
+
+## Shared Scheme
+
+`xcodeproj` doesn't create schemes, and the scheme `xcodebuild` auto-generates for the app runs only the unit tests. Copy `./assets/scheme.xcscheme` to `<Name>.xcodeproj/xcshareddata/xcschemes/<Name>.xcscheme` and replace `<Name>`, `<APP_ID>`, `<TESTS_ID>`, and `<UITESTS_ID>`. Read each target's ID from the project file:
+
+```bash
+plutil -extract targets json -o - <Name>.xcodeproj/project.xcproj
+```
+
+Each entry has `name` and `id`. Then confirm `xcodebuild -list -project <Name>.xcodeproj` shows the scheme.
 
 ## Test Source Rules
 
@@ -275,7 +210,7 @@ Copy the `./assets/AGENTS.md` template to the new project root as `AGENTS.md`.
 
 ## XcodebuildMCP Config
 
-First, list all available simulators to find the name and ID of the latest simulator for the primary platform (or use at least iPhone 17/Apple Watch Series 11).
+First, list all available simulators to find the name and ID of the latest simulator for the primary platform (or use at least iPhone 17/Apple Watch Series 11). Its runtime must be at or above the deployment target.
 
 Then, copy the following template to the project root as `.xcodebuildmcp/config.yaml`:
 
@@ -284,7 +219,7 @@ schemaVersion: 1
 debug: false
 sentryDisabled: false
 sessionDefaults:
-  workspacePath: <relative path to the Tuist-generated .xcworkspace file>
+  projectPath: <relative path to the .xcodeproj>
   scheme: <scheme name>
   simulatorId: <iPhone/Apple Watch simulator id>
   simulatorName: <iPhone/Apple Watch simulator name>

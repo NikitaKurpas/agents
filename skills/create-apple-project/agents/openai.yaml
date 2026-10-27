@@ -1,4 +1,4 @@
 interface:
   display_name: "Create Apple Project"
-  short_description: "Scaffold Tuist Apple app projects"
-  default_prompt: "Use $create-apple-project to scaffold a new iOS app with Tuist, mise tools, and Codex project instructions."
+  short_description: "Scaffold Apple app projects"
+  default_prompt: "Use $create-apple-project to scaffold a new iOS app, mise tools, and Codex project instructions."
