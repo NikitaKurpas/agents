@@ -1,0 +1,4 @@
+interface:
+  display_name: "Xcode Project (xcproj)"
+  short_description: "Edit Xcode projects in the JSON xcproj format"
+  default_prompt: "Use $xcproj to add a unit test target to this Xcode project."
