@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Context"
+  short_description: "Create or update a project's PRODUCT.md"
+  default_prompt: "Use $product-context to capture this project's users, purpose, positioning, constraints, and evidence in PRODUCT.md."
