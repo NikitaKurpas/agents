@@ -55,6 +55,15 @@
       "skillFolderHash": "4bb2d919b567277219f7a18358bd05e0a1679a77",
       "installedAt": "2026-09-10T05:44:49.416Z",
       "updatedAt": "2026-09-10T05:44:49.416Z"
+    },
+    "share-ios-build": {
+      "source": "NikitaKurpas/appshare",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NikitaKurpas/appshare.git",
+      "skillPath": "skills/share-ios-build/SKILL.md",
+      "skillFolderHash": "d5ae5e132aa98176afec803c06fc4c2cfb7f2aed",
+      "installedAt": "2026-10-29T05:17:39.562Z",
+      "updatedAt": "2026-10-29T05:17:39.562Z"
     }
   },
   "dismissed": {
@@ -66,6 +75,7 @@
     "codex",
     "cursor",
     "droid",
+    "fx",
     "gemini-cli",
     "github-copilot",
     "kilo",
