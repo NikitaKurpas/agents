@@ -56,12 +56,13 @@ Square images are typically fastest to generate. For 4K-style output, use `3840x
 - `quality`: rendering fidelity (detail and polish of the final pixels). `low`, `medium`, `high`, or `auto`; `gpt-image-2.5-*` and `gpt-image-2.6-*` also accept `xhigh` and `max` (verified live on both 2.6 models). The API default is `auto`; the CLI default is `medium`. Separate from `complexity`
 - `background`: output transparency behavior (`transparent`, `opaque`, or `auto`) for generated output; this is not the same thing as the prompt's visual scene/backdrop
 - `output_format`: `png` (default), `jpeg`, `webp`, `svg`, or `gif`. `svg` and `gif` are generations only on `gpt-image-2.6-*`; `svg` needs `n=1`
-- `frame_count`, `frame_duration_ms`: GIF only (2-16 frames, default 9; 20 ms or more per frame, default 200). Sent by the CLI as `--frame-count` / `--frame-duration-ms`
+- `frame_count`, `frame_duration_ms`: GIF only (2-16 frames, default 9; 20-2000 ms per frame, default 200). Sent by the CLI as `--frame-count` / `--frame-duration-ms`
 - `markup` (edits only): transparent PNG annotation layer, same dimensions as the first input image; `gpt-image-2.5-*` and `gpt-image-2.6-*`; not with `mask`. Sent by the CLI as `--markup`
 - `output_compression`: 0-100 (jpeg/webp only)
 - `complexity`: `low`, `medium`, or `high` (`gpt-image-2.6-sunburst` and `gpt-image-2.6-flare` only; API default `high`; no extra fee). How much the image model plans before rendering; separate from `quality`. Lower suits focused edits, higher suits dense text and complex layouts. For SVG output it controls the reference image. Sent by the CLI as `--complexity`.
 - `svg`: `{model, reasoning: {effort}}` — the model that authors the SVG (required when SVG model selection is enabled; omit otherwise). Only with `output_format=svg`. Sent by the CLI as `--svg-model` / `--svg-reasoning-effort`.
 - `moderation`: `auto` (default) or `low`
+- `prompt_rewriter`: the API rejects it ("Unknown parameter"), so the CLI does not expose it.
 
 ## Edit-specific parameters
 - `image`: one or more input images. For GPT Image models, you can provide up to 16 images.
