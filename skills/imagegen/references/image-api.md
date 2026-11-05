@@ -12,8 +12,8 @@ These parameters describe the Image API and bundled CLI fallback surface. Do not
 
 | Model | Quality | Input fidelity | Resolutions | Recommended use |
 | --- | --- | --- | --- | --- |
-| `gpt-image-2.6-sunburst` (CLI default) | `low`, `medium`, `high`, `xhigh`, `max`, `auto` | Image inputs always high fidelity; do not set `input_fidelity` | `auto` or flexible sizes (same rules as `gpt-image-2`) | Detailed compositions, dense text and layouts, precise edits, final assets. Supports `complexity`, `--markup`, SVG, GIF, transparent backgrounds |
-| `gpt-image-2.6-flare` | same as 2.6 Sunburst | same | same | Fast iteration and everyday generation; same controls as Sunburst |
+| `gpt-image-2.6-flare` (CLI default) | `low`, `medium`, `high`, `xhigh`, `max`, `auto` | Image inputs always high fidelity; do not set `input_fidelity` | `auto` or flexible sizes (same rules as `gpt-image-2`) | Most workflows: fast iteration and everyday generation. Supports `complexity`, `--markup`, SVG, GIF, transparent backgrounds |
+| `gpt-image-2.6-sunburst` | same as 2.6 Flare | same | same | Detailed compositions, dense text and layouts, precise edits, final assets; same controls as Flare |
 | `gpt-image-2.5-sunburst`, `gpt-image-2.5-flare` | same as 2.6 | same | same | Same token rates as 2.6; transparent backgrounds and `--markup`; no `complexity`, GIF, or SVG |
 | `gpt-image-2` | `low`, `medium`, `high`, `auto` | Always high fidelity for image inputs; do not set `input_fidelity` | `auto` or flexible sizes that satisfy the constraints below | Earlier generation: high-quality generation and editing, text-heavy images, photorealism, compositing; no transparent backgrounds |
 | `gpt-image-1.5` | `low`, `medium`, `high`, `auto` | `low`, `high` | `1024x1024`, `1024x1536`, `1536x1024`, `auto` | True transparent-background fallback and backward-compatible workflows |

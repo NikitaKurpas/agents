@@ -244,20 +244,20 @@ Asset-type templates (website assets, game assets, wireframes, logo) are consoli
 
 ## Model and control guidance for CLI fallback
 
-The fallback CLI defaults to `gpt-image-2.6-sunburst`.
+The fallback CLI defaults to `gpt-image-2.6-flare`, the recommended model for most workflows.
 
 ### Picking a model
 
 | Need | Model |
 | - | - |
-| Detailed compositions, dense text or layouts, precise edits (including `--markup`), final assets | `gpt-image-2.6-sunburst` (default) |
-| Fast iteration, drafts, many variants, everyday quality | `gpt-image-2.6-flare` |
+| Most workflows: fast iteration, drafts, many variants, everyday quality, posters and product imagery | `gpt-image-2.6-flare` (default) |
+| Detailed compositions, dense text or layouts, precise edits (including `--markup`), final assets | `gpt-image-2.6-sunburst` |
 | Animated GIF (`--output-format gif`) | Either 2.6 model; GIF is 2.6-only |
 | SVG (`--output-format svg`) | Either 2.6 model for the reference image; a separate author model writes the SVG |
 | Same token rates as 2.6 but no `complexity`, GIF, or SVG | `gpt-image-2.5-sunburst` / `gpt-image-2.5-flare` |
 | Legacy; no transparency, no `xhigh`/`max` | `gpt-image-2`, `gpt-image-1.5` |
 
-Sunburst favors precision and detail, and keeps characters, products, and brand details more consistent across edit rounds at `medium` or `high` quality. Flare favors speed (OpenAI cites as little as six seconds at `quality low`) and also handles layouts such as posters and product imagery. Both support `complexity`, `--markup`, SVG, and transparent backgrounds. Start with the default and switch to Flare when iterating quickly.
+Sunburst favors precision and detail, and keeps characters, products, and brand details more consistent across edit rounds at `medium` or `high` quality. Flare favors speed (OpenAI cites as little as six seconds at `quality low`) and also handles layouts such as posters and product imagery. Both support `complexity`, `--markup`, SVG, and transparent backgrounds. Start with the default and switch to Sunburst when detail or edit consistency matters.
 
 ### `quality` vs `complexity`
 

@@ -62,7 +62,7 @@ python "$IMAGE_GEN" edit \
 - Do not silently downgrade from CLI `gpt-image-2` or built-in `image_gen` to CLI `gpt-image-1.5`; ask first unless the user explicitly requested `gpt-image-1.5`.
 
 ## Defaults
-- Model: `gpt-image-2.6-sunburst`
+- Model: `gpt-image-2.6-flare`
 - Supported model family for this CLI: GPT Image models (`gpt-image-*`)
 - Size: `auto`
 - Quality: `medium`
@@ -72,14 +72,14 @@ python "$IMAGE_GEN" edit \
 
 ## gpt-image-2 size and model guidance
 
-`gpt-image-2.6-sunburst` is the default model for new CLI fallback work: it favors detail and editing precision. Use `gpt-image-2.6-flare` for fast iteration. See `SKILL.md` ("Model and control guidance for CLI fallback") for picking a model and for `quality` vs `complexity`.
+`gpt-image-2.6-flare` is the default model for new CLI fallback work: it is fast and fits most workflows. Use `gpt-image-2.6-sunburst` for detail and editing precision. See `SKILL.md` ("Model and control guidance for CLI fallback") for picking a model and for `quality` vs `complexity`.
 
 - Use `--quality low` for fast drafts, thumbnails, and quick iterations.
 - Use `--quality medium`, `--quality high`, or `--quality auto` for final assets, dense text, diagrams, identity-sensitive edits, and high-resolution outputs.
 - Square images are typically fastest. Use `--size 1024x1024` for quick square drafts.
 - If the user asks for 4K-style output, use `--size 3840x2160` for landscape or `--size 2160x3840` for portrait.
 - Do not pass `--input-fidelity` with `gpt-image-2`; this model always uses high fidelity for image inputs.
-- `--background transparent --output-format png|webp` works on the default `gpt-image-2.6-flare`, `gpt-image-2.6-sunburst`, and the 2.5 models (verified live on both 2.6 models). Do not use it with CLI `gpt-image-2`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `--background transparent --output-format png|webp` works on `gpt-image-2.6-flare` (default), `gpt-image-2.6-sunburst`, and the 2.5 models (verified live on both 2.6 models). Do not use it with CLI `gpt-image-2`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
 
 Popular `gpt-image-2` sizes:
 - `1024x1024`
