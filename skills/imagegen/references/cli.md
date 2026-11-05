@@ -65,7 +65,7 @@ python "$IMAGE_GEN" edit \
 - Model: `gpt-image-2.6-flare`
 - Supported model family for this CLI: GPT Image models (`gpt-image-*`)
 - Size: `auto`
-- Quality: `medium`
+- Quality: omitted (the API default, `auto`)
 - Output format: `png`
 - Default one-off output path: `output/imagegen/output.png`
 - Background: unspecified unless `--background` is set

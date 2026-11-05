@@ -53,7 +53,7 @@ Square images are typically fastest to generate. For 4K-style output, use `3840x
 - `model`: image model
 - `n`: number of images (1-10)
 - `size`: `auto` by default; flexible `WIDTHxHEIGHT` sizes are allowed for `gpt-image-2`, `gpt-image-2.5-*`, and `gpt-image-2.6-*`; older GPT Image models use `1024x1024`, `1536x1024`, `1024x1536`, or `auto`. For GIF output it is the per-frame size; see `references/cli.md`
-- `quality`: rendering fidelity (detail and polish of the final pixels). `low`, `medium`, `high`, or `auto`; `gpt-image-2.5-*` and `gpt-image-2.6-*` also accept `xhigh` and `max` (verified live on both 2.6 models). The API default is `auto`; the CLI default is `medium`. Separate from `complexity`
+- `quality`: rendering fidelity (detail and polish of the final pixels). `low`, `medium`, `high`, or `auto`; `gpt-image-2.5-*` and `gpt-image-2.6-*` also accept `xhigh` and `max` (verified live on both 2.6 models). Defaults to `auto`; the CLI omits it unless `--quality` is set. Separate from `complexity`
 - `background`: output transparency behavior (`transparent`, `opaque`, or `auto`) for generated output; this is not the same thing as the prompt's visual scene/backdrop
 - `output_format`: `png` (default), `jpeg`, `webp`, `svg`, or `gif`. `svg` and `gif` are generations only on `gpt-image-2.6-*`; `svg` needs `n=1`
 - `frame_count`, `frame_duration_ms`: GIF only (2-16 frames, default 9; 20-2000 ms per frame, default 200). Sent by the CLI as `--frame-count` / `--frame-duration-ms`

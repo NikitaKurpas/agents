@@ -24,7 +24,6 @@ from io import BytesIO
 
 DEFAULT_MODEL = "gpt-image-2.6-flare"
 DEFAULT_SIZE = "auto"
-DEFAULT_QUALITY = "medium"
 DEFAULT_OUTPUT_FORMAT = "png"
 DEFAULT_SVG_MODEL = "gpt-6.1-sol"
 DEFAULT_SVG_REASONING_EFFORT = "high"
@@ -166,7 +165,9 @@ def _validate_size(size: str, model: str, *, min_pixels: int = GPT_IMAGE_2_MIN_P
         )
 
 
-def _validate_quality(quality: str, model: str) -> None:
+def _validate_quality(quality: Optional[str], model: str) -> None:
+    if quality is None:  # omitted: the API default (auto) applies
+        return
     if model.startswith(EXTENDED_QUALITY_MODEL_PREFIXES):
         if quality not in ALLOWED_QUALITIES | EXTENDED_QUALITIES:
             _die("quality must be one of low, medium, high, xhigh, max, or auto.")
@@ -331,7 +332,7 @@ def _validate_generate_payload(payload: Dict[str, Any]) -> None:
     if str(payload.get("output_format", "")).lower() in {"svg", "gif"}:
         _die("svg and gif output are not supported by generate-batch; use generate.")
     size = str(payload.get("size", DEFAULT_SIZE))
-    quality = str(payload.get("quality", DEFAULT_QUALITY))
+    quality = payload.get("quality")
     background = payload.get("background")
     _validate_size(size, model)
     _validate_quality(quality, model)
@@ -1068,7 +1069,7 @@ def _add_shared_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--prompt-file")
     parser.add_argument("--n", type=int, default=1)
     parser.add_argument("--size", default=DEFAULT_SIZE)
-    parser.add_argument("--quality", default=DEFAULT_QUALITY)
+    parser.add_argument("--quality")
     parser.add_argument("--background")
     parser.add_argument("--output-format")
     parser.add_argument("--output-compression", type=int)
