@@ -16,10 +16,10 @@ The labeled lines are prompt scaffolding, not a closed schema. `Asset type` and 
 Execution details such as explicit CLI flags, `quality`, `input_fidelity`, masks, output formats, and local output paths depend on mode. Use built-in `image_gen` by default, request transparent backgrounds directly, and preserve the generated alpha; apply CLI-specific controls only when the user chooses or confirms that fallback.
 
 CLI model notes:
-- `gpt-image-2` is the fallback CLI default for new workflows.
-- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- `gpt-image-2.6-sunburst` is the fallback CLI default for new workflows; `gpt-image-2.6-flare` is the faster option for iteration.
+- `quality` values are `low`, `medium`, `high`, and `auto` (`gpt-image-2` and older); `gpt-image-2.5-*` and `gpt-image-2.6-*` also accept `xhigh` and `max`. `quality` is rendering fidelity; `complexity` is planning effort for hard layouts (2.6 only).
 - For 4K-style `gpt-image-2` output, use `3840x2160` or `2160x3840`.
-- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- CLI `gpt-image-2.5-*` and `gpt-image-2.6-*` support `background=transparent` (`png`/`webp`); CLI `gpt-image-2` does not, so ask before using `gpt-image-1.5` unless the user explicitly requested that model.
 - Do not set `input_fidelity` with `gpt-image-2`; image inputs already use high fidelity.
 
 For prompting principles (structure, specificity, invariants, iteration), see `references/prompting.md`.

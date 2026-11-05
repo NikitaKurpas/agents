@@ -25,6 +25,7 @@ Rules:
 - Do not switch to CLI fallback for ordinary quality, size, or file-path control.
 - For transparent images, ask built-in `image_gen` for a transparent background and preserve the generated alpha.
 - Never silently switch from built-in `image_gen` or CLI `gpt-image-2` to CLI `gpt-image-1.5`; ask the user first unless they explicitly requested `gpt-image-1.5`.
+- SVG, GIF, and markup-guided edits are CLI-only: `generate --output-format svg` (author model defaults to `gpt-6.1-sol`, effort `high`), `generate --output-format gif`, `edit --markup`. See `references/cli.md` for limits and "Model and control guidance for CLI fallback" below for choosing models.
 - The word `batch` by itself does not mean CLI fallback. If the user asks for many assets or says to batch-generate assets without explicitly asking for CLI/API/model controls, stay on the built-in path and issue one built-in call per requested asset or variant.
 - If the built-in tool fails or is unavailable, tell the user the CLI fallback exists and that it requires `OPENAI_API_KEY`. Proceed only if the user explicitly asks for that fallback.
 - If the user explicitly asks for CLI mode, use the bundled `scripts/image_gen.py` workflow. Do not create one-off SDK runners.
@@ -241,15 +242,38 @@ Copy/paste specs shared by both modes: `references/sample-prompts.md`.
 ## Guidance by asset type
 Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
 
-## gpt-image-2 guidance for CLI fallback
+## Model and control guidance for CLI fallback
 
-The fallback CLI defaults to `gpt-image-2`.
+The fallback CLI defaults to `gpt-image-2.6-sunburst`.
 
-- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
-- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
-- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
-- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+### Picking a model
+
+| Need | Model |
+| - | - |
+| Detailed compositions, dense text or layouts, precise edits (including `--markup`), final assets | `gpt-image-2.6-sunburst` (default) |
+| Fast iteration, drafts, many variants, everyday quality | `gpt-image-2.6-flare` |
+| Animated GIF (`--output-format gif`) | Either 2.6 model; GIF is 2.6-only |
+| SVG (`--output-format svg`) | Either 2.6 model for the reference image; a separate author model writes the SVG |
+| Same token rates as 2.6 but no `complexity`, GIF, or SVG | `gpt-image-2.5-sunburst` / `gpt-image-2.5-flare` |
+| Legacy; no transparency, no `xhigh`/`max` | `gpt-image-2`, `gpt-image-1.5` |
+
+Sunburst favors precision and detail, and keeps characters, products, and brand details more consistent across edit rounds at `medium` or `high` quality. Flare favors speed (OpenAI cites as little as six seconds at `quality low`) and also handles layouts such as posters and product imagery. Both support `complexity`, `--markup`, SVG, and transparent backgrounds. Start with the default and switch to Flare when iterating quickly.
+
+### `quality` vs `complexity`
+
+In short: `quality` controls visual detail and fidelity; `complexity` controls how much planning the model does and so how much goes into the scene. Lower `complexity` suits quick edits.
+
+- `quality` sets rendering fidelity: how much detail and polish the final pixels get. Values `low`, `medium`, `high`, `auto`; `gpt-image-2.5-*` and `gpt-image-2.6-*` also accept `xhigh` and `max` (the CLI rejects those elsewhere). Higher quality costs more tokens and time. The CLI default is `medium`; the API default is `auto`.
+- `complexity` (`--complexity low|medium|high`, 2.6 models only) sets how much the model plans before rendering: layout, dense text, relationships between objects. It has no fee, defaults to `high` at the API, and higher values can add latency and unwanted changes. OpenAI recommends `low` for most edits (for example changing one background or sign), paired with the `quality` the workflow needs, and `medium` or `high` for scenes with many elements or constraints.
+- They are independent: raise `quality` for crisper rendering, raise `complexity` for harder layouts. For SVG, both shape the reference image; the SVG author's effort is `--svg-reasoning-effort`.
 - Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+
+### Other controls
+
+- `gpt-image-2.5-*` and `gpt-image-2.6-*` support `background=transparent` with `png`/`webp`. CLI `gpt-image-2` does not; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `--markup <transparent.png>` (edit only; 2.5/2.6 models; not with `--mask`) marks where an edit should happen.
+- `--output-format gif` with `--frame-count` and `--frame-duration-ms` (generate only; 2.6 models). See `references/cli.md` for size limits. For the prompt, describe the motion as a short sequence of beats, keep the camera, character, outfit, and background fixed across frames, and for a seamless loop say the last frame transitions toward the first. Add `no captions, no words, no panel labels, no borders` so nothing from the frame layout leaks into the image. OpenAI's own examples also spell out an exact frame count and grid; the API takes `--frame-count`, so that is likely redundant (untested).
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
 - Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
 - If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
 - `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.

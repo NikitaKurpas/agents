@@ -62,7 +62,7 @@ python "$IMAGE_GEN" edit \
 - Do not silently downgrade from CLI `gpt-image-2` or built-in `image_gen` to CLI `gpt-image-1.5`; ask first unless the user explicitly requested `gpt-image-1.5`.
 
 ## Defaults
-- Model: `gpt-image-2`
+- Model: `gpt-image-2.6-sunburst`
 - Supported model family for this CLI: GPT Image models (`gpt-image-*`)
 - Size: `auto`
 - Quality: `medium`
@@ -72,14 +72,14 @@ python "$IMAGE_GEN" edit \
 
 ## gpt-image-2 size and model guidance
 
-`gpt-image-2` is the default model for new CLI fallback work.
+`gpt-image-2.6-sunburst` is the default model for new CLI fallback work: it favors detail and editing precision. Use `gpt-image-2.6-flare` for fast iteration. See `SKILL.md` ("Model and control guidance for CLI fallback") for picking a model and for `quality` vs `complexity`.
 
 - Use `--quality low` for fast drafts, thumbnails, and quick iterations.
 - Use `--quality medium`, `--quality high`, or `--quality auto` for final assets, dense text, diagrams, identity-sensitive edits, and high-resolution outputs.
 - Square images are typically fastest. Use `--size 1024x1024` for quick square drafts.
 - If the user asks for 4K-style output, use `--size 3840x2160` for landscape or `--size 2160x3840` for portrait.
 - Do not pass `--input-fidelity` with `gpt-image-2`; this model always uses high fidelity for image inputs.
-- Do not use `--background transparent` with CLI `gpt-image-2`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `--background transparent --output-format png|webp` works on the default `gpt-image-2.6-flare`, `gpt-image-2.6-sunburst`, and the 2.5 models (verified live on both 2.6 models). Do not use it with CLI `gpt-image-2`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
 
 Popular `gpt-image-2` sizes:
 - `1024x1024`
@@ -128,9 +128,17 @@ python "$IMAGE_GEN" generate \
   --out output/imagegen/architecture-4k.png
 ```
 
-True transparent fallback request:
+True transparent request (default model):
 
-Ask for confirmation before using this command unless the user explicitly requested `gpt-image-1.5`.
+```bash
+python "$IMAGE_GEN" generate \
+  --prompt "A clean product cutout on a transparent background" \
+  --background transparent \
+  --output-format png \
+  --out output/imagegen/product-cutout.png
+```
+
+Legacy `gpt-image-1.5` transparent fallback (only for `gpt-image-2`; ask for confirmation unless the user explicitly requested `gpt-image-1.5`):
 
 ```bash
 python "$IMAGE_GEN" generate \
@@ -146,7 +154,8 @@ Explain that CLI `gpt-image-2` does not support `background=transparent`, so tra
 ## Quality, input fidelity, and masks (CLI fallback only)
 These are explicit CLI controls. They are not built-in `image_gen` tool arguments.
 
-- `--quality` works for `generate`, `edit`, and `generate-batch`: `low|medium|high|auto`
+- `--quality` works for `generate`, `edit`, and `generate-batch`: `low|medium|high|auto`, plus `xhigh|max` on `gpt-image-2.5-*` and `gpt-image-2.6-*` models (rejected on others; verified live on both 2.6 models). It sets rendering fidelity; `--complexity` is a separate planning control.
+- `--markup <png>` is **edit-only**: a transparent PNG with the same dimensions as the first input image, drawn with circles or sketches over the area to change; describe the change in the prompt and ask to remove the annotation. Requires `gpt-image-2.5-*` or `gpt-image-2.6-*`; cannot be combined with `--mask`
 - `--input-fidelity` is **edit-only** and validated as `low|high`; it is not supported for `gpt-image-2`
 - `--mask` is **edit-only**
 
@@ -231,7 +240,11 @@ Notes:
 
 ## CLI notes
 - Supported sizes depend on the model. `gpt-image-2` supports flexible constrained sizes; older GPT Image models support `1024x1024`, `1536x1024`, `1024x1536`, or `auto`.
-- True transparent CLI outputs require `output_format` to be `png` or `webp` and are not supported by `gpt-image-2`.
+- True transparent CLI outputs require `output_format` to be `png` or `webp`; supported by the 2.5 and 2.6 models, not by `gpt-image-2`.
+- `--complexity low|medium|high` works with `generate` and `edit` on `gpt-image-2.6-sunburst` and `gpt-image-2.6-flare` (not `generate-batch`). Omitted, the API uses `high`.
+- SVG output (`--output-format svg`) works only with `generate` on `gpt-image-2.6-sunburst` or `gpt-image-2.6-flare`. It requires `n=1` and rejects `edit`, `generate-batch`, `--output-compression`, and `--downscale-max-dim`. `gpt-image-2.x` models share `gpt-image-2` size rules. The API creates a reference image (`--quality` controls it) and a separate author model writes the SVG: the CLI defaults it to `gpt-6.1-sol` with reasoning effort `high`; override with `--svg-model <model>` and `--svg-reasoning-effort <effort>`. Example: `generate --model gpt-image-2.6-sunburst --output-format svg --size 1024x1024 --out output/imagegen/icon.svg`. Billing adds the author model's tokens to the image model's.
+- GIF output (`--output-format gif`) works only with `generate` on `gpt-image-2.6-sunburst` or `gpt-image-2.6-flare`; it needs GIF preview access and rejects `edit`, `generate-batch`, `--output-compression`, and `--downscale-max-dim`. `--frame-count` takes 2-16 (API default 9) and `--frame-duration-ms` takes 20 or more (API default 200, rounded to 10 ms). `--size` is the per-frame size, and all frames are packed onto one sheet whose longest edge must be at most 3840px. Observed live: `1024x1024` fails for any frame count ("No supported sheet fits"), while `832x832` (4 frames) and `512x512` (4 and 6 frames) succeed. The CLI skips the 655,360-pixel minimum for GIF. Example: `generate --output-format gif --frame-count 6 --frame-duration-ms 120 --size 512x512 --quality low --out output/imagegen/loop.gif`.
+- If Python fails TLS with `OSStatus -26276` inside a proxying sandbox, the same request works with `curl` against `/v1/images/generations` (decode `data[0].b64_json` to the `.svg` file).
 - `--prompt-file`, `--output-compression`, `--moderation`, `--max-attempts`, `--fail-fast`, `--force`, and `--no-augment` are supported.
 - This CLI is intended for GPT Image models. Do not assume older non-GPT image-model behavior applies here.
 

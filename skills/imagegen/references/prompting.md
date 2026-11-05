@@ -79,9 +79,9 @@ Do not add:
 - `quality`, `input_fidelity`, explicit masks, output format, and output paths are fallback-only execution controls.
 - Do not assume they are built-in `image_gen` tool arguments.
 - If the user explicitly chooses CLI fallback, see `references/cli.md` and `references/image-api.md` for those controls.
-- In CLI fallback mode, `gpt-image-2` is the default. It supports `quality=low|medium|high|auto`; use `low` for fast drafts and thumbnails, and move to `medium`, `high`, or `auto` for final assets.
+- In CLI fallback mode, `gpt-image-2.6-sunburst` is the default (use `gpt-image-2.6-flare` for fast iteration). They support `quality=low|medium|high|xhigh|max|auto`; use `low` for fast drafts and thumbnails, and move to `medium`, `high`, or `auto` for final assets. `quality` sets rendering fidelity; `complexity` (`low|medium|high`) sets how much the model plans a hard layout or dense text before rendering. See `SKILL.md` for model choice.
 - `gpt-image-2` always uses high fidelity for image inputs, so do not set `input_fidelity` with that model.
-- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- CLI `gpt-image-2.5-*` and `gpt-image-2.6-*` support `background=transparent` (`png`/`webp`); CLI `gpt-image-2` does not, so ask before using `gpt-image-1.5` unless the user explicitly requested that model.
 - If the user asks for 4K-style output with `gpt-image-2`, use `3840x2160` for landscape or `2160x3840` for portrait.
 
 ## Use-case tips

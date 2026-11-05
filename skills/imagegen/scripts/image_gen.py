@@ -22,10 +22,12 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from io import BytesIO
 
-DEFAULT_MODEL = "gpt-image-2"
+DEFAULT_MODEL = "gpt-image-2.6-sunburst"
 DEFAULT_SIZE = "auto"
 DEFAULT_QUALITY = "medium"
 DEFAULT_OUTPUT_FORMAT = "png"
+DEFAULT_SVG_MODEL = "gpt-6.1-sol"
+DEFAULT_SVG_REASONING_EFFORT = "high"
 DEFAULT_CONCURRENCY = 5
 DEFAULT_DOWNSCALE_SUFFIX = "-web"
 DEFAULT_OUTPUT_PATH = "output/imagegen/output.png"
@@ -33,6 +35,13 @@ GPT_IMAGE_MODEL_PREFIX = "gpt-image-"
 
 ALLOWED_LEGACY_SIZES = {"1024x1024", "1536x1024", "1024x1536", "auto"}
 ALLOWED_QUALITIES = {"low", "medium", "high", "auto"}
+ALLOWED_COMPLEXITIES = {"low", "medium", "high"}
+COMPLEXITY_MODEL_PREFIX = "gpt-image-2.6-"
+GIF_MODEL_PREFIX = "gpt-image-2.6-"
+MARKUP_MODEL_PREFIXES = ("gpt-image-2.5-", "gpt-image-2.6-")
+GIF_MIN_FRAMES, GIF_MAX_FRAMES, GIF_MIN_FRAME_DURATION_MS = 2, 16, 20
+EXTENDED_QUALITIES = {"xhigh", "max"}
+EXTENDED_QUALITY_MODEL_PREFIXES = ("gpt-image-2.5-", "gpt-image-2.6-")
 ALLOWED_BACKGROUNDS = {"transparent", "opaque", "auto", None}
 ALLOWED_INPUT_FIDELITIES = {"low", "high", None}
 
@@ -106,8 +115,8 @@ def _normalize_output_format(fmt: Optional[str]) -> str:
     if not fmt:
         return DEFAULT_OUTPUT_FORMAT
     fmt = fmt.lower()
-    if fmt not in {"png", "jpeg", "jpg", "webp"}:
-        _die("output-format must be png, jpeg, jpg, or webp.")
+    if fmt not in {"png", "jpeg", "jpg", "webp", "svg", "gif"}:
+        _die("output-format must be png, jpeg, jpg, webp, svg, or gif.")
     return "jpeg" if fmt == "jpg" else fmt
 
 
@@ -118,7 +127,7 @@ def _parse_size(size: str) -> Optional[Tuple[int, int]]:
     return int(match.group(1)), int(match.group(2))
 
 
-def _validate_gpt_image_2_size(size: str) -> None:
+def _validate_gpt_image_2_size(size: str, *, min_pixels: int = GPT_IMAGE_2_MIN_PIXELS) -> None:
     if size == "auto":
         return
 
@@ -139,15 +148,16 @@ def _validate_gpt_image_2_size(size: str) -> None:
         _die("gpt-image-2 size width and height must be multiples of 16px.")
     if max_edge / min_edge > GPT_IMAGE_2_MAX_RATIO:
         _die("gpt-image-2 size long edge to short edge ratio must not exceed 3:1.")
-    if total_pixels < GPT_IMAGE_2_MIN_PIXELS or total_pixels > GPT_IMAGE_2_MAX_PIXELS:
+    if total_pixels < min_pixels or total_pixels > GPT_IMAGE_2_MAX_PIXELS:
         _die(
-            "gpt-image-2 size total pixels must be at least 655,360 and no more than 8,294,400."
+            f"gpt-image-2 size total pixels must be at least {min_pixels:,} and no more than 8,294,400."
         )
 
 
-def _validate_size(size: str, model: str) -> None:
-    if model == GPT_IMAGE_2_MODEL:
-        _validate_gpt_image_2_size(size)
+def _validate_size(size: str, model: str, *, min_pixels: int = GPT_IMAGE_2_MIN_PIXELS) -> None:
+    # gpt-image-2 and its 2.x successors (for example gpt-image-2.6-sunburst) share size rules.
+    if model == GPT_IMAGE_2_MODEL or model.startswith(GPT_IMAGE_2_MODEL + "."):
+        _validate_gpt_image_2_size(size, min_pixels=min_pixels)
         return
 
     if size not in ALLOWED_LEGACY_SIZES:
@@ -156,7 +166,13 @@ def _validate_size(size: str, model: str) -> None:
         )
 
 
-def _validate_quality(quality: str) -> None:
+def _validate_quality(quality: str, model: str) -> None:
+    if model.startswith(EXTENDED_QUALITY_MODEL_PREFIXES):
+        if quality not in ALLOWED_QUALITIES | EXTENDED_QUALITIES:
+            _die("quality must be one of low, medium, high, xhigh, max, or auto.")
+        return
+    if quality in EXTENDED_QUALITIES:
+        _die("quality xhigh and max are supported only by gpt-image-2.5-* and gpt-image-2.6-* models.")
     if quality not in ALLOWED_QUALITIES:
         _die("quality must be one of low, medium, high, or auto.")
 
@@ -202,17 +218,123 @@ def _validate_model_specific_options(
         )
 
 
+def _validate_svg(
+    output_format: Optional[str],
+    *,
+    n: int,
+    output_compression: Optional[int],
+    downscale_max_dim: Optional[int] = None,
+    edit: bool = False,
+) -> None:
+    """SVG output is generate-only, single-image, and has no raster post-processing."""
+    if (output_format or "").lower() != "svg":
+        return
+    if edit:
+        _die("svg output is not supported by edit; use generate.")
+    if n != 1:
+        _die("svg output requires n=1.")
+    if output_compression is not None:
+        _die("output-compression is not supported with svg output.")
+    if downscale_max_dim is not None:
+        _die("downscale-max-dim is not supported with svg output.")
+
+
+def _validate_complexity(args: argparse.Namespace) -> None:
+    if args.complexity is None:
+        return
+    if args.complexity not in ALLOWED_COMPLEXITIES:
+        _die("complexity must be one of low, medium, or high.")
+    if not args.model.startswith(COMPLEXITY_MODEL_PREFIX):
+        _die("complexity is supported only by gpt-image-2.6-sunburst and gpt-image-2.6-flare.")
+    if args.command == "generate-batch":
+        _die("complexity is not supported by generate-batch; use generate or edit.")
+
+
+def _validate_gif(args: argparse.Namespace) -> None:
+    is_gif = (args.output_format or "").lower() == "gif"
+    if not is_gif:
+        if args.frame_count is not None or args.frame_duration_ms is not None:
+            _die("--frame-count and --frame-duration-ms require --output-format gif.")
+        return
+    if args.command != "generate":
+        _die("gif output is supported only by generate.")
+    if not args.model.startswith(GIF_MODEL_PREFIX):
+        _die("gif output is supported only by gpt-image-2.6-sunburst and gpt-image-2.6-flare.")
+    if args.output_compression is not None:
+        _die("output-compression is not supported with gif output.")
+    if args.downscale_max_dim is not None:
+        _die("downscale-max-dim is not supported with gif output.")
+    if args.frame_count is not None and not (
+        GIF_MIN_FRAMES <= args.frame_count <= GIF_MAX_FRAMES
+    ):
+        _die(f"frame-count must be between {GIF_MIN_FRAMES} and {GIF_MAX_FRAMES}.")
+    if (
+        args.frame_duration_ms is not None
+        and args.frame_duration_ms < GIF_MIN_FRAME_DURATION_MS
+    ):
+        _die(f"frame-duration-ms must be at least {GIF_MIN_FRAME_DURATION_MS}.")
+
+
+def _validate_markup(args: argparse.Namespace) -> None:
+    if args.markup is None:
+        return
+    if args.command != "edit":
+        _die("--markup is supported only by edit.")
+    if args.mask:
+        _die("--markup cannot be combined with --mask.")
+    if not args.model.startswith(MARKUP_MODEL_PREFIXES):
+        _die("--markup is supported only by gpt-image-2.5-* and gpt-image-2.6-* models.")
+    path = Path(args.markup)
+    if not path.exists():
+        _die(f"Markup file not found: {path}")
+    if path.suffix.lower() != ".png":
+        _die("--markup must be a transparent PNG.")
+    if path.stat().st_size > MAX_IMAGE_BYTES:
+        _die("--markup exceeds the 50MB limit.")
+
+
+def _build_request(
+    payload: Dict[str, Any], svg_options: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """The SDK has no typed `complexity`, `frame_*` or `svg` fields yet, so send them as extra body parameters."""
+    request = dict(payload)
+    extra_body: Dict[str, Any] = {}
+    for key in ("complexity", "frame_count", "frame_duration_ms"):
+        if key in request:
+            extra_body[key] = request.pop(key)
+    if svg_options:
+        extra_body["svg"] = svg_options
+    if extra_body:
+        request["extra_body"] = extra_body
+    return request
+
+
+def _svg_options(args: argparse.Namespace, output_format: str) -> Dict[str, Any]:
+    model = getattr(args, "svg_model", None)
+    effort = getattr(args, "svg_reasoning_effort", None)
+    if output_format != "svg":
+        if model or effort:
+            _die("--svg-model and --svg-reasoning-effort require --output-format svg.")
+        return {}
+    return {
+        "model": model or DEFAULT_SVG_MODEL,
+        "reasoning": {"effort": effort or DEFAULT_SVG_REASONING_EFFORT},
+    }
+
+
 def _validate_generate_payload(payload: Dict[str, Any]) -> None:
     model = str(payload.get("model", DEFAULT_MODEL))
     _validate_model(model)
     n = int(payload.get("n", 1))
     if n < 1 or n > 10:
         _die("n must be between 1 and 10")
+    if str(payload.get("output_format", "")).lower() in {"svg", "gif"}:
+        _die("svg and gif output are not supported by generate-batch; use generate.")
     size = str(payload.get("size", DEFAULT_SIZE))
     quality = str(payload.get("quality", DEFAULT_QUALITY))
     background = payload.get("background")
     _validate_size(size, model)
-    _validate_quality(quality)
+    _validate_quality(quality, model)
     _validate_background(background)
     _validate_model_specific_options(model=model, background=background)
     oc = payload.get("output_compression")
@@ -745,12 +867,16 @@ def _generate(args: argparse.Namespace) -> None:
         "output_format": args.output_format,
         "output_compression": args.output_compression,
         "moderation": args.moderation,
+        "complexity": args.complexity,
+        "frame_count": args.frame_count,
+        "frame_duration_ms": args.frame_duration_ms,
     }
     payload = {k: v for k, v in payload.items() if v is not None}
 
     output_format = _normalize_output_format(args.output_format)
     _validate_transparency(args.background, output_format)
     payload["output_format"] = output_format
+    svg_options = _svg_options(args, output_format)
     output_paths = _build_output_paths(args.out, output_format, args.n, args.out_dir)
     downscaled = None
     if args.downscale_max_dim is not None:
@@ -765,6 +891,7 @@ def _generate(args: argparse.Namespace) -> None:
                 "outputs": [str(p) for p in output_paths],
                 "outputs_downscaled": downscaled,
                 **payload,
+                **({"svg": svg_options} if svg_options else {}),
             }
         )
         return
@@ -775,7 +902,7 @@ def _generate(args: argparse.Namespace) -> None:
     )
     started = time.time()
     client = _create_client()
-    result = client.images.generate(**payload)
+    result = client.images.generate(**_build_request(payload, svg_options))
     elapsed = time.time() - started
     print(f"Generation completed in {elapsed:.1f}s.", file=sys.stderr)
 
@@ -815,6 +942,7 @@ def _edit(args: argparse.Namespace) -> None:
         "output_compression": args.output_compression,
         "input_fidelity": args.input_fidelity,
         "moderation": args.moderation,
+        "complexity": args.complexity,
     }
     payload = {k: v for k, v in payload.items() if v is not None}
 
@@ -834,6 +962,8 @@ def _edit(args: argparse.Namespace) -> None:
         payload_preview["image"] = [str(p) for p in image_paths]
         if mask_path:
             payload_preview["mask"] = str(mask_path)
+        if args.markup:
+            payload_preview["markup"] = args.markup
         _print_request(
             {
                 "endpoint": "/v1/images/edits",
@@ -851,11 +981,18 @@ def _edit(args: argparse.Namespace) -> None:
     started = time.time()
     client = _create_client()
 
-    with _open_files(image_paths) as image_files, _open_mask(mask_path) as mask_file:
-        request = dict(payload)
+    markup_path = Path(args.markup) if args.markup else None
+    with (
+        _open_files(image_paths) as image_files,
+        _open_mask(mask_path) as mask_file,
+        _open_mask(markup_path) as markup_file,
+    ):
+        request = _build_request(payload)
         request["image"] = image_files if len(image_files) > 1 else image_files[0]
         if mask_file is not None:
             request["mask"] = mask_file
+        if markup_file is not None:
+            request["markup"] = markup_file
         result = client.images.edit(**request)
 
     elapsed = time.time() - started
@@ -935,6 +1072,16 @@ def _add_shared_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--background")
     parser.add_argument("--output-format")
     parser.add_argument("--output-compression", type=int)
+    # SVG output (gpt-image-2.6-*): the model that authors the SVG; required when the org has SVG model selection enabled.
+    # gpt-image-2.6-*: how much the image model plans before rendering (low|medium|high; API default high).
+    parser.add_argument("--complexity")
+    # gif output (gpt-image-2.6-* generate only): 2-16 frames (API default 9), >=20 ms per frame (API default 200).
+    parser.add_argument("--frame-count", type=int)
+    parser.add_argument("--frame-duration-ms", type=int)
+    # edit only (gpt-image-2.5-*/2.6-*): transparent PNG annotation layer marking where to edit; not with --mask.
+    parser.add_argument("--markup")
+    parser.add_argument("--svg-model")
+    parser.add_argument("--svg-reasoning-effort")
     parser.add_argument("--moderation")
     parser.add_argument("--out", default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--out-dir")
@@ -1011,9 +1158,23 @@ def main() -> int:
     ):
         _die("--downscale-max-dim must be >= 1")
 
+    _validate_svg(
+        args.output_format,
+        n=args.n,
+        output_compression=args.output_compression,
+        downscale_max_dim=getattr(args, "downscale_max_dim", None),
+        edit=args.command == "edit",
+    )
+    if (args.output_format or "").lower() == "svg" and args.command == "generate-batch":
+        _die("svg output is not supported by generate-batch; use generate.")
+    _validate_complexity(args)
+    _validate_gif(args)
+    _validate_markup(args)
     _validate_model(args.model)
-    _validate_size(args.size, args.model)
-    _validate_quality(args.quality)
+    # GIF frames may be smaller than the still-image minimum (verified: 512x512 works).
+    gif_min_pixels = 1 if (args.output_format or "").lower() == "gif" else GPT_IMAGE_2_MIN_PIXELS
+    _validate_size(args.size, args.model, min_pixels=gif_min_pixels)
+    _validate_quality(args.quality, args.model)
     _validate_background(args.background)
     _validate_model_specific_options(
         model=args.model,
