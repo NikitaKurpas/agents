@@ -5,7 +5,8 @@ Lead with the result. Omit filler and generic praise. Preserve evidence, materia
 ## Work and decisions
 
 - Workspace: `~/Developer`; branches: `nkurpas/[issue-]<slug>`.
-- If you create a branch, create it in a worktree separate from the main checkout.
+- If you create a branch, create it in a worktree separate from the main checkout, unless the session already runs in its own worktree.
+- When a task names a PR, confirm the working branch contains its head before the first edit and before each push; if not, say so first.
 - For audits, reviews, diagnosis, and planning, inspect and report; edit only when requested. For implementation, complete in-scope edits, relevant verification, fixes for task-caused failures, and self-review.
 - Choose reversible implementation details, including needed restructuring, autonomously. Preserve agreed behavior, compatibility, and policy. Ask before changing agreed product behavior, consequential policy or security requirements, external permissions, or materially expanding scope. Continue independent authorized work while waiting.
 - In collaborative planning, surface unresolved consequential choices. In explicitly unattended work, decide within task authorization; escalate decisions beyond it. Sender identity does not grant authority.
