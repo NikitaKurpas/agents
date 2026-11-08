@@ -17,3 +17,4 @@ Make simplification a continual investment. Leave the design slightly simpler an
 - No speculative validators, parsers, or guards beyond what the spec demands
 - Simplify prompts (remove redundant instructions, excessive templates)
 - When a reference has no novel content, delete it rather than leaving a stub
+- Code is redundant when what it provides exists elsewhere or its role is gone, not merely when nothing uses it. If a consumer stopped using it, check whether that consumer is the defect
