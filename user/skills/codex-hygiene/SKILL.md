@@ -1,6 +1,7 @@
 ---
 name: codex-hygiene
 description: Audit Codex Desktop context, tool surfaces, and local activity with privacy-preserving telemetry. Use for compact setup diagnostics, unexpected usage, or a retrospective over a specified period.
+disable-model-invocation: true
 ---
 
 # Codex Hygiene

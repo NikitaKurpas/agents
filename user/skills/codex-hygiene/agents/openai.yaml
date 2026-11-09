@@ -1,3 +1,5 @@
+policy:
+  allow_implicit_invocation: false
 interface:
   display_name: "Codex Hygiene"
   short_description: "Audit Codex context and local activity"
