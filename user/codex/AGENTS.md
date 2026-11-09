@@ -14,18 +14,19 @@ Lead with the result. Omit filler and generic praise. Preserve evidence, materia
 - Allow Xcode prompts for Codex/Claude access to Xcode tools without asking.
 - Xcode projects use the JSON `project.xcproj` format; edit them with `xcrun xcodeproj` per $xcproj.
 - Treat unrecognized changes as another agent's or the user's work. Preserve them and continue within your scope; stop and ask if they interfere with your task.
-- When writing, refactoring, or reviewing code or docs, use $with-standards; where it is unavailable, use $coding-standards.
+- When writing, refactoring, or reviewing code or docs, use $with-standards if available.
+- Use $writing-clearly-and-concisely per its description, but load references only for extensive documentation work.
 - When addressing comments from bots on GitHub, always reply to them; resolve them if the comment is addressed.
 
 ## Delegation
 
 Delegated tasks inherit user authorization and constraints. Coordinators may decide within them, not expand them.
 
-### For Luna/Haiku and Terra/Sonnet
+### For Luna/Haiku
 
 Do not delegate. Perform the work yourself.
 
-### For Astra/Fable and Sol/Opus
+### For Astra/Fable, Sol/Opus, and Terra/Sonnet
 
 Delegate well-defined, bounded work to cheaper models when repeated calls, large outputs, or sustained monitoring would consume substantial context. Keep task framing, consequential decisions, and synthesis with the parent. Handle one-off reads and status checks directly when delegation adds more overhead. Explicit user choices and a skill's policy take precedence.
 
@@ -41,18 +42,17 @@ Preferred models when delegating:
 - Luna/Haiku medium: sustained polling or waiting, status monitoring, summaries, verifiable mechanical coding tasks (rename, move, etc.).
 - Luna/Haiku high: simulator verification, prescribed API calls (including `curl`), temporary code/library feasibility probes, code research, and log analysis.
 - Luna/Haiku xhigh: documentation research and structured investigation.
-- Luna/Haiku max: difficult, bounded analysis.
-- Sol/Opus medium/high: implementation tasks when instructed by the user
-- Sol/Opus high: review tasks when instructed by the user
+- Sol/Opus medium/high: implementation tasks when instructed by the user.
+- Sol/Opus high: review tasks when instructed by the user.
 
 Give agents ownership, the observable result to prove, required setup and readiness checks, stop conditions, and evidence requirements. Have them return concise results and evidence references, not full tool logs. DO NOT duplicate delegated work; continue independent work while they run.
 
 ## Tools and conventions
 
-- Use raw GitHub URLs for source text and `curl` for text-only responses. Use `https://markdown.new` when direct page retrieval is unavailable.
+- Use `https://markdown.new/<full-url>` when direct page Markdown retrieval is unavailable/missing.
 - For Deno, prefer Deno/Web APIs and JSR `@std/*`, then `node:` APIs.
 - Defaults: Zod for TypeScript boundary validation; swift-argument-parser for Swift CLIs; swift-log, swift-distributed-tracing, and swift-metrics in Swift; `@opentelemetry/api` elsewhere, using Deno's built-in OpenTelemetry.
-- New Swift code: Swift 6.3+; TypeScript: Deno 2.9+, subject to project constraints.
+- New Swift code: Swift 6.4+; TypeScript: Deno 2.9+, subject to project constraints.
 
 ## Repository identity
 
