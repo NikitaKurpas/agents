@@ -30,6 +30,16 @@ FIXES = {
     },
     "cli-creator": {"disable_model_invocation": True},
     "codex-hygiene": {"disable_model_invocation": True},
+    "frontend-design": {
+        "disable_model_invocation": True,
+        "openai": {
+            "interface": {
+                "display_name": "Frontend Design",
+                "short_description": "Distinctive, intentional visual design for new or existing UI",
+            },
+        },
+    },
+    "security-threat-model": {"disable_model_invocation": True},
 }
 
 IMPLICIT_FLAG = "  allow_implicit_invocation: false"

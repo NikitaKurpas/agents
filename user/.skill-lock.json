@@ -64,6 +64,25 @@
       "skillFolderHash": "d5ae5e132aa98176afec803c06fc4c2cfb7f2aed",
       "installedAt": "2026-10-29T05:17:39.562Z",
       "updatedAt": "2026-10-29T05:17:39.562Z"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "skillFolderHash": "d79e2a5bb4df4a386c2adcdd9ab8709bba28c3f6",
+      "pluginName": "example-skills",
+      "installedAt": "2026-11-09T07:22:23.115Z",
+      "updatedAt": "2026-11-09T07:22:23.115Z"
+    },
+    "security-threat-model": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/security-threat-model/SKILL.md",
+      "skillFolderHash": "455ed2d898ef7d1e8836898f07be3a7d2c3f38d2",
+      "installedAt": "2026-11-09T07:22:52.664Z",
+      "updatedAt": "2026-11-09T07:22:52.664Z"
     }
   },
   "dismissed": {

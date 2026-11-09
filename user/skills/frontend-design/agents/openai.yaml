@@ -1,0 +1,5 @@
+policy:
+  allow_implicit_invocation: false
+interface:
+  display_name: "Frontend Design"
+  short_description: "Distinctive, intentional visual design for new or existing UI"
