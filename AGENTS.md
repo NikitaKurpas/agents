@@ -4,20 +4,17 @@
 
 - `skills/`: locally maintained skills; selected `user/skills/` entries symlink here. Each contains `SKILL.md`, optional `references/`, `scripts/`, and assets.
 - `user/`: installed user skills, skill locks, and Codex configuration; home configuration paths symlink here.
-- `skills/.vendor/`: source-managed vendored skills and `sources.toml`.
 - `skills/.experimental/`: in-progress skills not ready for use.
-- `scripts/`: repo automation (TypeScript, Deno). Example: `scripts/update_skills.ts` syncs skill sources.
+- `scripts/`: repo automation (TypeScript, Deno). Example: `scripts/repo-map.ts`.
 - `user/codex/`: local Codex config and rules.
-- `justfile`: common entry points for updating skills and repo checks.
+- `justfile`: common entry points for repo checks.
 
 ## Build, Test, and Development Commands
 
-- `just update-skills`: pull skills listed in `skills/.vendor/sources.toml` into `skills/.vendor/` (uses `scripts/update_skills.ts`).
 - `just setup-hooks`: run once per worktree to enable `.githooks/pre-commit`.
 - `just check-plugin-skills` check for drifts between `plugins/standards/skills/ponytail-docs` and `skills/ponytail-docs`. Edit the source skill and copy it into the plugin.
-- `./scripts/update_skills.ts --help`: show flags (`--file`, `--dest`, `--overwrite`, `--dry-run`).
 
-Requires Deno for running TypeScript scripts (see shebang in `scripts/update_skills.ts`).
+Requires Deno for running TypeScript scripts (see shebang in `scripts/repo-map.ts`).
 
 ## Coding Style & Naming Conventions
 
@@ -42,5 +39,4 @@ Requires Deno for running TypeScript scripts (see shebang in `scripts/update_ski
 
 ## Configuration Tips
 
-- Vendored skills belong in `skills/.vendor/`; update them through `just update-skills`.
-- If a skill is experimental, keep it under `skills/.experimental/` and avoid using it.
+- If a skill is experimental, keep it under `skills/.experimental/`.

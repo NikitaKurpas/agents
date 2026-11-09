@@ -1,8 +1,5 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
-update-skills:
-    ./scripts/update_skills.ts --file skills/.vendor/sources.toml --dest skills/.vendor --overwrite
-
 # Fails when the standards plugin's copy of ponytail-docs drifts from skills/ponytail-docs.
 check-plugin-skills:
     diff -r skills/ponytail-docs plugins/standards/skills/ponytail-docs
