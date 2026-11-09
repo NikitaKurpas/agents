@@ -1,6 +1,7 @@
 ---
 name: need-it
 description: Question unnecessary work, speculative needs, and needless complexity in specs, code, or docs.
+disable-model-invocation: true
 ---
 
 Look at what we're working on, including things I already approved. Question anything without a clear need, even if it's simple. Start with the least justified or most unnecessarily complex part. Consider both the reasons to keep it and the reasons to cut or simplify it before asking: “Do you really fucking need it?”

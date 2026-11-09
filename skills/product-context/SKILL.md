@@ -2,6 +2,7 @@
 name: product-context
 description: >
   Create or update a project's PRODUCT.md, its durable product record: users, purpose, positioning, constraints, evidence, principles. Use when asked to create, capture, or refresh product context, or when work is blocked on product facts the repository doesn't state. Not for single-feature specs or visual design.
+disable-model-invocation: true
 ---
 
 # Product Context

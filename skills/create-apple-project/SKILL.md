@@ -1,6 +1,7 @@
 ---
 name: create-apple-project
 description: Create a new iOS, macOS, or watchOS project base with Git, mise-managed tools, Apple-agent skills, Swift Testing unit tests, buildable folders, and an AGENTS.md project instruction template. Use when Codex is asked to initialize, scaffold, bootstrap, or set up a fresh Apple platform app project.
+disable-model-invocation: true
 ---
 
 # Create Apple Project
