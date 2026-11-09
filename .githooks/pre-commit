@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-exec just --justfile "$(git rev-parse --show-toplevel)/justfile" check-plugin-skills
+justfile="$(git rev-parse --show-toplevel)/justfile"
+just --justfile "$justfile" apply-skill-fixes --stage
+just --justfile "$justfile" check-plugin-skills

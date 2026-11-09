@@ -1,5 +1,9 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
+# Reapplies local tweaks to skills installed by `npx skills`; --stage adds the fixed files to the index.
+apply-skill-fixes *args:
+    ./scripts/apply_skill_fixes.py {{ args }}
+
 # Fails when the standards plugin's copy of ponytail-docs drifts from skills/ponytail-docs.
 check-plugin-skills:
     diff -r skills/ponytail-docs plugins/standards/skills/ponytail-docs
