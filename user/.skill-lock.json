@@ -83,6 +83,15 @@
       "skillFolderHash": "455ed2d898ef7d1e8836898f07be3a7d2c3f38d2",
       "installedAt": "2026-11-09T07:22:52.664Z",
       "updatedAt": "2026-11-09T07:22:52.664Z"
+    },
+    "continuity": {
+      "source": "nkurpas-indeed/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nkurpas-indeed/skills.git",
+      "skillPath": "continuity/SKILL.md",
+      "skillFolderHash": "4943fd1d6a79150190c08b4de9d14537133b8a2a",
+      "installedAt": "2026-11-12T09:02:17.380Z",
+      "updatedAt": "2026-11-12T09:02:17.380Z"
     }
   },
   "dismissed": {

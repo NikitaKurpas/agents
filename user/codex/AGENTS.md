@@ -34,15 +34,17 @@ Delegate well-defined, bounded work to cheaper models when repeated calls, large
 
 - Always delegate simulator verification to Luna/Haiku
 - Always delegate log retrieval and analysis to Luna/Haiku
-- Delegate substantial mechanical coding tasks to Luna/Haiku
+- Delegate substantial mechanical easily-verifiable coding tasks to Luna/Haiku
+- Delegate copywriting/copyediting tasks to Sonnet
 - Delegate review and implementation/coding ONLY when instructed by the user
 
-Preferred models when delegating:
+Preferred models and effort levels when delegating:
 
-- Luna/Haiku medium: sustained polling or waiting, status monitoring, summaries, verifiable mechanical coding tasks (rename, move, etc.).
+- Luna/Haiku medium: default effort level; sustained polling or waiting, status monitoring, summaries, verifiable mechanical coding tasks (rename, move, etc.).
 - Luna/Haiku high: simulator verification, prescribed API calls (including `curl`), temporary code/library feasibility probes, code research, and log analysis.
 - Luna/Haiku xhigh: documentation research and structured investigation.
-- Sol/Opus medium/high: implementation tasks when instructed by the user.
+- Terra/Sonnet medium: default effort level.
+- Sol/Opus medium: default effort level; implementation tasks when instructed by the user.
 - Sol/Opus high: review tasks when instructed by the user.
 
 Give agents ownership, the observable result to prove, required setup and readiness checks, stop conditions, and evidence requirements. Have them return concise results and evidence references, not full tool logs. DO NOT duplicate delegated work; continue independent work while they run.

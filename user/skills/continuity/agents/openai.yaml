@@ -1,0 +1,4 @@
+interface:
+  display_name: "Continuity Ledger"
+  short_description: "Maintain task continuity across context compaction"
+  default_prompt: "Use $continuity to maintain a task-specific Continuity Ledger for this task."
