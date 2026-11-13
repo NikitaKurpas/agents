@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "standards",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Engineering principles as skills. /with-standards applies them to the current task.",
   "author": {
     "name": "Nikita Kurpas"

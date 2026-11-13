@@ -1,7 +1,6 @@
 ---
 name: unslop
 description: "Removes AI writing patterns such as filler, hedging, stock vocabulary, and jargon."
-disable-model-invocation: true
 ---
 
 # Unslop
