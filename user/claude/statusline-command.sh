@@ -111,8 +111,8 @@ build() {
   [ "$1" = 1 ] && [ -n "$cost" ] && add 33 '  ' "\$$cost"
 }
 
-# shortcut: the 2-column margin for the UI's own padding is a guess; raise it if the line wraps.
-fits() { [ $((${#plain} + 2)) -le "${COLUMNS:-9999}" ]; }
+# shortcut: the 6-column margin (2 indent, trailing space, right-edge reserve) is measured, not documented; raise it if the line truncates.
+fits() { [ $((${#plain} + 6)) -le "${COLUMNS:-9999}" ]; }
 build 1 1 0
 fits || build 0 1 0  # drop cost first
 fits || build 0 0 0  # then the context bar, keeping the percentage
